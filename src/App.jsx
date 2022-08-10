@@ -1,17 +1,23 @@
-import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { Layout } from './components'
+import {
+	CreateArticle,
+	Dashboard,
+	DetailArticle,
+	EditArticle,
+	Login,
+} from './pages'
 
 const App = () => (
-	<div className='App'>
-		<h1>Vite + React</h1>
-		<div className='card'>
-			<p>
-				Edit <code>src/App.jsx</code> and save to test HMR
-			</p>
-		</div>
-		<p className='read-the-docs'>
-			Click on the Vite and React logos to learn more
-		</p>
-	</div>
+	<Layout>
+		<Routes>
+			<Route path='/' element={<Dashboard />} />
+			<Route path='/login' element={<Login />} />
+			<Route path='/detailArticle' element={<DetailArticle />} />
+			<Route path='/createArticle' element={<CreateArticle />} />
+			<Route path='/editArticle' element={<EditArticle />} />
+		</Routes>
+	</Layout>
 )
 
 export default App
