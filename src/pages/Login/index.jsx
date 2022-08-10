@@ -11,7 +11,7 @@ const Login = () => {
 
 	const signIn = ({ username, password }) => {
 		if (usersDb.includes(username) && usersDb.includes(password)) {
-			localStorage.setItem('token', 'admin')
+			localStorage.setItem('token', username)
 			navigate('/')
 		} else
 			alert(
