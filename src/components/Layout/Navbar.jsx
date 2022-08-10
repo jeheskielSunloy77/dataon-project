@@ -19,19 +19,19 @@ const Navbar = () => {
 			defaultSelectedKeys={[pathname]}
 			onSelect={navigatePage}
 			className='justify-center'
-		>
-			<Menu.Item key='/'>Dashboard</Menu.Item>
-			<Menu.Item key='/createArticle'>Create Article</Menu.Item>
-			<Menu.Item key='/detailArticle'>Detail Article</Menu.Item>
-			<Menu.Item key='/editArticle'>Edit Article</Menu.Item>
-			<Menu.Item
-				key='logout'
-				icon={<LogoutOutlined />}
-				className='flex justify-center items-center'
-			>
-				Logout
-			</Menu.Item>
-		</Menu>
+			items={[
+				{ key: '/', label: 'Dashboard' },
+				{ key: '/createArticle', label: 'Create Article' },
+				{ key: '/detailArticle', label: 'Detail Article' },
+				{ key: '/editArticle', label: 'Edit Article' },
+				{
+					key: 'logout',
+					label: 'Logout',
+					icon: <LogoutOutlined />,
+					className: 'flex justify-center items-center',
+				},
+			]}
+		/>
 	)
 }
 
