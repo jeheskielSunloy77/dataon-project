@@ -1,6 +1,6 @@
+import { AppContext } from '@/utils/AppContext'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AppContext } from '../utils/AppContext'
 
 const Dashboard = () => {
 	const { state } = useContext(AppContext)
