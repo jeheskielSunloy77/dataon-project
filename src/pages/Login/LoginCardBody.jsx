@@ -29,7 +29,13 @@ const LoginCardBody = ({ signIn }) => {
 				</Carousel>
 			</div>
 			<div className='container mx-auto w-full sm:w-1/2 p-2'>
-				<Form layout='vertical' className='space-y-1' form={form} onFinish={signIn}>
+				<Form
+					layout='vertical'
+					className='space-y-1'
+					form={form}
+					onFinish={signIn}
+					data-testid='loginForm'
+				>
 					<h1 className='text-2xl font-semibold text-blue-500'>
 						Please enter your cridentials to access the system
 					</h1>

@@ -29,6 +29,7 @@ const LoginFormInputs = () => (
 				<Input
 					className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-500 placeholder-gray-500 dark:placeholder-gray-400 text-high rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:focus:border-blue-400 focus:z-10 sm:text-sm bg-transparent'
 					placeholder='Enter Your Username'
+					data-testid='usernameInput'
 				/>
 			</label>
 		</Form.Item>
@@ -39,12 +40,17 @@ const LoginFormInputs = () => (
 					type='password'
 					className='appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-500 placeholder-gray-500 dark:placeholder-gray-400 text-high rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:focus:border-blue-400 focus:z-10 sm:text-sm bg-transparent'
 					placeholder='Enter Your Password'
+					data-testid='passwordInput'
 				/>
 			</label>
 		</Form.Item>
 		<div className='flex h-8'>
 			<Form.Item Item name='rememberMe' valuePropName='checked'>
-				<Checkbox className='w-full' defaultChecked>
+				<Checkbox
+					className='w-full'
+					defaultChecked
+					data-testid='rememberMeCheckbox'
+				>
 					Remember Me
 				</Checkbox>
 			</Form.Item>
