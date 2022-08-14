@@ -20,7 +20,7 @@ const Navbar = () => {
 			onSelect={navigatePage}
 			className='justify-center'
 			items={[
-				{ key: '/', label: 'Dashboard' },
+				{ key: '/', label: 'Home' },
 				{ key: '/createArticle', label: 'Create Article' },
 				{ key: '/detailArticle', label: 'Detail Article' },
 				{ key: '/editArticle', label: 'Edit Article' },

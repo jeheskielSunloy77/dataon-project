@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow&family=Oswald&family=Roboto&display=swap');
 
 @layer components {
-	.myContainer {
+	.pageContainer {
 		@apply container mx-auto px-6 py-14;
 	}
 	.sectionPrimary {

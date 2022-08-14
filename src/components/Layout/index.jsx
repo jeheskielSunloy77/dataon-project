@@ -1,4 +1,5 @@
 import { useLocation } from 'react-router-dom'
+import Breadcrumbs from './Breadcrumbs'
 import Footer from './Footer'
 import Navbar from './Navbar'
 
@@ -12,6 +13,7 @@ const Layout = ({ children }) => {
 		return (
 			<>
 				<Navbar />
+				<Breadcrumbs />
 				{children}
 				<Footer />
 			</>
