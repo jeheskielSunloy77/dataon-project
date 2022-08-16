@@ -1,10 +1,12 @@
-import HomeBreadcrumbSection from './HomeBreadcrumbSection'
-import HomeSearchSection from './HomeSearchSection'
+import BreadcrumbSection from './BreadcrumbSection'
+import SearchSection from './SearchSection'
+import TableSection from './TableSection'
 
 const Home = () => (
 	<div className='pageContainer space-y-2'>
-		<HomeBreadcrumbSection />
-		<HomeSearchSection />
+		<BreadcrumbSection />
+		<SearchSection />
+		<TableSection />
 	</div>
 )
 

@@ -1,7 +1,8 @@
 import { render } from '@testing-library/react'
-// import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import App from './App'
+import { matchMediaConfig } from './utils/testUtils'
+matchMediaConfig()
 test('renders without crashing', () => {
 	render(
 		<BrowserRouter>
