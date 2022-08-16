@@ -4,7 +4,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Barlow&family=Oswald&family=Roboto&display=swap');
 
 @layer components {
-	.myContainer {
+	.pageContainer {
 		@apply container mx-auto px-6 py-14;
 	}
 	.sectionPrimary {
@@ -35,7 +35,7 @@
 
 html,
 body {
-	background-color: #f3f4f6;
+	background-color: #efefef;
 	padding: 0;
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,

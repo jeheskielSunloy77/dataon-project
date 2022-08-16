@@ -1,7 +1,8 @@
 import CreateArticle from './CreateArticle'
-import Dashboard from './Dashboard'
 import DetailArticle from './DetailArticle'
 import EditArticle from './EditArticle'
+import Home from './Home'
 import Login from './Login'
+import NewTraining from './NewTraining'
 
-export { Dashboard, Login, DetailArticle, CreateArticle, EditArticle }
+export { Home, Login, DetailArticle, CreateArticle, EditArticle, NewTraining }
