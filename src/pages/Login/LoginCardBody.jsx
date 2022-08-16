@@ -43,7 +43,7 @@ const LoginCardBody = ({ signIn }) => {
 					<Button
 						type='primary'
 						htmlType='submit'
-						className='bg-blue-500 w-full sm:w-40 rounded-md'
+						className='btnPrimary w-full sm:w-40 '
 					>
 						Sign In
 					</Button>
