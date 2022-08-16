@@ -1,5 +1,5 @@
-import { HomeBreadcrumbSection } from './HomeBreadcrumbSection'
-import { HomeSearchSection } from './HomeSearchSection'
+import HomeBreadcrumbSection from './HomeBreadcrumbSection'
+import HomeSearchSection from './HomeSearchSection'
 
 const Home = () => (
 	<div className='pageContainer space-y-2'>

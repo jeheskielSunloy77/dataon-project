@@ -1,12 +1,14 @@
 import { Breadcrumb } from 'antd'
 import { Link } from 'react-router-dom'
-import { BreadcrumbItems } from './BreadcrumbItems'
+import BreadcrumbItems from './BreadcrumbItems'
 
 const BreadCrumb = () => (
 	<>
 		<Breadcrumb className='centerAll' separator='>'>
 			<Breadcrumb.Item>
-				<Link to='/'>Home</Link>
+				<Link data-testid='homeLink' to='/'>
+					Home
+				</Link>
 			</Breadcrumb.Item>
 			<BreadcrumbItems />
 		</Breadcrumb>
