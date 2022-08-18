@@ -1,6 +1,6 @@
 import { Searchbar } from '@/components/index'
 import { AppContext } from '@/utils/AppContext'
-import { UnorderedListOutlined } from '@ant-design/icons'
+import { AppstoreOutlined, UnorderedListOutlined } from '@ant-design/icons'
 import { Button, Switch } from 'antd'
 import { useContext } from 'react'
 
@@ -24,7 +24,13 @@ const SearchFilters = () => {
 			</label>
 			<Button
 				className='mt-5 btnDefault'
-				icon={<UnorderedListOutlined />}
+				icon={
+					myTrainingView === 'cards' ? (
+						<UnorderedListOutlined />
+					) : (
+						<AppstoreOutlined />
+					)
+				}
 				onClick={changeView}
 			>
 				View As {myTrainingView === 'cards' ? 'Table' : 'Cards'}

@@ -77,15 +77,10 @@ p {
 	background-color: blue !important;
 	margin-top: 30px !important;
 }
-/* .slick-arrow {
-	transform: scale(1.4);
-	z-index: 20;
-	background-color: #d1d5db !important;
-	border-radius: 100%;
+.ant-table-thead > tr > th {
+	background-color: #1890ff;
+	color: white;
 }
-.slick-arrow.slick-next {
-	right: 0;
+.ant-table-thead > tr > th:hover {
+	background-color: #0780ee !important;
 }
-.slick-arrow.slick-prev {
-	left: 0;
-} */
