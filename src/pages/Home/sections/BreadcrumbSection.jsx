@@ -2,7 +2,7 @@ import { Breadcrumbs } from '@/components/index'
 import { MoreOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 
-const HomeBreadcrumbSection = () => (
+const BreadcrumbSection = () => (
 	<section className='sectionContainer flex justify-between '>
 		<Breadcrumbs />
 		<div className='space-x-2'>
@@ -22,4 +22,4 @@ const HomeBreadcrumbSection = () => (
 	</section>
 )
 
-export default HomeBreadcrumbSection
+export default BreadcrumbSection

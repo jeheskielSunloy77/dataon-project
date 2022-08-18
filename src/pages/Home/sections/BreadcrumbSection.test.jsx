@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { describe, expect, test } from 'vitest'
-import HomeBreadcrumbSection from './BreadcrumbSection'
+import BreadcrumbSection from './BreadcrumbSection'
 
 describe('Bradcrumb component test', () => {
 	test('should render correctly', () => {
 		render(
 			<BrowserRouter>
-				<HomeBreadcrumbSection />
+				<BreadcrumbSection />
 			</BrowserRouter>
 		)
 		const moreBtn = screen.getByTestId('moreBtn')
@@ -20,7 +20,7 @@ describe('Create new training button test', () => {
 	test('should render button as a link', () => {
 		render(
 			<BrowserRouter>
-				<HomeBreadcrumbSection />
+				<BreadcrumbSection />
 			</BrowserRouter>
 		)
 		const newTrainingBtn = screen.getByTestId('newTrainingBtn')

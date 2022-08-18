@@ -2,7 +2,7 @@ import { Searchbar } from '@/components/index'
 import { UnorderedListOutlined } from '@ant-design/icons'
 import { Button, Switch } from 'antd'
 
-const HomeSearchSection = () => (
+const SearchSection = () => (
 	<section className='sectionContainer sm:grid grid-cols-5 gap-6'>
 		<Searchbar label='Search Training' placeholder='Search Training' />
 		<Searchbar label='Event Type' placeholder='Search Event Type' />
@@ -19,4 +19,4 @@ const HomeSearchSection = () => (
 	</section>
 )
 
-export default HomeSearchSection
+export default SearchSection
