@@ -1,16 +1,10 @@
-import {
-	BreadcrumbSection,
-	CardsSection,
-	SearchSection,
-	TableSection,
-} from './sections'
+import { BreadcrumbSection, MyTraining, SearchFilters } from './sections'
 
 const Home = () => (
 	<div className='pageContainer space-y-2'>
 		<BreadcrumbSection />
-		<SearchSection />
-		<TableSection />
-		<CardsSection />
+		<SearchFilters />
+		<MyTraining />
 	</div>
 )
 

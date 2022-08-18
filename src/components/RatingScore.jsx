@@ -1,8 +1,8 @@
-import { StarIcon } from '.'
+import { Icon } from '.'
 
 const RatingScore = ({ score }) => {
 	const stars = [...Array(5)].map((_, index) => (
-		<StarIcon key={index} active={index < score} />
+		<Icon key={index} name='Star' active={index < score} />
 	))
 
 	return stars

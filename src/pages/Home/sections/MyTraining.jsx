@@ -1,9 +1,9 @@
-import { TableData } from '@/components/index'
+import { MyTrainingCarousel, MyTrainingTable } from '@/components/index'
 import { AppContext } from '@/utils/AppContext'
 import { useContext } from 'react'
 
-const TableSection = () => {
-	const { myTrainingData } = useContext(AppContext)
+const MyTraining = () => {
+	const { myTrainingView, myTrainingData } = useContext(AppContext)
 
 	return (
 		<section className='sectionContainer'>
@@ -13,10 +13,10 @@ const TableSection = () => {
 					{myTrainingData.length}
 				</span>
 			</h1>
-
-			<TableData data={myTrainingData} />
+			{myTrainingView === 'table' && <MyTrainingTable data={myTrainingData} />}
+			{myTrainingView === 'cards' && <MyTrainingCarousel data={myTrainingData} />}
 		</section>
 	)
 }
 
-export default TableSection
+export default MyTraining

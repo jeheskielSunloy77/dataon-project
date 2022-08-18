@@ -5,6 +5,7 @@ const data1 = [
 		image:
 			'https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg',
 		name: 'Training Angular',
+		location: 'Jln. Terserah, Jakarta, Id',
 		type: 'Offline Class',
 		period: '9 Jul 2022, 07:00 - 10:00',
 		trainerName: 'Juwwita Susati',
@@ -33,6 +34,7 @@ const data1 = [
 		image:
 			'https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg',
 		name: 'Learn Typescript',
+		location: 'Jln. Terserah, Jakarta, Id',
 		type: 'Offline Class',
 		period: '11 Jan 2022, 07:00 - 12:00',
 		trainerName: 'Johnny Depp',
@@ -45,9 +47,17 @@ export const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
 	const [myTrainingData, setMyTrainingData] = useState(data1)
+	const [myTrainingView, setMyTrainingView] = useState('table')
 
 	return (
-		<AppContext.Provider value={{ myTrainingData, setMyTrainingData }}>
+		<AppContext.Provider
+			value={{
+				myTrainingData,
+				setMyTrainingData,
+				myTrainingView,
+				setMyTrainingView,
+			}}
+		>
 			{children}
 		</AppContext.Provider>
 	)

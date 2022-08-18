@@ -44,7 +44,7 @@
 
 html,
 body {
-	background-color: #efefef;
+	background-color: #e5e7eb;
 	padding: 0;
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -73,3 +73,19 @@ h1 {
 p {
 	font-family: 'Barlow', sans-serif;
 }
+.ant-carousel .slick-dots li button {
+	background-color: blue !important;
+	margin-top: 30px !important;
+}
+/* .slick-arrow {
+	transform: scale(1.4);
+	z-index: 20;
+	background-color: #d1d5db !important;
+	border-radius: 100%;
+}
+.slick-arrow.slick-next {
+	right: 0;
+}
+.slick-arrow.slick-prev {
+	left: 0;
+} */

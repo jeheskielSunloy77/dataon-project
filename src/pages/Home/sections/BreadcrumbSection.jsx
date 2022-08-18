@@ -3,9 +3,9 @@ import { MoreOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 
 const BreadcrumbSection = () => (
-	<section className='sectionContainer flex justify-between '>
+	<section className='sectionContainer flex flex-col sm:flex-row items-center sm:justify-between '>
 		<Breadcrumbs />
-		<div className='space-x-2'>
+		<div className='space-x-2 sm:mt-4'>
 			<Button
 				type='primary'
 				icon={<PlusOutlined />}

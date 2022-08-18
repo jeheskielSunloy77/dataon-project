@@ -1,15 +1,17 @@
 import Breadcrumbs from './Breadcrumbs'
-import StarIcon from './icons/StarIcon'
+import Icon from './Icon'
 import MyTrainingCard from './MyTrainingCard'
+import MyTrainingCarousel from './MyTrainingCarousel'
+import MyTrainingTable from './MyTrainingTable'
 import RatingScore from './RatingScore'
 import Searchbar from './Searchbar'
-import TableData from './TableData'
 
 export {
 	Breadcrumbs,
 	Searchbar,
-	TableData,
+	MyTrainingTable,
 	RatingScore,
-	StarIcon,
+	Icon,
 	MyTrainingCard,
+	MyTrainingCarousel,
 }

@@ -1,7 +1,7 @@
 import { Table } from 'antd'
 import RatingScore from './RatingScore'
 
-const TableData = ({ data }) => (
+const MyTrainingTable = ({ data }) => (
 	<>
 		<Table dataSource={data} className='overflow-x-auto rounded-lg'>
 			<Table.Column
@@ -54,4 +54,4 @@ const TableData = ({ data }) => (
 	</>
 )
 
-export default TableData
+export default MyTrainingTable

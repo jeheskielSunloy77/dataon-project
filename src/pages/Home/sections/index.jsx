@@ -1,6 +1,5 @@
 import BreadcrumbSection from './BreadcrumbSection'
-import CardsSection from './CardsSection'
-import SearchSection from './SearchSection'
-import TableSection from './TableSection'
+import MyTraining from './MyTraining'
+import SearchFilters from './SearchFilters'
 
-export { BreadcrumbSection, TableSection, SearchSection, CardsSection }
+export { BreadcrumbSection, SearchFilters, MyTraining }
