@@ -5,11 +5,10 @@ import { Button, Switch } from 'antd'
 import { useContext } from 'react'
 
 const SearchFilters = () => {
-	const { setMyTrainingView, myTrainingView } = useContext(AppContext)
+	const { dataView, setDataView } = useContext(AppContext)
 
-	const changeView = () => {
-		setMyTrainingView((prev) => (prev === 'cards' ? 'table' : 'cards'))
-	}
+	const changeView = () =>
+		setDataView((prev) => (prev === 'cards' ? 'table' : 'cards'))
 
 	return (
 		<section className='sectionContainer sm:grid grid-cols-5 gap-6'>
@@ -25,15 +24,11 @@ const SearchFilters = () => {
 			<Button
 				className='mt-5 btnDefault'
 				icon={
-					myTrainingView === 'cards' ? (
-						<UnorderedListOutlined />
-					) : (
-						<AppstoreOutlined />
-					)
+					dataView === 'cards' ? <UnorderedListOutlined /> : <AppstoreOutlined />
 				}
 				onClick={changeView}
 			>
-				View As {myTrainingView === 'cards' ? 'Table' : 'Cards'}
+				View As {dataView === 'cards' ? 'Table' : 'Cards'}
 			</Button>
 		</section>
 	)

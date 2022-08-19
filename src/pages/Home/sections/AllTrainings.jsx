@@ -3,15 +3,17 @@ import { AppContext } from '@/utils/AppContext'
 import { useContext } from 'react'
 
 const AllTrainings = () => {
-	const { allTrainingData } = useContext(AppContext)
+	const { allTrainingData, dataView } = useContext(AppContext)
 
 	return (
 		<section className='sectionContainer'>
 			<TrainingSectionTitle
 				text='All Trainings Sessions'
-				dataLength={allTrainingData.dataLength}
+				dataLength={allTrainingData.length}
 			/>
-			<TrainingTable data={allTrainingData} />
+			{dataView === 'table' && (
+				<TrainingTable data={allTrainingData} infiniteScroll />
+			)}
 		</section>
 	)
 }
