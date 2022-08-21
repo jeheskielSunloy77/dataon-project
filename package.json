@@ -16,6 +16,7 @@
 		"@ant-design/icons": "^4.7.0",
 		"@testing-library/user-event": "^14.4.3",
 		"antd": "^4.22.4",
+		"axios": "^0.27.2",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-infinite-scroll-component": "^6.1.0",

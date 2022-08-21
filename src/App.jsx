@@ -1,3 +1,5 @@
+import axios from '@/utils/axios'
+import { useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import {
 	CreateArticle,
@@ -12,6 +14,14 @@ const App = () => {
 	const { pathname } = useLocation()
 	const token = localStorage.getItem('token')
 	if (pathname !== '/login' && !token) window.location.replace('/login')
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const res = await axios.get('todos/1')
+			console.log(res)
+		}
+		fetchData()
+	}, [])
 
 	return (
 		<Routes>
