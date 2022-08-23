@@ -2,6 +2,7 @@ import Breadcrumbs from './Breadcrumbs'
 import Icon from './Icon'
 import MyTrainingCard from './MyTrainingCard'
 import MyTrainingCarousel from './MyTrainingCarousel'
+import Notification from './Notification'
 import RatingScore from './RatingScore'
 import Searchbar from './Searchbar'
 import TrainingSectionTitle from './TrainingSectionTitle'
@@ -16,4 +17,5 @@ export {
 	MyTrainingCard,
 	MyTrainingCarousel,
 	TrainingSectionTitle,
+	Notification,
 }
