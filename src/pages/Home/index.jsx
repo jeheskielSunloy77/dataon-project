@@ -1,13 +1,9 @@
-import {
-	AllTrainings,
-	BreadcrumbSection,
-	MyTraining,
-	SearchFilters,
-} from './sections'
+import { HeaderSection } from '@/components/index'
+import { AllTrainings, MyTraining, SearchFilters } from './sections'
 
 const Home = () => (
 	<div className='pageContainer space-y-2'>
-		<BreadcrumbSection />
+		<HeaderSection />
 		<SearchFilters />
 		<MyTraining />
 		<AllTrainings />

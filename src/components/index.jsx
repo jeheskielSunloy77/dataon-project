@@ -1,4 +1,5 @@
 import Breadcrumbs from './Breadcrumbs'
+import HeaderSection from './HeaderSection'
 import Icon from './Icon'
 import MyTrainingCard from './MyTrainingCard'
 import MyTrainingCarousel from './MyTrainingCarousel'
@@ -18,4 +19,5 @@ export {
 	MyTrainingCarousel,
 	TrainingSectionTitle,
 	Notification,
+	HeaderSection,
 }
