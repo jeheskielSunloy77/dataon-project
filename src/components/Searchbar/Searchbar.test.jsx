@@ -27,8 +27,5 @@ describe('searchbar component', () => {
 		const { input } = setup()
 		fireEvent.change(input, { target: { value: 'hellowolrd' } })
 		expect(input.value).toBe('hellowolrd')
-		// fireEvent.click(screen.getByRole('button'))
-		// fireEvent.click(screen.getByRole('button'))
-		// expect(alert).toHaveBeenCalledWith('searching')
 	})
 })
