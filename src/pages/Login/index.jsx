@@ -1,5 +1,8 @@
+import axios from '@/utils/axios'
 import { Card } from 'antd'
 import 'antd/dist/antd.css'
+import sign from 'jwt-encode'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LoginCardBody from './LoginCardBody'
 import LoginCardFooter from './LoginCardFooter'
@@ -8,16 +11,24 @@ import LoginWrapper from './LoginWrapper'
 
 const Login = () => {
 	const navigate = useNavigate()
-	const usersDb = ['admin', 'client']
+	const [usersData, setUsersData] = useState(null)
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const response = await axios.get('?seed=8c191e56a88fc13d&inc=login')
+			const data = { ...response.data.results[0].login, userId: 'user123' }
+			setUsersData(data)
+		}
+		fetchData()
+	}, [])
 
 	const signIn = ({ username, password }) => {
-		if (usersDb.includes(username) && usersDb.includes(password)) {
-			localStorage.setItem('token', username)
+		if (usersData.username === username && usersData.password === password) {
+			const jwt = sign(usersData, 'as12ewqasdassao1121903rqeijoasjdoqwe')
+
+			localStorage.setItem('token', jwt)
 			navigate('/')
-		} else
-			alert(
-				'Username or password is incorrect!, Use admin & admin || client & client to login'
-			)
+		} else alert('Username or password is incorrect!')
 	}
 
 	return (
