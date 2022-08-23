@@ -6,6 +6,7 @@ const Star = ({ active }) => (
 		viewBox='0 0 24 24'
 		stroke='currentColor'
 		strokeWidth={1}
+		data-testid={active ? 'starActive' : 'starInactive'}
 	>
 		<path
 			strokeLinecap='round'
