@@ -21,7 +21,7 @@ const passwordRules = [
 	},
 ]
 
-const LoginFormInputs = () => (
+const FormInputs = () => (
 	<>
 		<Form.Item name='username' rules={usernameRules}>
 			<label>
@@ -61,4 +61,4 @@ const LoginFormInputs = () => (
 	</>
 )
 
-export default LoginFormInputs
+export default FormInputs

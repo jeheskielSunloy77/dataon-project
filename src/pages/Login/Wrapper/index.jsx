@@ -1,6 +1,6 @@
 import bgImage from '@/assets/background.svg'
 
-const LoginWrapper = ({ children }) => (
+const Wrapper = ({ children }) => (
 	<div
 		className='sm:centerAll h-screen bg-no-repeat bg-center bg-cover'
 		style={{ backgroundImage: `url(${bgImage})` }}
@@ -10,4 +10,4 @@ const LoginWrapper = ({ children }) => (
 	</div>
 )
 
-export default LoginWrapper
+export default Wrapper

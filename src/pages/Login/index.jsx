@@ -4,10 +4,10 @@ import 'antd/dist/antd.css'
 import sign from 'jwt-encode'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import LoginCardBody from './LoginCardBody'
-import LoginCardFooter from './LoginCardFooter'
-import LoginCardHead from './LoginCardHead'
-import LoginWrapper from './LoginWrapper'
+import CardBody from './CardBody'
+import CardFooter from './CardFooter'
+import CardHeader from './CardHeader'
+import Wrapper from './Wrapper'
 
 const Login = () => {
 	const navigate = useNavigate()
@@ -32,13 +32,13 @@ const Login = () => {
 	}
 
 	return (
-		<LoginWrapper>
+		<Wrapper>
 			<Card className='max-w-[90%] sm:max-w-[60%] rounded-xl shadow-2xl'>
-				<LoginCardHead />
-				<LoginCardBody signIn={signIn} />
-				<LoginCardFooter />
+				<CardHeader />
+				<CardBody signIn={signIn} />
+				<CardFooter />
 			</Card>
-		</LoginWrapper>
+		</Wrapper>
 	)
 }
 

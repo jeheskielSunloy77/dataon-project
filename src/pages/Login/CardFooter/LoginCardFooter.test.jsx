@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { describe, test } from 'vitest'
-import LoginCardFooter from './LoginCardFooter'
+import LoginCardFooter from '.'
 
 const text =
 	/This product is licensed for Dataon Corporation © 1999 - 2022 Dataon Technologies, All Rights Reserved/i

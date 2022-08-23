@@ -2,9 +2,9 @@ import loginIlustration1 from '@/assets/loginIlustration1.svg'
 import loginIlustration2 from '@/assets/loginIlustration2.svg'
 import loginIlustration3 from '@/assets/loginIlustration3.svg'
 import { Button, Carousel, Form } from 'antd'
-import LoginFormInputs from './LoginFormInputs'
+import FormInputs from '../FormInputs'
 
-const LoginCardBody = ({ signIn }) => {
+const CardBody = ({ signIn }) => {
 	const [form] = Form.useForm()
 
 	return (
@@ -39,7 +39,7 @@ const LoginCardBody = ({ signIn }) => {
 					<h1 className='text-2xl font-semibold text-blue-500'>
 						Please enter your cridentials to access the system
 					</h1>
-					<LoginFormInputs />
+					<FormInputs />
 					<Button
 						type='primary'
 						htmlType='submit'
@@ -53,4 +53,4 @@ const LoginCardBody = ({ signIn }) => {
 	)
 }
 
-export default LoginCardBody
+export default CardBody

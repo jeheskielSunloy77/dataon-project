@@ -1,7 +1,7 @@
 import mainLogo from '@/assets/mainLogo.png'
 import { Select } from 'antd'
 
-const LoginCardHead = () => (
+const CardHeader = () => (
 	<div className='flex gap-2'>
 		<img
 			src={mainLogo}
@@ -21,4 +21,4 @@ const LoginCardHead = () => (
 	</div>
 )
 
-export default LoginCardHead
+export default CardHeader

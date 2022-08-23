@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, test } from 'vitest'
-import LoginCardHead from './LoginCardHead'
+import LoginCardHead from '.'
 
 describe('Login Card header test', () => {
 	test('should show header text all the time', () => {

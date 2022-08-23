@@ -2,7 +2,7 @@ import { matchMediaConfig } from '@/utils/testUtils'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { Form } from 'antd'
 import { describe, expect, test } from 'vitest'
-import LoginFormInputs from './LoginFormInputs'
+import LoginFormInputs from '.'
 
 matchMediaConfig()
 
