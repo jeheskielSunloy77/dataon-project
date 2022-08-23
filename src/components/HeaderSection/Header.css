@@ -1,0 +1,4 @@
+.ant-breadcrumb li:last-child a {
+	color: #1890ff !important;
+	font-weight: 600;
+}
