@@ -1,6 +1,4 @@
-import nextArrowImg from '@/assets/nextArrow.svg'
-import prevArrowImg from '@/assets/prevArrow.svg'
-import { MyTrainingCard } from '@/components/index'
+import { Icon, MyTrainingCard } from '@/components/index'
 import useCheckMobile from '@/hooks/useCheckMobile'
 import { AppContext } from '@/utils/AppContext'
 import { Carousel } from 'antd'
@@ -32,8 +30,9 @@ const MyTrainingCarousel = () => {
 				draggable
 				slidesToShow={mobile ? 1 : 3}
 				arrows
-				nextArrow={<img src={nextArrowImg} data-testid='nextArrow' />}
-				prevArrow={<img src={prevArrowImg} data-testid='prevArrow' />}
+				nextArrow={<Icon name='nextArrow' />}
+				prevArrow={<Icon name='prevArrow' />}
+				className='relative h-[200px]'
 			>
 				{cards}
 			</Carousel>
