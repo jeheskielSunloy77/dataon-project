@@ -1,5 +1,5 @@
 import AllTrainings from './AllTrainings'
-import BreadcrumbSection from './BreadcrumbSection'
+import BreadcrumbSection from './Header'
 import MyTraining from './MyTraining'
 import SearchFilters from './SearchFilters'
 
