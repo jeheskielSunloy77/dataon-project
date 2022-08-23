@@ -1,3 +1,4 @@
+import { Notification } from '@/components/index'
 import axios from '@/utils/axios'
 import { Card } from 'antd'
 import 'antd/dist/antd.css'
@@ -28,7 +29,7 @@ const Login = () => {
 
 			localStorage.setItem('token', jwt)
 			navigate('/')
-		} else alert('Username or password is incorrect!')
+		} else Notification('Username or password is incorrect', '', 'error')
 	}
 
 	return (

@@ -44,6 +44,7 @@ const CardBody = ({ signIn }) => {
 						type='primary'
 						htmlType='submit'
 						className='btnPrimary w-full sm:w-40 '
+						data-testid='loginButton'
 					>
 						Sign In
 					</Button>
