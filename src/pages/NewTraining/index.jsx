@@ -1,5 +1,5 @@
 import { FormTextInput, HeaderSection } from '@/components/index'
-import axios from '@/utils/axios'
+import customAxios from '@/utils/axios'
 import { PlusSquareOutlined, UploadOutlined } from '@ant-design/icons'
 import { Button, DatePicker, Form, Input, Radio, Select, Upload } from 'antd'
 import jwt_decode from 'jwt-decode'
@@ -24,7 +24,8 @@ const NewTraining = () => {
 			startDate: formatedDate[0],
 			endDate: formatedDate[1],
 		}
-		axios.post('trainings', data)
+		// console.log(data)
+		customAxios.post('trainings', data)
 		navigate('/')
 	}
 

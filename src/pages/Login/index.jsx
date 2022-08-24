@@ -1,5 +1,5 @@
 import { Notification } from '@/components/index'
-import axios from '@/utils/axios'
+import customAxios from '@/utils/axios'
 import { Card } from 'antd'
 import 'antd/dist/antd.css'
 import sign from 'jwt-encode'
@@ -16,7 +16,7 @@ const Login = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await axios.get('?seed=8c191e56a88fc13d&inc=login')
+			const response = await customAxios.get('?seed=8c191e56a88fc13d&inc=login')
 			const data = { ...response.data.results[0].login, userId: 'user123' }
 			setUsersData(data)
 		}
