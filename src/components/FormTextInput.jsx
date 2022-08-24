@@ -1,6 +1,6 @@
 import { Form, Input } from 'antd'
 
-const TextInput = ({ label, name, required }) => (
+const FormTextInput = ({ label, name, required }) => (
 	<Form.Item
 		label={label}
 		name={name}
@@ -15,4 +15,4 @@ const TextInput = ({ label, name, required }) => (
 	</Form.Item>
 )
 
-export default TextInput
+export default FormTextInput
