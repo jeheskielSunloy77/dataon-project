@@ -1,12 +1,5 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
-import {
-	CreateArticle,
-	DetailArticle,
-	EditArticle,
-	Home,
-	Login,
-	NewTraining,
-} from './pages'
+import { DetailArticle, EditArticle, Home, Login, NewTraining } from './pages'
 
 const App = () => {
 	const { pathname } = useLocation()
@@ -18,7 +11,6 @@ const App = () => {
 			<Route path='/' element={<Home />} />
 			<Route path='/login' element={<Login />} />
 			<Route path='/detailArticle' element={<DetailArticle />} />
-			<Route path='/createArticle' element={<CreateArticle />} />
 			<Route path='/editArticle' element={<EditArticle />} />
 			<Route path='/newTraining' element={<NewTraining />} />
 		</Routes>
