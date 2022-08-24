@@ -1,11 +1,28 @@
 import { Breadcrumbs } from '@/components/index'
 import { MoreOutlined, PlusOutlined } from '@ant-design/icons'
-import { Button } from 'antd'
-import { useLocation } from 'react-router-dom'
+import { Button, Dropdown, Menu } from 'antd'
+import { useLocation, useNavigate } from 'react-router-dom'
 import './Header.css'
 
 const HeaderSection = () => {
 	const { pathname } = useLocation()
+	const navigate = useNavigate()
+
+	const logout = () => {
+		localStorage.removeItem('token')
+		navigate('/login')
+	}
+	const menu = (
+		<Menu
+			items={[
+				{
+					key: '1',
+					label: 'Logout',
+					onClick: logout,
+				},
+			]}
+		/>
+	)
 
 	return (
 		<section className='sectionContainer flex flex-col sm:flex-row items-center sm:justify-between '>
@@ -22,13 +39,12 @@ const HeaderSection = () => {
 						Create New Training
 					</Button>
 				)}
-				<Button
-					icon={<MoreOutlined />}
-					className='btnDefault'
-					data-testid='moreBtn'
-				>
-					More
-				</Button>
+				<Dropdown overlay={menu}>
+					<Button className='btnDefault' data-testid='moreBtn'>
+						More
+						<MoreOutlined />
+					</Button>
+				</Dropdown>
 			</div>
 		</section>
 	)

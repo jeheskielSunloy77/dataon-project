@@ -1,7 +1,7 @@
 import { Notification } from '@/components/index'
-import customAxios from '@/utils/axios'
 import { Card } from 'antd'
 import 'antd/dist/antd.css'
+import axios from 'axios'
 import sign from 'jwt-encode'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -16,7 +16,9 @@ const Login = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await customAxios.get('?seed=8c191e56a88fc13d&inc=login')
+			const response = await axios.get(
+				'https://randomuser.me/api/?seed=8c191e56a88fc13d&inc=login'
+			)
 			const data = { ...response.data.results[0].login, userId: 'user123' }
 			setUsersData(data)
 		}
