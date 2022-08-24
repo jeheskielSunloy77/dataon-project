@@ -1,4 +1,5 @@
 import { DatePicker, Form } from 'antd'
+const { RangePicker } = DatePicker
 
 const DateRangePicker = () => (
 	<Form.Item
@@ -11,7 +12,7 @@ const DateRangePicker = () => (
 			},
 		]}
 	>
-		<DatePicker.RangePicker />
+		<RangePicker showTime />
 	</Form.Item>
 )
 

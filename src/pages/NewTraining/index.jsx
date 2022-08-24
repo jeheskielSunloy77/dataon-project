@@ -30,7 +30,7 @@ const NewTraining = () => {
 					}}
 					initialValues={{ providerType: 'internal' }}
 					onFinish={onFinish}
-					className='sm:px-[10%]'
+					className='sm:px-[10%] new-training-form'
 				>
 					<Form.Item label='Event No' name='eventNo'>
 						TASDIAINXA-XSDODASD-SDKNSKD12
