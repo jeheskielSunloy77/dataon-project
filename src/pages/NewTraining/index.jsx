@@ -1,12 +1,35 @@
 import { FormTextInput, HeaderSection } from '@/components/index'
+import axios from '@/utils/axios'
 import { PlusSquareOutlined, UploadOutlined } from '@ant-design/icons'
-import { Button, DatePicker, Form, Radio, Select, Upload } from 'antd'
+import { Button, DatePicker, Form, Input, Radio, Select, Upload } from 'antd'
+import jwt_decode from 'jwt-decode'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './NewTraining.css'
 const { RangePicker } = DatePicker
 
 const NewTraining = () => {
-	const onFinish = (value) => {
-		console.log(value)
+	const [onlineClass, setOnlineClass] = useState(false)
+	const navigate = useNavigate()
+
+	const onFormFinish = (value) => {
+		const token = localStorage.getItem('token')
+		const { userId } = jwt_decode(token)
+
+		const { date, ...rest } = value
+		const formatedDate = date.map((item) => item.format('DD-MMM-YYYY-hh:mm'))
+		const data = {
+			...rest,
+			userId,
+			startDate: formatedDate[0],
+			endDate: formatedDate[1],
+		}
+		axios.post('trainings', data)
+		navigate('/')
+	}
+
+	const onFormChange = ({ isOnline }) => {
+		setOnlineClass(isOnline)
 	}
 
 	return (
@@ -21,32 +44,56 @@ const NewTraining = () => {
 					wrapperCol={{
 						span: 16,
 					}}
-					initialValues={{ providerType: 'internal' }}
-					onFinish={onFinish}
+					initialValues={{ isOnline: onlineClass }}
+					onValuesChange={onFormChange}
+					onFinish={onFormFinish}
 					className='sm:px-[10%] new-training-form'
 				>
-					<Form.Item label='Event No' name='eventNo'>
-						TASDIAINXA-XSDODASD-SDKNSKD12
+					<Form.Item label='Event No'>TASDIAINXA-XSDODASD-SDKNSKD12</Form.Item>
+					<Form.Item
+						label='Event Type'
+						name='isOnline'
+						rules={[
+							{
+								required: true,
+								message: 'Please select the Event Type!',
+							},
+						]}
+					>
+						<Radio.Group>
+							<Radio.Button value={true}>Online Calss</Radio.Button>
+							<Radio.Button value={false}>Offline Class</Radio.Button>
+						</Radio.Group>
 					</Form.Item>
-					<FormTextInput label='Event Type' name='eventType' required />
-					<FormTextInput label='Training Course' name='trainingCourse' required />
+					<FormTextInput label='Training Course' required />
 					<FormTextInput label='Event Name' name='name' required />
-					<Form.Item label='Provider Type' name='providerType' required>
+					<FormTextInput label='Trainer Name' name='trainerName' required />
+					{!onlineClass && (
+						<>
+							<FormTextInput
+								label='Location'
+								name='location'
+								required={!onlineClass}
+							/>
+							<FormTextInput
+								label='Longtitude'
+								name='longtitude'
+								required={!onlineClass}
+							/>
+							<FormTextInput
+								label='Latitude'
+								name='latitude'
+								required={!onlineClass}
+							/>
+						</>
+					)}
+					<Form.Item label='Provider Type'>
 						<Radio.Group>
 							<Radio.Button value='internal'>Internal</Radio.Button>
 							<Radio.Button value='external'>External</Radio.Button>
 						</Radio.Group>
 					</Form.Item>
-					<Form.Item
-						label='Provider'
-						name='provider'
-						rules={[
-							{
-								required: true,
-								message: 'Please select the provider!',
-							},
-						]}
-					>
+					<Form.Item label='Provider'>
 						<Select placeholder='Select a Provider'>
 							<Select.Option value='jack'>Provider1</Select.Option>
 							<Select.Option value='lucy'>Provider2</Select.Option>
@@ -58,7 +105,7 @@ const NewTraining = () => {
 							/>
 						</Select>
 					</Form.Item>
-					<Form.Item label='Event Thumbnail' name='eventThumbnail'>
+					<Form.Item label='Event Thumbnail'>
 						<Upload>
 							<Button icon={<UploadOutlined />}>Click to Upload</Button>
 						</Upload>
@@ -79,21 +126,24 @@ const NewTraining = () => {
 					>
 						<RangePicker showTime />
 					</Form.Item>
-					<Form.Item
-						label='Status'
-						name='status'
-						rules={[
-							{
-								required: true,
-								message: 'Please input the status!',
-							},
-						]}
-					>
+					<Form.Item label='Status'>
 						<Radio.Group>
 							<Radio.Button value='draft'>Draft</Radio.Button>
 							<Radio.Button value='open'>Open For Registration</Radio.Button>
 							<Radio.Button value='closed'>Closed For Registration</Radio.Button>
 						</Radio.Group>
+					</Form.Item>
+					<Form.Item
+						label='Aditional Information'
+						name='information'
+						rules={[
+							{
+								required: true,
+								message: 'Please fill in the aditional information!',
+							},
+						]}
+					>
+						<Input.TextArea rows={4} />
 					</Form.Item>
 					<div className='flex justify-end py-6'>
 						<Button type='primary' htmlType='submit' className='btnPrimary mr-10'>
