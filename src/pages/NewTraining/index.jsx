@@ -28,8 +28,8 @@ const NewTraining = () => {
 		navigate('/')
 	}
 
-	const onFormChange = ({ isOnline }) => {
-		setOnlineClass(isOnline)
+	const selectEventType = (event) => {
+		setOnlineClass(event.target.value)
 	}
 
 	return (
@@ -45,7 +45,6 @@ const NewTraining = () => {
 						span: 16,
 					}}
 					initialValues={{ isOnline: onlineClass }}
-					onValuesChange={onFormChange}
 					onFinish={onFormFinish}
 					className='sm:px-[10%] new-training-form'
 				>
@@ -60,7 +59,7 @@ const NewTraining = () => {
 							},
 						]}
 					>
-						<Radio.Group>
+						<Radio.Group onChange={selectEventType}>
 							<Radio.Button value={true} data-testid='onlineClass'>
 								Online Calss
 							</Radio.Button>
