@@ -1,12 +1,12 @@
 import jwt_decode from 'jwt-decode'
 import { createContext, useEffect, useState } from 'react'
-import { data1, data2 } from '../mockData'
+import { data2 } from '../mockData'
 import customAxios from './axios'
 
 export const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
-	const [myTrainingData, setMyTrainingData] = useState(data1)
+	const [myTrainingData, setMyTrainingData] = useState([])
 	const [allTrainingData, setAllTrainingData] = useState(data2)
 	const [dataView, setDataView] = useState('table')
 
