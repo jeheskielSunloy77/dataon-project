@@ -1,21 +1,13 @@
 import { Spin, Table } from 'antd'
-import { useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { RatingScore } from '../index'
 
-const TrainingTable = ({ data, infiniteScroll }) => {
-	const [tableData, setTableData] = useState(data.slice(0, 10))
-
+const TrainingTable = ({ tableData, setPageLimit, infiniteScroll }) => {
 	const Wrapper = ({ children }) => {
 		const fetchMoreData = () => {
-			if (tableData.length >= data.length) {
+			if (tableData.length >= 9) {
 				return false
-			} else
-				setTimeout(() => {
-					setTableData((prev) =>
-						prev.concat(data.slice(prev.length, prev.length + 10))
-					)
-				}, 1000)
+			} else setPageLimit((prev) => prev + 5)
 		}
 
 		if (infiniteScroll)
@@ -23,7 +15,7 @@ const TrainingTable = ({ data, infiniteScroll }) => {
 				<InfiniteScroll
 					dataLength={tableData.length}
 					next={fetchMoreData}
-					hasMore={tableData.length < data.length}
+					hasMore={tableData.length < 9}
 					loader={
 						<Spin className='absolute bottom-0 left-1/2 -translate-x-1/2' spinning />
 					}
@@ -39,7 +31,7 @@ const TrainingTable = ({ data, infiniteScroll }) => {
 	return (
 		<Wrapper>
 			<Table
-				dataSource={infiniteScroll ? tableData : data}
+				dataSource={tableData}
 				pagination={!infiniteScroll}
 				className='overflow-x-auto rounded-lg'
 			>

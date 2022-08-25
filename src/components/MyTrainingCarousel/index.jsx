@@ -1,13 +1,10 @@
 import { Icon, MyTrainingCard } from '@/components/index'
 import useCheckMobile from '@/hooks/useCheckMobile'
-import { AppContext } from '@/utils/AppContext'
 import { Carousel } from 'antd'
-import { useContext } from 'react'
 
-const MyTrainingCarousel = () => {
-	const { myTrainingData } = useContext(AppContext)
+const MyTrainingCarousel = ({ carouselData }) => {
 	const mobile = useCheckMobile()
-	const cards = myTrainingData.map(
+	const cards = carouselData.map(
 		({ name, location, startDate, endDate, trainerName, isOnline }, index) => (
 			<MyTrainingCard
 				key={index}
