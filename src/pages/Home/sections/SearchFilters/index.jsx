@@ -5,14 +5,22 @@ import { Button, Switch } from 'antd'
 import { useContext } from 'react'
 
 const SearchFilters = () => {
-	const { dataView, setDataView } = useContext(AppContext)
+	const { dataView, setDataView, setSearchParams } = useContext(AppContext)
 
 	const changeView = () =>
 		setDataView((prev) => (prev === 'cards' ? 'table' : 'cards'))
 
+	const searchTraining = (value) => {
+		setSearchParams({ searchTraining: value })
+	}
+
 	return (
 		<section className='sectionContainer sm:grid grid-cols-5 gap-6'>
-			<Searchbar label='Search Training' placeholder='Search Training' />
+			<Searchbar
+				label='Search Training'
+				placeholder='Search Training'
+				onSearch={searchTraining}
+			/>
 			<Searchbar label='Event Type' placeholder='Search Event Type' />
 			<Searchbar label='Status' placeholder='Search Status' />
 			<label className='flex flex-col'>
