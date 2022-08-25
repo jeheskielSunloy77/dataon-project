@@ -7,17 +7,16 @@ import { useContext } from 'react'
 const MyTrainingCarousel = () => {
 	const { myTrainingData } = useContext(AppContext)
 	const mobile = useCheckMobile()
-
 	const cards = myTrainingData.map(
-		({ name, image, location, period, trainerName, type }, index) => (
+		({ name, location, startDate, endDate, trainerName, isOnline }, index) => (
 			<MyTrainingCard
 				key={index}
 				name={name}
-				image={image}
+				image={`https://picsum.photos/seed/${index + 1}/200/300`}
 				location={location}
 				trainerName={trainerName}
-				type={type}
-				period={period}
+				isOnline={isOnline}
+				period={`${startDate} - ${endDate.slice(12)}`}
 			/>
 		)
 	)
@@ -32,7 +31,7 @@ const MyTrainingCarousel = () => {
 				arrows
 				nextArrow={<Icon name='nextArrow' />}
 				prevArrow={<Icon name='prevArrow' />}
-				className='relative h-[200px]'
+				className='relative'
 			>
 				{cards}
 			</Carousel>

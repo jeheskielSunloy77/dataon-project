@@ -24,7 +24,6 @@ const NewTraining = () => {
 			startDate: formatedDate[0],
 			endDate: formatedDate[1],
 		}
-		// console.log(data)
 		customAxios.post('trainings', data)
 		navigate('/')
 	}
@@ -62,8 +61,12 @@ const NewTraining = () => {
 						]}
 					>
 						<Radio.Group>
-							<Radio.Button value={true}>Online Calss</Radio.Button>
-							<Radio.Button value={false}>Offline Class</Radio.Button>
+							<Radio.Button value={true} data-testid='onlineClass'>
+								Online Calss
+							</Radio.Button>
+							<Radio.Button value={false} data-testid='offlineClass'>
+								Offline Class
+							</Radio.Button>
 						</Radio.Group>
 					</Form.Item>
 					<FormTextInput label='Training Course' required />
@@ -147,7 +150,12 @@ const NewTraining = () => {
 						<Input.TextArea rows={4} />
 					</Form.Item>
 					<div className='flex justify-end py-6'>
-						<Button type='primary' htmlType='submit' className='btnPrimary mr-10'>
+						<Button
+							type='primary'
+							htmlType='submit'
+							className='btnPrimary mr-10'
+							data-testid='btnSubmit'
+						>
 							Submit
 						</Button>
 					</div>

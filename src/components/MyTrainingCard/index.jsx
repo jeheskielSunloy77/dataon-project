@@ -7,13 +7,17 @@ const MyTrainingCard = ({
 	location,
 	period,
 	trainerName,
-	type,
+	isOnline,
+	startDate,
+	endDate,
 }) => (
 	<>
 		<Card
 			actions={[
 				<Button type='link' key='status' className='font-bold'>
-					Event Started
+					{new Date(startDate) < new Date() && new Date() < new Date(endDate)
+						? 'Event Completed'
+						: 'Upcoming Event'}
 				</Button>,
 				<Button
 					type='primary'
@@ -24,7 +28,7 @@ const MyTrainingCard = ({
 					{location ? 'View Location' : 'Give Feedback'}
 				</Button>,
 			]}
-			className='max-w-md'
+			className='trainingCard max-w-md'
 		>
 			<div className='flex gap-4'>
 				<img
@@ -33,7 +37,7 @@ const MyTrainingCard = ({
 					alt='card image'
 				/>
 				<div>
-					{location && type === 'Offline Class' ? (
+					{location && !isOnline ? (
 						<p>
 							<Icon name='MapPin' />
 							{location}
@@ -54,7 +58,7 @@ const MyTrainingCard = ({
 			</div>
 		</Card>
 		<style jsx='true'>{`
-			.ant-card-body {
+			.trainingCard .ant-card-body {
 				padding: 0.5rem;
 			}
 		`}</style>
