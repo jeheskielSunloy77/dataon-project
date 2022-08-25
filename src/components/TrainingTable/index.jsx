@@ -52,15 +52,16 @@ const TrainingTable = ({ data, infiniteScroll }) => {
 				/>
 				<Table.Column
 					title='Event Type'
-					dataIndex='type'
-					key='type'
-					sorter={(a, b) => a.type.length - b.type.length}
+					dataIndex='isOnline'
+					key='isOnline'
+					render={(isOnline) => (isOnline ? 'Online Class' : 'Offline Class')}
+					sorter={(a, b) => a.isOnline - b.isOnline}
 				/>
 				<Table.Column
 					title='Event Period'
 					dataIndex='period'
 					key='period'
-					sorter={(a, b) => a.period.length - b.period.length}
+					sorter={(a, b) => Date.parse(a.startDate) - Date.parse(b.startDate)}
 				/>
 				<Table.Column
 					title='Trainer Name'
@@ -77,9 +78,10 @@ const TrainingTable = ({ data, infiniteScroll }) => {
 				/>
 				<Table.Column
 					title='Aditional Info'
-					dataIndex='aditionalInfo'
-					key='aditionalInfo'
-					sorter={(a, b) => a.name.length - b.name.length}
+					dataIndex='information'
+					className='max-w-xs'
+					key='information'
+					sorter={(a, b) => a.information.length - b.information.length}
 				/>
 			</Table>
 		</Wrapper>
