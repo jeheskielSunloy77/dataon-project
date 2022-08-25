@@ -16,23 +16,42 @@ const Login = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const response = await axios.get(
+			const response1 = await axios.get(
 				'https://randomuser.me/api/?seed=8c191e56a88fc13d&inc=login'
 			)
-			const data = { ...response.data.results[0].login, userId: 'user123' }
-			setUsersData(data)
+			const response2 = await axios.get(
+				'https://randomuser.me/api/?seed=3a5fb19fbfac60c9&inc=login'
+			)
+
+			const data1 = { ...response1.data.results[0].login, userId: 'user123' }
+			const data2 = { ...response2.data.results[0].login, userId: 'user321' }
+			setUsersData([data1, data2])
 		}
 		fetchData()
 	}, [])
 
 	const signIn = ({ username, password }) => {
-		if (usersData.username === username && usersData.password === password) {
-			const jwt = sign(usersData, 'as12ewqasdassao1121903rqeijoasjdoqwe')
+		const user = usersData.find((user) => user.username === username)
 
-			localStorage.setItem('token', jwt)
-			navigate('/')
-		} else Notification('Username or password is incorrect', '', 'error')
+		if (user) {
+			if (user.password === password) {
+				localStorage.setItem(
+					'token',
+					sign(user, 'as12ewqasdassao1121903rqeijoasjdoqwe')
+				)
+				navigate('/')
+			} else Notification('Username or password is incorrect', '', 'error')
+		}
 	}
+
+	// const signIn = ({ username, password }) => {
+	// 	if (usersData.username === username && usersData.password === password) {
+	// 		const jwt = sign(usersData, 'as12ewqasdassao1121903rqeijoasjdoqwe')
+
+	// 		localStorage.setItem('token', jwt)
+	// 		navigate('/')
+	// 	} else Notification('Username or password is incorrect', '', 'error')
+	// }
 
 	return (
 		<Wrapper>
