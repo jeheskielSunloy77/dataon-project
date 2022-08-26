@@ -1,4 +1,8 @@
-import { TrainingSectionTitle, TrainingTable } from '@/components/index'
+import {
+	AllTrainingsCards,
+	TrainingSectionTitle,
+	TrainingTable,
+} from '@/components/index'
 import { AppContext } from '@/utils/AppContext'
 import customAxios from '@/utils/axios'
 import { useContext, useEffect, useState } from 'react'
@@ -36,6 +40,12 @@ const AllTrainings = () => {
 					tableData={allTrainingData}
 					setPageLimit={setPageLimit}
 					infiniteScroll
+				/>
+			)}
+			{dataView === 'cards' && (
+				<AllTrainingsCards
+					setPageLimit={setPageLimit}
+					cardsData={allTrainingData}
 				/>
 			)}
 		</section>
