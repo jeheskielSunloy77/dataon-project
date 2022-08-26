@@ -19,7 +19,6 @@ const TrainingTable = ({ tableData, setPageLimit, infiniteScroll }) => {
 					loader={
 						<Spin className='absolute bottom-0 left-1/2 -translate-x-1/2' spinning />
 					}
-					endMessage={<h1 className='text-center'>That is all</h1>}
 					className='relative'
 				>
 					{children}
