@@ -1,3 +1,4 @@
+import AllTrainingsCards from './AllTrainingsCards'
 import Breadcrumbs from './Breadcrumbs'
 import FormTextInput from './FormTextInput'
 import HeaderSection from './HeaderSection'
@@ -22,4 +23,5 @@ export {
 	Notification,
 	HeaderSection,
 	FormTextInput,
+	AllTrainingsCards,
 }
