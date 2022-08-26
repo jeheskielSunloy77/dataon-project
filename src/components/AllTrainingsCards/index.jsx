@@ -18,7 +18,7 @@ const AllTrainingsCards = ({ setPageLimit, cardsData }) => {
 			loader={
 				<Spin className='absolute bottom-0 left-1/2 -translate-x-1/2' spinning />
 			}
-			className='grid grid-cols-5 gap-1'
+			className='relative grid grid-cols-5 gap-1'
 		>
 			{cardsData.map(
 				({ name, location, trainerName, isOnline, period }, index) => (
