@@ -78,3 +78,6 @@ section {
 .ant-table-thead > tr > th:hover {
 	background-color: #0780ee !important;
 }
+.trainingCard .ant-card-body {
+	padding: 0;
+}
