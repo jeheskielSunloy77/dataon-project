@@ -1,4 +1,4 @@
-import HeaderSection from '@/components/HeaderSection'
+import { HeaderSection } from '@/components/index'
 import customAxios from '@/utils/axios'
 import {
 	CalendarOutlined,
@@ -22,13 +22,6 @@ const DetailTraining = () => {
 	const { isOnline, startDate, endDate, location, trainerName, name } =
 		trainingData
 
-	const isPassed = () => {
-		const today = new Date()
-		const trainingDate = new Date(startDate)
-
-		return trainingDate < today
-	}
-
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await customAxios(`trainings/${id}`)
@@ -37,7 +30,13 @@ const DetailTraining = () => {
 		}
 		fetchData()
 	}, [])
-	console.log(trainingData)
+
+	const isPassed = () => {
+		const today = new Date()
+		const trainingDate = new Date(startDate)
+
+		return trainingDate < today
+	}
 	if (loading) return <Spin className='centerAbsolute' />
 	else
 		return (
