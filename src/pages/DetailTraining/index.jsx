@@ -50,7 +50,7 @@ const DetailTraining = () => {
 							<img
 								src={`https://picsum.photos/seed/${id}/700/500`}
 								alt='class image'
-								className='w-full h-[300px] rounded-xl'
+								className='w-full h-[300px] rounded-xl object-cover'
 							/>
 							<Button
 								type='primary'
