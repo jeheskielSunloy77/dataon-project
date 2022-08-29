@@ -107,7 +107,7 @@ const DetailTraining = () => {
 									</p>
 								</div>
 							</div>
-							<Card title='Resources' className='rounded-lg'>
+							<Card title='Resources' className='detailTrainingCard rounded-lg'>
 								<h1 className='text-xl'>
 									<SolutionOutlined className='mr-2' />
 									Offline Class Detail
