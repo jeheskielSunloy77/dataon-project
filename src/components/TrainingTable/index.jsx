@@ -1,5 +1,6 @@
 import { Spin, Table } from 'antd'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import { Link } from 'react-router-dom'
 import { RatingScore } from '../index'
 
 const TrainingTable = ({ tableData, setPageLimit, infiniteScroll }) => {
@@ -38,8 +39,12 @@ const TrainingTable = ({ tableData, setPageLimit, infiniteScroll }) => {
 					title='Event Name'
 					dataIndex='name'
 					key='name'
+					render={(text, { id }) => (
+						<Link to={`/detailTraining/${id}`} className='text-blue-500 font-medium'>
+							{text}
+						</Link>
+					)}
 					sorter={(a, b) => a.name.length - b.name.length}
-					className='text-blue-500 font-medium'
 				/>
 				<Table.Column
 					title='Event Type'

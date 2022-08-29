@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons'
 import { Button, Card, Spin } from 'antd'
 import jwt_decode from 'jwt-decode'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './DetailTraining.css'
 
@@ -22,14 +22,17 @@ const DetailTraining = () => {
 	const { isOnline, startDate, endDate, location, trainerName, name } =
 		trainingData
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const response = await customAxios(`trainings/${id}`)
-			setTrainingData(response.data.data)
+	const fetchData = useCallback(async () => {
+		try {
+			const response = await customAxios.get(`/training/${id}`)
+			setTrainingData(response.data)
 			setLoading(false)
+		} catch (error) {
+			throw new Error(error)
 		}
-		fetchData()
 	}, [])
+
+	useEffect(() => fetchData(), [])
 
 	const isPassed = () => {
 		const today = new Date()
