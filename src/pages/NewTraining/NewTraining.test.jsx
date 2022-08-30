@@ -75,9 +75,7 @@ describe('NewTraining page', () => {
 		const { container } = renderer()
 		setupAdmin()
 		const eventName = container.querySelectorAll('input')
-		// const trainerName = container.querySelector('input .trainerNameInput')
 		await waitFor(() => expect(eventName).toBeTruthy())
-		// expect(trainerName.value).toBe('testing')
 	})
 	it('should render transfer component correctly', async () => {
 		const { container, getByText } = renderer()
