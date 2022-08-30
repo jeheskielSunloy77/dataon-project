@@ -1,16 +1,76 @@
 import { FormTextInput, HeaderSection } from '@/components/index'
 import customAxios from '@/utils/axios'
 import { PlusSquareOutlined, UploadOutlined } from '@ant-design/icons'
-import { Button, DatePicker, Form, Input, Radio, Select, Upload } from 'antd'
+import {
+	Button,
+	DatePicker,
+	Form,
+	Input,
+	Radio,
+	Select,
+	Spin,
+	Transfer,
+	Upload,
+} from 'antd'
 import jwt_decode from 'jwt-decode'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import moment from 'moment'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import './NewTraining.css'
 const { RangePicker } = DatePicker
 
 const NewTraining = () => {
+	const [mockData, setMockData] = useState([])
+	const [targetKeys, setTargetKeys] = useState([])
+
+	const getMock = () => {
+		const tempTargetKeys = []
+		const tempMockData = []
+
+		for (let i = 0; i < 20; i++) {
+			const data = {
+				key: i.toString(),
+				name: `Participant ${i + 1}`,
+				chosen: Math.random() * 2 > 1,
+			}
+
+			if (data.chosen) {
+				tempTargetKeys.push(data.key)
+			}
+
+			tempMockData.push(data)
+		}
+
+		setMockData(tempMockData)
+		setTargetKeys(tempTargetKeys)
+	}
 	const [onlineClass, setOnlineClass] = useState(false)
+	const [formData, setFormData] = useState(null)
+	const [loading, setLoading] = useState(true)
 	const navigate = useNavigate()
+	const isEditPage = window.location.pathname.includes('/editTraining')
+	const params = useParams()
+
+	const fetchData = async () => {
+		const response = await customAxios.get(`trainings/${params.id}`)
+		const { startDate, endDate, ...rest } = response.data.data
+		const date = [moment(startDate), moment(endDate)]
+		const data = {
+			date,
+			...rest,
+		}
+		setFormData(data)
+		setLoading(false)
+	}
+
+	useEffect(() => {
+		if (isEditPage) {
+			getMock()
+			const token = localStorage.getItem('token')
+			const decoded = jwt_decode(token)
+			decoded.userId === 'user123' ? fetchData() : navigate('/')
+		} else setLoading(false)
+	}, [])
 
 	const onFormFinish = (value) => {
 		const token = localStorage.getItem('token')
@@ -32,6 +92,8 @@ const NewTraining = () => {
 		setOnlineClass(event.target.value)
 	}
 
+	if (loading) return <Spin className='centerAbsolute' />
+
 	return (
 		<div className='pageContainer space-y-2'>
 			<HeaderSection />
@@ -44,7 +106,7 @@ const NewTraining = () => {
 					wrapperCol={{
 						span: 16,
 					}}
-					initialValues={{ isOnline: onlineClass }}
+					initialValues={formData || { isOnline: false }}
 					onFinish={onFormFinish}
 					className='sm:px-[10%] new-training-form'
 				>
@@ -148,6 +210,17 @@ const NewTraining = () => {
 					>
 						<Input.TextArea rows={4} />
 					</Form.Item>
+					{isEditPage && (
+						<Form.Item label='Participants'>
+							<Transfer
+								dataSource={mockData}
+								showSearch
+								targetKeys={targetKeys}
+								onChange={(newTargetKeys) => setTargetKeys(newTargetKeys)}
+								render={(item) => item.name}
+							/>
+						</Form.Item>
+					)}
 					<div className='flex justify-end py-6'>
 						<Button
 							type='primary'
