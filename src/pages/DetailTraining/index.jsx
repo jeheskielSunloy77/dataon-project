@@ -8,7 +8,6 @@ import {
 	UserOutlined,
 } from '@ant-design/icons'
 import { Button, Card, Spin } from 'antd'
-import jwt_decode from 'jwt-decode'
 import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './DetailTraining.css'
@@ -17,8 +16,8 @@ const DetailTraining = () => {
 	const [trainingData, setTrainingData] = useState({})
 	const [loading, setLoading] = useState(true)
 	const { id } = useParams()
-	const token = localStorage.getItem('token')
-	const { userId } = jwt_decode(token)
+	// const token = localStorage.getItem('token')
+	// const { userId } = jwt_decode(token)
 	const { isOnline, startDate, endDate, location, trainerName, name } =
 		trainingData
 
@@ -58,7 +57,7 @@ const DetailTraining = () => {
 							<Button
 								type='primary'
 								className='btnPrimary w-full my-4'
-								disabled={trainingData.userId !== userId}
+								// disabled={trainingData.userId !== userId}
 							>
 								Join Class
 							</Button>
