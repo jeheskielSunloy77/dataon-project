@@ -11,7 +11,7 @@ const FormTextInput = ({ label, name, required }) => (
 			},
 		]}
 	>
-		<Input placeholder={`Enter the ${label}`} />
+		<Input placeholder={`Enter the ${label}`} className={`${name}Input`} />
 	</Form.Item>
 )
 
