@@ -5,10 +5,11 @@ import {
 	InfoCircleOutlined,
 	PlusOutlined,
 	SolutionOutlined,
-	UserOutlined,
+	UserOutlined
 } from '@ant-design/icons'
 import { Button, Card, Spin } from 'antd'
 import jwt_decode from 'jwt-decode'
+import moment from 'moment'
 import { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import './DetailTraining.css'
@@ -24,22 +25,25 @@ const DetailTraining = () => {
 
 	const fetchData = useCallback(async () => {
 		try {
-			const response = await customAxios.get(`/training/${id}`)
-			setTrainingData(response.data)
+			const response = await customAxios.get(`/trainings/${id}`)
+			setTrainingData(response.data.data)
 			setLoading(false)
 		} catch (error) {
 			throw new Error(error)
 		}
 	}, [])
 
-	useEffect(() => fetchData(), [])
+	useEffect(() => {
+		fetchData()
+	}, [])
 
 	const isPassed = () => {
 		const today = new Date()
-		const trainingDate = new Date(startDate)
+		const dateDiff = moment(startDate).diff(today, 'days')
 
-		return trainingDate < today
+		return dateDiff<0
 	}
+
 	if (loading) return <Spin className='centerAbsolute' />
 	else
 		return (
