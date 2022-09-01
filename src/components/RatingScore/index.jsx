@@ -3,25 +3,25 @@ import { Modal, Rate } from 'antd'
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
 
-const RatingScore = ({ rating }) => {
+const RatingScore = ({ score }) => {
 	const [modal, setModal] = useState(null)
 
 	return (
 		<>
-			<div onClick={() => setModal(true)}>
-				<Rate className='cursor-pointer' disabled defaultValue={rating.rating} />
+			<div id='ratingContainer' onClick={() => setModal(true)}>
+				<Rate className='cursor-pointer' disabled defaultValue={score} />
 			</div>
-			<SubmitRatingModal modal={modal} setModal={setModal} rating={rating} />
+			<SubmitRatingModal modal={modal} setModal={setModal} rating={score} />
 		</>
 	)
 }
 
-const SubmitRatingModal = ({ modal, setModal, rating }) => {
-	const [rateValue, setRateValue] = useState(rating.rating)
+const SubmitRatingModal = ({ modal, setModal, score }) => {
+	const [rateValue, setRateValue] = useState(score.rating)
 
 	const submitRating = () => {
 		setModal(false)
-		customAxios.put(`trainings/${rating.id}/ratings`, {
+		customAxios.put(`trainings/${score.id}/ratings`, {
 			rate: rateValue * 20,
 		})
 	}
