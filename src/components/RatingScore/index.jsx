@@ -7,7 +7,7 @@ const RatingScore = ({ score }) => {
 
 	return (
 		<>
-			<div onClick={() => setModal(true)}>
+			<div id='ratingContainer' onClick={() => setModal(true)}>
 				<Rate className='cursor-pointer' disabled defaultValue={score} />
 			</div>
 			<SubmitRatingModal modal={modal} setModal={setModal} score={score} />
@@ -31,7 +31,7 @@ const SubmitRatingModal = ({ modal, setModal, score }) => {
 			>
 				<Rate className='centerAbsolute' defaultValue={score} />
 			</Modal>,
-			document.getElementById('root')
+			document.getElementById('ratingContainer')
 		)
 }
 
