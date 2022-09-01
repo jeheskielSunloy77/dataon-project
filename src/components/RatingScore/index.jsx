@@ -41,7 +41,7 @@ const SubmitRatingModal = ({ modal, setModal, score }) => {
 					onChange={(value) => setRateValue(value)}
 				/>
 			</Modal>,
-			document.getElementById('root')
+			document.getElementById('ratingContainer')
 		)
 }
 

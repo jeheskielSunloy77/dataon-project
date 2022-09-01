@@ -11,9 +11,12 @@ const AllTrainings = () => {
 	const { dataView } = useContext(AppContext)
 	const [allTrainingData, setAllTrainingData] = useState([])
 	const [pageLimit, setPageLimit] = useState(5)
+	const [dataLength, setDataLength] = useState(0)
 
 	useEffect(() => {
 		const fetchData = async () => {
+			const dataLength = await customAxios.get('trainings')
+			setDataLength(dataLength.data.total)
 			const response = await customAxios.get(`trainings?page=1&limit=${pageLimit}`)
 			const data = response.data.data
 			const allTraining = data.map((item) => {
@@ -40,6 +43,7 @@ const AllTrainings = () => {
 					tableData={allTrainingData}
 					setPageLimit={setPageLimit}
 					infiniteScroll
+					dataLength={dataLength}
 				/>
 			)}
 			{dataView === 'cards' && (
