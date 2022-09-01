@@ -69,7 +69,7 @@ const TrainingTable = ({ tableData, setPageLimit, infiniteScroll }) => {
 					title='Rating'
 					dataIndex='rating'
 					key='rating'
-					render={(rating) => <RatingScore score={rating} />}
+					render={(_, { rating, id }) => <RatingScore rating={{ rating, id }} />}
 					sorter={(a, b) => a.rating - b.rating}
 				/>
 				<Table.Column

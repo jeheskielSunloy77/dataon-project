@@ -1,24 +1,29 @@
+import customAxios from '@/utils/axios'
 import { Modal, Rate } from 'antd'
 import { useState } from 'react'
 import { createPortal } from 'react-dom'
 
-const RatingScore = ({ score }) => {
+const RatingScore = ({ rating }) => {
 	const [modal, setModal] = useState(null)
 
 	return (
 		<>
 			<div onClick={() => setModal(true)}>
-				<Rate className='cursor-pointer' disabled defaultValue={score} />
+				<Rate className='cursor-pointer' disabled defaultValue={rating.rating} />
 			</div>
-			<SubmitRatingModal modal={modal} setModal={setModal} score={score} />
+			<SubmitRatingModal modal={modal} setModal={setModal} rating={rating} />
 		</>
 	)
 }
 
-const SubmitRatingModal = ({ modal, setModal, score }) => {
+const SubmitRatingModal = ({ modal, setModal, rating }) => {
+	const [rateValue, setRateValue] = useState(rating.rating)
+
 	const submitRating = () => {
 		setModal(false)
-		// TODO: POST rating to the API
+		customAxios.put(`trainings/${rating.id}/ratings`, {
+			rate: rateValue * 20,
+		})
 	}
 
 	if (modal)
@@ -29,7 +34,12 @@ const SubmitRatingModal = ({ modal, setModal, score }) => {
 				onOk={submitRating}
 				onCancel={() => setModal(false)}
 			>
-				<Rate className='centerAbsolute' defaultValue={score} />
+				<Rate
+					className='centerAbsolute'
+					defaultValue={rateValue}
+					value={rateValue}
+					onChange={(value) => setRateValue(value)}
+				/>
 			</Modal>,
 			document.getElementById('root')
 		)
