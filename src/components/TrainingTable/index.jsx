@@ -3,11 +3,17 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 import { Link } from 'react-router-dom'
 import { RatingScore } from '../index'
 
-const TrainingTable = ({ tableData, setPageLimit, infiniteScroll }) => (
+const TrainingTable = ({
+	tableData,
+	setPageLimit,
+	infiniteScroll,
+	dataLength,
+}) => (
 	<Wrapper
 		tableData={tableData}
 		setPageLimit={setPageLimit}
 		infiniteScroll={infiniteScroll}
+		dataLength={dataLength}
 	>
 		<Table
 			dataSource={tableData}
@@ -62,9 +68,15 @@ const TrainingTable = ({ tableData, setPageLimit, infiniteScroll }) => (
 	</Wrapper>
 )
 
-const Wrapper = ({ children, infiniteScroll, tableData, setPageLimit }) => {
+const Wrapper = ({
+	children,
+	infiniteScroll,
+	tableData,
+	setPageLimit,
+	dataLength,
+}) => {
 	const fetchMoreData = () => {
-		if (tableData.length >= 9) {
+		if (tableData.length >= dataLength) {
 			return false
 		} else setPageLimit((prev) => prev + 5)
 	}
@@ -74,7 +86,7 @@ const Wrapper = ({ children, infiniteScroll, tableData, setPageLimit }) => {
 			<InfiniteScroll
 				dataLength={tableData.length}
 				next={fetchMoreData}
-				hasMore={tableData.length < 9}
+				hasMore={tableData.length < dataLength}
 				loader={
 					<Spin className='absolute bottom-0 left-1/2 -translate-x-1/2' spinning />
 				}
