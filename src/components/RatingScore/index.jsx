@@ -5,13 +5,14 @@ import { createPortal } from 'react-dom'
 
 const RatingScore = ({ score }) => {
 	const [modal, setModal] = useState(null)
+	console.log(score)
 
 	return (
 		<>
 			<div id='ratingContainer' onClick={() => setModal(true)}>
-				<Rate className='cursor-pointer' disabled defaultValue={score} />
+				<Rate className='cursor-pointer' disabled defaultValue={score.rating} />
 			</div>
-			<SubmitRatingModal modal={modal} setModal={setModal} rating={score} />
+			<SubmitRatingModal modal={modal} setModal={setModal} score={score} />
 		</>
 	)
 }

@@ -1,7 +1,7 @@
 import { Spin, Table } from 'antd'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Link } from 'react-router-dom'
-import { RatingScore } from '../index'
+import RatingScore from '../RatingScore'
 
 const TrainingTable = ({
 	tableData,
@@ -54,7 +54,7 @@ const TrainingTable = ({
 				title='Rating'
 				dataIndex='rating'
 				key='rating'
-				render={(rating) => <RatingScore score={rating} />}
+				render={(_, { id, rating }) => <RatingScore score={{ id, rating }} />}
 				sorter={(a, b) => a.rating - b.rating}
 			/>
 			<Table.Column

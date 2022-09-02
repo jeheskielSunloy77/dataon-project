@@ -19,14 +19,22 @@ const AllTrainings = () => {
 			setDataLength(dataLength.data.total)
 			const response = await customAxios.get(`trainings?page=1&limit=${pageLimit}`)
 			const data = response.data.data
-			const allTraining = data.map((item) => {
-				const period = `${item.startDate} - ${item.endDate.slice(12)}`
 
-				return {
-					...item,
-					period,
-				}
-			})
+			const allTraining = await Promise.all(
+				data.map(async (training) => {
+					const period = `${training.startDate} - ${training.endDate.slice(12)}`
+					const response = await customAxios.get(`trainings/${training.id}/ratings`)
+					const rating =
+						response.data.length !== 0 ? Math.round(response.data[0].rate / 20) : 0
+
+					return {
+						...training,
+						rating,
+						period,
+					}
+				})
+			)
+
 			setAllTrainingData(allTraining)
 		}
 		fetchData()
