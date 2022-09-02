@@ -11,7 +11,7 @@ import { Button, Card, Spin } from 'antd'
 import jwt_decode from 'jwt-decode'
 import moment from 'moment'
 import { useCallback, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import './DetailTraining.css'
 
 const DetailTraining = () => {
@@ -19,6 +19,7 @@ const DetailTraining = () => {
 	const { id } = useParams()
 	const token = localStorage.getItem('token')
 	const { userId } = jwt_decode(token)
+	const navigate = useNavigate()
 
 	const fetchData = useCallback(async () => {
 		try {
@@ -42,6 +43,11 @@ const DetailTraining = () => {
 		const dateDiff = moment(startDate).diff(today, 'days')
 
 		return dateDiff < 0
+	}
+
+	const deleteTraining = () => {
+		customAxios.delete(`trainings/${id}`)
+		navigate('/')
 	}
 
 	return (
@@ -141,11 +147,7 @@ const DetailTraining = () => {
 					>
 						Edit
 					</Button>
-					<Button
-						className='btnDanger border-none px-8'
-						onClick={customAxios.delete(`trainings/${id}`)}
-						href='/'
-					>
+					<Button className='btnDanger border-none px-8' onClick={deleteTraining}>
 						Delete
 					</Button>
 				</div>
