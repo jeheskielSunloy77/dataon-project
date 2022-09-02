@@ -5,7 +5,6 @@ import { createPortal } from 'react-dom'
 
 const RatingScore = ({ score }) => {
 	const [modal, setModal] = useState(null)
-	console.log(score)
 
 	return (
 		<>
@@ -22,7 +21,7 @@ const SubmitRatingModal = ({ modal, setModal, score }) => {
 
 	const submitRating = () => {
 		setModal(false)
-		customAxios.put(`trainings/${score.id}/ratings`, {
+		customAxios.post(`trainings/${score.id}/ratings`, {
 			rate: rateValue * 20,
 		})
 	}
