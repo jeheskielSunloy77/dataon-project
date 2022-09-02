@@ -22,6 +22,7 @@ const SubmitRatingModal = ({ modal, setModal, score }) => {
 	const submitRating = () => {
 		setModal(false)
 		customAxios.post(`trainings/${score.id}/ratings`, {
+			trainingId: score.id,
 			rate: rateValue * 20,
 		})
 	}
