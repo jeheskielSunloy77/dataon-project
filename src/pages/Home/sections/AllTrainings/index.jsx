@@ -3,8 +3,10 @@ import {
 	TrainingSectionTitle,
 	TrainingTable,
 } from '@/components/index'
+import useDebounce from '@/hooks/useDebounce'
 import { AppContext } from '@/utils/AppContext'
 import customAxios from '@/utils/axios'
+import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 
 const AllTrainings = () => {
@@ -15,17 +17,37 @@ const AllTrainings = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const dataLength = await customAxios.get('trainings')
-			setDataLength(dataLength.data.total)
-			const response = await customAxios.get(`trainings?page=1&limit=${pageLimit}`)
-			const data = response.data.data
+			let cancelToken
+
+			if (typeof cancelToken != typeof undefined)
+				cancelToken.cancel('Canceling Previous Request!')
+
+			cancelToken = axios.CancelToken.source()
+
+			// const allData = await customAxios.get('trainings', {
+			// 	cancelToken: cancelToken.token,
+			// })
+			setDataLength(10)
+			const response = await customAxios.get(
+				`trainings?page=1&limit=${pageLimit}`,
+				{
+					cancelToken: cancelToken.token,
+				}
+			)
 
 			const allTraining = await Promise.all(
-				data.map(async (training) => {
+				response.data.data.map(async (training) => {
 					const period = `${training.startDate} - ${training.endDate.slice(12)}`
-					const response = await customAxios.get(`trainings/${training.id}/ratings`)
+					const ratingResponse = await customAxios.get(
+						`trainings/${training.id}/ratings`,
+						{
+							cancelToken: cancelToken.token,
+						}
+					)
 					const rating =
-						response.data.length !== 0 ? Math.round(response.data[0].rate / 20) : 0
+						ratingResponse.data.length !== 0
+							? Math.round(ratingResponse.data[0].rate / 20)
+							: 0
 
 					return {
 						...training,
@@ -38,7 +60,7 @@ const AllTrainings = () => {
 			setAllTrainingData(allTraining)
 		}
 		fetchData()
-	}, [pageLimit])
+	}, [useDebounce(pageLimit, 2000)])
 
 	return (
 		<section className='sectionContainer'>
@@ -58,6 +80,7 @@ const AllTrainings = () => {
 				<AllTrainingsCards
 					setPageLimit={setPageLimit}
 					cardsData={allTrainingData}
+					dataLength={dataLength}
 				/>
 			)}
 		</section>

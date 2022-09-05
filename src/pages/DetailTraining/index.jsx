@@ -66,7 +66,7 @@ const DetailTraining = () => {
 						<Button
 							type='primary'
 							className='btnPrimary w-full my-4'
-							disabled={trainingData.userId !== userId}
+							disabled={trainingData.userId === userId}
 						>
 							Join Class
 						</Button>

@@ -30,14 +30,14 @@ describe('DetailTraining page', () => {
 	})
 	it('should render 2 cards', async () => {
 		setupAdmin()
-		const { container } = renderer(1)
+		const { container } = renderer(8)
 		await waitFor(() =>
 			expect(container.querySelectorAll('.ant-card').length).toBe(2)
 		)
 	})
 	it('should render 2 buttons', async () => {
 		setupAdmin()
-		const { container } = renderer(1)
+		const { container } = renderer(8)
 		await waitFor(() =>
 			expect(container.querySelectorAll('.ant-btn').length).toBe(5)
 		)
