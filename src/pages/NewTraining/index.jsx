@@ -1,5 +1,5 @@
 import { FormTextInput, HeaderSection } from '@/components/index'
-import { trasnferMockData } from '@/mockData'
+import { transferMockKeys, trasnferMockData } from '@/mockData'
 import customAxios from '@/utils/axios'
 import { PlusSquareOutlined, UploadOutlined } from '@ant-design/icons'
 import {
@@ -21,7 +21,7 @@ import './NewTraining.css'
 const { RangePicker } = DatePicker
 
 const NewTraining = () => {
-	const [transferMockKeys, setTransferMockKeys] = useState(transferMockKeys)
+	const [transferKeys, setTransferKeys] = useState(transferMockKeys)
 	const [onlineClass, setOnlineClass] = useState(false)
 	const [formData, setFormData] = useState(null)
 	const navigate = useNavigate()
@@ -55,8 +55,8 @@ const NewTraining = () => {
 		const data = {
 			...rest,
 			userId,
-			startDate: date[0],
-			endDate: date[1],
+			startDate: moment(date[0]).format(),
+			endDate: moment(date[1]).format(),
 		}
 
 		if (isEditPage) {
@@ -191,8 +191,8 @@ const NewTraining = () => {
 								<Transfer
 									dataSource={trasnferMockData}
 									showSearch
-									targetKeys={transferMockKeys}
-									onChange={(newTargetKeys) => setTransferMockKeys(newTargetKeys)}
+									targetKeys={transferKeys}
+									onChange={(newTargetKeys) => setTransferKeys(newTargetKeys)}
 									render={(item) => item.name}
 								/>
 							</Form.Item>

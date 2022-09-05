@@ -8,13 +8,21 @@ import { lazy, Suspense, useContext, useEffect, useState } from 'react'
 const TrainingTable = lazy(() => import('@/components/TrainingTable'))
 
 const MyTraining = () => {
-	const { dataView } = useContext(AppContext)
+	const { dataView, searchParams } = useContext(AppContext)
 	const [myTrainingData, setMyTrainingData] = useState(null)
+	const token = localStorage.getItem('token')
+	const { userId } = jwt_decode(token)
+	const date = moment(new Date()).format()
+
+	const url = `trainings?${
+		searchParams.eventName !== '' ? searchParams.eventName + '&' : ''
+	}${searchParams.eventType !== '' ? searchParams.eventType + '&' : ''}${
+		searchParams.eventStatus === true ? `startDate=${date}&` : ''
+	}userId=${userId}`
+
 	useEffect(() => {
 		const fetchData = async () => {
-			const token = localStorage.getItem('token')
-			const { userId } = jwt_decode(token)
-			const response = await customAxios.get(`trainings?userId=${userId}`)
+			const response = await customAxios.get(url)
 			const myTraining = await Promise.all(
 				response.data.data.map(async (training) => {
 					const startDate = moment(training.startDate).format('ll-HH-mm')
@@ -35,11 +43,14 @@ const MyTraining = () => {
 			setMyTrainingData(myTraining)
 		}
 		fetchData()
-	}, [])
+	}, [searchParams])
 
 	return (
 		<section className='sectionContainer'>
-			<TrainingSectionTitle text='My Trainings Sessions' dataLength={0} />
+			<TrainingSectionTitle
+				text='My Trainings Sessions'
+				dataLength={myTrainingData?.length}
+			/>
 			{dataView === 'table' && (
 				<Suspense fallback={<Skeleton active />}>
 					<TrainingTable tableData={myTrainingData} />

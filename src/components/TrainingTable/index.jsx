@@ -8,70 +8,66 @@ const TrainingTable = ({
 	setPageLimit,
 	infiniteScroll,
 	dataLength,
-}) => {
-	console.log(tableData)
-
-	return (
-		<Wrapper
-			tableData={tableData}
-			setPageLimit={setPageLimit}
-			infiniteScroll={infiniteScroll}
-			dataLength={dataLength}
+}) => (
+	<Wrapper
+		tableData={tableData}
+		setPageLimit={setPageLimit}
+		infiniteScroll={infiniteScroll}
+		dataLength={dataLength}
+	>
+		<Table
+			loading={!tableData}
+			dataSource={tableData}
+			pagination={!infiniteScroll}
+			className='overflow-x-auto rounded-lg'
 		>
-			<Table
-				loading={!tableData}
-				dataSource={tableData}
-				pagination={!infiniteScroll}
-				className='overflow-x-auto rounded-lg'
-			>
-				<Table.Column
-					title='Event Name'
-					dataIndex='name'
-					key='name'
-					render={(text, { id }) => (
-						<Link to={`/detailTraining/${id}`} className='text-blue-500 font-medium'>
-							{text}
-						</Link>
-					)}
-					sorter={(a, b) => a.name.length - b.name.length}
-				/>
-				<Table.Column
-					title='Event Type'
-					dataIndex='isOnline'
-					key='isOnline'
-					render={(isOnline) => (isOnline ? 'Online Class' : 'Offline Class')}
-					sorter={(a, b) => a.isOnline - b.isOnline}
-				/>
-				<Table.Column
-					title='Event Period'
-					dataIndex='period'
-					key='period'
-					sorter={(a, b) => Date.parse(a.startDate) - Date.parse(b.startDate)}
-				/>
-				<Table.Column
-					title='Trainer Name'
-					dataIndex='trainerName'
-					key='trainerName'
-					sorter={(a, b) => a.trainerName.length - b.trainerName.length}
-				/>
-				<Table.Column
-					title='Rating'
-					dataIndex='rating'
-					key='rating'
-					render={(_, { id, rating }) => <RatingScore score={{ id, rating }} />}
-					sorter={(a, b) => a.rating - b.rating}
-				/>
-				<Table.Column
-					title='Aditional Info'
-					dataIndex='information'
-					className='max-w-xs'
-					key='information'
-					sorter={(a, b) => a.information.length - b.information.length}
-				/>
-			</Table>
-		</Wrapper>
-	)
-}
+			<Table.Column
+				title='Event Name'
+				dataIndex='name'
+				key='name'
+				render={(text, { id }) => (
+					<Link to={`/detailTraining/${id}`} className='text-blue-500 font-medium'>
+						{text}
+					</Link>
+				)}
+				sorter={(a, b) => a.name.length - b.name.length}
+			/>
+			<Table.Column
+				title='Event Type'
+				dataIndex='isOnline'
+				key='isOnline'
+				render={(isOnline) => (isOnline ? 'Online Class' : 'Offline Class')}
+				sorter={(a, b) => a.isOnline - b.isOnline}
+			/>
+			<Table.Column
+				title='Event Period'
+				dataIndex='period'
+				key='period'
+				sorter={(a, b) => Date.parse(a.startDate) - Date.parse(b.startDate)}
+			/>
+			<Table.Column
+				title='Trainer Name'
+				dataIndex='trainerName'
+				key='trainerName'
+				sorter={(a, b) => a.trainerName.length - b.trainerName.length}
+			/>
+			<Table.Column
+				title='Rating'
+				dataIndex='rating'
+				key='rating'
+				render={(_, { id, rating }) => <RatingScore score={{ id, rating }} />}
+				sorter={(a, b) => a.rating - b.rating}
+			/>
+			<Table.Column
+				title='Aditional Info'
+				dataIndex='information'
+				className='max-w-xs'
+				key='information'
+				sorter={(a, b) => a.information.length - b.information.length}
+			/>
+		</Table>
+	</Wrapper>
+)
 
 const Wrapper = ({
 	children,

@@ -10,10 +10,15 @@ import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 
 const AllTrainings = () => {
-	const { dataView } = useContext(AppContext)
+	const { dataView, searchParams } = useContext(AppContext)
 	const [allTrainingData, setAllTrainingData] = useState([])
 	const [pageLimit, setPageLimit] = useState(5)
 	const [dataLength, setDataLength] = useState(0)
+	const url = `trainings?${
+		searchParams.eventName !== '' ? searchParams.eventName + '&' : ''
+	}${
+		searchParams.eventType !== '' ? searchParams.eventType + '&' : ''
+	}page=1&limit=${pageLimit}`
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -24,17 +29,10 @@ const AllTrainings = () => {
 
 			cancelToken = axios.CancelToken.source()
 
-			// const allData = await customAxios.get('trainings', {
-			// 	cancelToken: cancelToken.token,
-			// })
-			setDataLength(10)
-			const response = await customAxios.get(
-				`trainings?page=1&limit=${pageLimit}`,
-				{
-					cancelToken: cancelToken.token,
-				}
-			)
-
+			const response = await customAxios.get(url, {
+				cancelToken: cancelToken.token,
+			})
+			setDataLength(response.data.total)
 			const allTraining = await Promise.all(
 				response.data.data.map(async (training) => {
 					const period = `${training.startDate} - ${training.endDate.slice(12)}`
@@ -60,13 +58,13 @@ const AllTrainings = () => {
 			setAllTrainingData(allTraining)
 		}
 		fetchData()
-	}, [useDebounce(pageLimit, 2000)])
+	}, [useDebounce(pageLimit, 2000), searchParams])
 
 	return (
 		<section className='sectionContainer'>
 			<TrainingSectionTitle
 				text='All Trainings Sessions'
-				dataLength={allTrainingData.length}
+				dataLength={dataLength}
 			/>
 			{dataView === 'table' && (
 				<TrainingTable
