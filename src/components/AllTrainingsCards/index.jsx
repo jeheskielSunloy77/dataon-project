@@ -3,9 +3,9 @@ import { Card, Spin } from 'antd'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Icon from '../Icon'
 
-const AllTrainingsCards = ({ setPageLimit, cardsData }) => {
+const AllTrainingsCards = ({ setPageLimit, cardsData, dataLength }) => {
 	const fetchMoreData = () => {
-		if (cardsData.length >= 9) {
+		if (cardsData.length >= dataLength) {
 			return false
 		} else setPageLimit((prev) => prev + 5)
 	}
@@ -14,7 +14,7 @@ const AllTrainingsCards = ({ setPageLimit, cardsData }) => {
 		<InfiniteScroll
 			dataLength={cardsData.length}
 			next={fetchMoreData}
-			hasMore={cardsData.length < 9}
+			hasMore={cardsData.length < dataLength}
 			loader={
 				<Spin className='absolute bottom-0 left-1/2 -translate-x-1/2' spinning />
 			}
