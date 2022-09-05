@@ -2,11 +2,16 @@ import { act, fireEvent, render, waitFor } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 import RatingScore from '.'
 describe('RatingScore component', () => {
+	const renderer = () =>
+		render(<RatingScore score={{ rating: 3, id: 1 }} />, {
+			container: document.body,
+		})
 	it('should render without crashing', () => {
-		render(<RatingScore />)
+		const { container } = renderer()
+		expect(container).toBeDefined()
 	})
 	it('should display correct props', async () => {
-		const { container } = render(<RatingScore score={3} />)
+		const { container } = renderer()
 
 		await waitFor(() =>
 			expect(
@@ -15,9 +20,7 @@ describe('RatingScore component', () => {
 		)
 	})
 	it('should display a modal when clicked', async () => {
-		const { container } = render(<RatingScore score={3} />, {
-			container: document.body,
-		})
+		const { container } = renderer()
 		const rating = container.querySelector('#ratingContainer')
 		act(() => {
 			fireEvent.click(rating)
@@ -27,9 +30,7 @@ describe('RatingScore component', () => {
 		expect(container.querySelector('.ant-modal')).toBeDefined()
 	})
 	it('should close the modal when clicked the cancle button', async () => {
-		const { container } = render(<RatingScore score={3} />, {
-			container: document.body,
-		})
+		const { container } = renderer()
 		const rating = container.querySelector('#ratingContainer')
 		act(() => {
 			fireEvent.click(rating)
@@ -47,9 +48,7 @@ describe('RatingScore component', () => {
 		expect(container.querySelector('.ant-modal')).toBeNull()
 	})
 	it('should close the modal when clicked the ok button', async () => {
-		const { container } = render(<RatingScore score={3} />, {
-			container: document.body,
-		})
+		const { container } = renderer()
 		const rating = container.querySelector('#ratingContainer')
 		act(() => {
 			fireEvent.click(rating)
