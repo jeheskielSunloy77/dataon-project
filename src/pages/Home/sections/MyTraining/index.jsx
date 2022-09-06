@@ -1,8 +1,8 @@
 import { MyTrainingCarousel, TrainingSectionTitle } from '@/components/index'
 import { AppContext } from '@/utils/AppContext'
 import customAxios from '@/utils/axios'
+import queryPrams from '@/utils/queryParams'
 import { Skeleton } from 'antd'
-import jwt_decode from 'jwt-decode'
 import moment from 'moment'
 import { lazy, Suspense, useContext, useEffect, useState } from 'react'
 const TrainingTable = lazy(() => import('@/components/TrainingTable'))
@@ -10,15 +10,8 @@ const TrainingTable = lazy(() => import('@/components/TrainingTable'))
 const MyTraining = () => {
 	const { dataView, searchParams } = useContext(AppContext)
 	const [myTrainingData, setMyTrainingData] = useState(null)
-	const token = localStorage.getItem('token')
-	const { userId } = jwt_decode(token)
-	const date = moment(new Date()).format()
 
-	const url = `trainings?${
-		searchParams.eventName !== '' ? searchParams.eventName + '&' : ''
-	}${searchParams.eventType !== '' ? searchParams.eventType + '&' : ''}${
-		searchParams.eventStatus === true ? `startDate=${date}&` : ''
-	}userId=${userId}`
+	const url = queryPrams()
 
 	useEffect(() => {
 		const fetchData = async () => {
