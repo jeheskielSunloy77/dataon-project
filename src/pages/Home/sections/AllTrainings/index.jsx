@@ -6,6 +6,7 @@ import {
 import useDebounce from '@/hooks/useDebounce'
 import { AppContext } from '@/utils/AppContext'
 import customAxios from '@/utils/axios'
+import queryPrams from '@/utils/queryParams'
 import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 
@@ -14,11 +15,7 @@ const AllTrainings = () => {
 	const [allTrainingData, setAllTrainingData] = useState([])
 	const [pageLimit, setPageLimit] = useState(5)
 	const [dataLength, setDataLength] = useState(0)
-	const url = `trainings?${
-		searchParams.eventName !== '' ? searchParams.eventName + '&' : ''
-	}${
-		searchParams.eventType !== '' ? searchParams.eventType + '&' : ''
-	}page=1&limit=${pageLimit}`
+	const url = queryPrams(pageLimit)
 
 	useEffect(() => {
 		const fetchData = async () => {
