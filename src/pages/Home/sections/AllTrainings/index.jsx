@@ -33,15 +33,8 @@ const AllTrainings = () => {
 			const allTraining = response.data.data.map((training) => {
 				const period = `${training.startDate} - ${training.endDate.slice(12)}`
 
-				// const ratingResponse = await customAxios.get(
-				// 	`trainings/${training.id}/ratings`,
-				// 	{
-				// 		cancelToken: cancelToken.token,
-				// 	}
-				// )
 				return {
 					...training,
-					// rating,
 					period,
 				}
 			})
