@@ -55,7 +55,7 @@ const TrainingTable = ({
 				title='Rating'
 				dataIndex='rating'
 				key='rating'
-				render={(_, { id, rating }) => <RatingScore score={{ id, rating }} />}
+				render={(_, { id }) => <RatingScore id={id} />}
 				sorter={(a, b) => a.rating - b.rating}
 			/>
 			<Table.Column
