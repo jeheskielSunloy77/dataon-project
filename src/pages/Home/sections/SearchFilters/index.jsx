@@ -2,6 +2,7 @@ import { Searchbar } from '@/components/index'
 import { AppContext } from '@/utils/AppContext'
 import { AppstoreOutlined, UnorderedListOutlined } from '@ant-design/icons'
 import { Button, Select, Switch } from 'antd'
+import moment from 'moment'
 import { useContext } from 'react'
 
 const SearchFilters = () => {
@@ -15,9 +16,7 @@ const SearchFilters = () => {
 			<Searchbar
 				label='Search Training'
 				placeholder='Search Training'
-				onSearch={(value) =>
-					setSearchParams((prev) => ({ ...prev, eventName: `name=${value}` }))
-				}
+				onSearch={(value) => setSearchParams((prev) => ({ ...prev, name: value }))}
 			/>
 			<label className='rounded-xl flex flex-col'>
 				Event Type
@@ -26,7 +25,7 @@ const SearchFilters = () => {
 					placeholder='Search Event Type'
 					optionFilterProp='children'
 					onChange={(value) =>
-						setSearchParams((prev) => ({ ...prev, eventType: `isOnline=${value}` }))
+						setSearchParams((prev) => ({ ...prev, isOnline: value }))
 					}
 				>
 					<Select.Option value={true}>Online Class</Select.Option>
@@ -40,7 +39,10 @@ const SearchFilters = () => {
 					placeholder='Search Event Status'
 					optionFilterProp='children'
 					onChange={(value) =>
-						setSearchParams((prev) => ({ ...prev, eventStatus: value }))
+						setSearchParams((prev) => ({
+							...prev,
+							startDate: value ? moment(new Date()).format() : '',
+						}))
 					}
 				>
 					<Select.Option value={true}>Event Completed</Select.Option>

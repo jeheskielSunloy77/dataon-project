@@ -5,9 +5,9 @@ export const AppContext = createContext()
 export const AppProvider = ({ children }) => {
 	const [dataView, setDataView] = useState('table')
 	const [searchParams, setSearchParams] = useState({
-		eventName: '',
-		eventType: '',
-		status: '',
+		name: '',
+		isOnline: '',
+		startDate: '',
 	})
 
 	return (
