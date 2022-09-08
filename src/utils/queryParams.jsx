@@ -1,21 +1,15 @@
-import jwt_decode from 'jwt-decode'
-import moment from 'moment'
-import { useContext } from 'react'
-import { AppContext } from './AppContext'
+/* eslint-disable no-prototype-builtins */
+const queryPrams = (endpoint, params, pageLimit) => {
+	let str = []
 
-const queryPrams = (pageLimit) => {
-	const { searchParams } = useContext(AppContext)
-	const token = localStorage.getItem('token')
-	const { userId } = jwt_decode(token)
-	const date = moment(new Date()).format()
+	for (let p in params)
+		if (params[p] !== '') {
+			str.push(encodeURIComponent(p) + '=' + encodeURIComponent(params[p]))
+		}
 
-	const url = `trainings?${
-		searchParams.eventName !== '' ? searchParams.eventName + '&' : ''
-	}${searchParams.eventType !== '' ? searchParams.eventType + '&' : ''}${
-		searchParams.eventStatus === true ? `startDate=${date}&` : ''
-	}${pageLimit ? `page=1&limit=${pageLimit}` : `userId=${userId}`}`
-
-	return url
+	return `${endpoint}?${str.join('&')}${
+		pageLimit ? `&page=1&limit=${pageLimit}` : ''
+	}`
 }
 
 export default queryPrams
