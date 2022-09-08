@@ -15,7 +15,7 @@ const AllTrainings = () => {
 	const [allTrainingData, setAllTrainingData] = useState([])
 	const [pageLimit, setPageLimit] = useState(5)
 	const [dataLength, setDataLength] = useState(0)
-	const url = queryPrams(pageLimit)
+	const url = queryPrams('trainings', searchParams, pageLimit)
 
 	useEffect(() => {
 		const fetchData = async () => {
