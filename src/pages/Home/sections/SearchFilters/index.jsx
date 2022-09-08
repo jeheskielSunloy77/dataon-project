@@ -24,9 +24,10 @@ const SearchFilters = () => {
 					showSearch
 					placeholder='Search Event Type'
 					optionFilterProp='children'
-					onChange={(value) =>
+					onSearch={(value) =>
 						setSearchParams((prev) => ({ ...prev, isOnline: value }))
 					}
+					data-testid='eventTypeSelect'
 				>
 					<Select.Option value={true}>Online Class</Select.Option>
 					<Select.Option value={false}>Offline Class</Select.Option>
@@ -38,12 +39,13 @@ const SearchFilters = () => {
 					showSearch
 					placeholder='Search Event Status'
 					optionFilterProp='children'
-					onChange={(value) =>
+					onSearch={(value) =>
 						setSearchParams((prev) => ({
 							...prev,
 							startDate: value ? moment(new Date()).format() : '',
 						}))
 					}
+					data-testid='eventStatusSelect'
 				>
 					<Select.Option value={true}>Event Completed</Select.Option>
 					<Select.Option value={false}>Event Started</Select.Option>
