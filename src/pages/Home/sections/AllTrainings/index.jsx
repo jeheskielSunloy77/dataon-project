@@ -30,32 +30,19 @@ const AllTrainings = () => {
 				cancelToken: cancelToken.token,
 			})
 			setDataLength(response.data.total)
-			const allTraining = await Promise.all(
-				response.data.data.map(async (training) => {
-					const period = `${training.startDate} - ${training.endDate.slice(12)}`
-					const ratingResponse = await customAxios.get(
-						`trainings/${training.id}/ratings`,
-						{
-							cancelToken: cancelToken.token,
-						}
-					)
-					const rating =
-						ratingResponse.data.length !== 0
-							? Math.round(ratingResponse.data[0].rate / 20)
-							: 0
+			const allTraining = response.data.data.map((training) => {
+				const period = `${training.startDate} - ${training.endDate.slice(12)}`
 
-					return {
-						...training,
-						rating,
-						period,
-					}
-				})
-			)
+				return {
+					...training,
+					period,
+				}
+			})
 
 			setAllTrainingData(allTraining)
 		}
 		fetchData()
-	}, [useDebounce(pageLimit, 2000), searchParams])
+	}, [useDebounce(pageLimit, 1000), searchParams])
 
 	return (
 		<section className='sectionContainer'>

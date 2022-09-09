@@ -20,22 +20,16 @@ const MyTraining = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await customAxios.get(url)
-			const myTraining = await Promise.all(
-				response.data.data.map(async (training) => {
-					const startDate = moment(training.startDate).format('ll-HH-mm')
-					const endDate = moment(training.endDate).format('HH-mm')
-					const period = `${startDate} - ${endDate}`
-					const response = await customAxios.get(`trainings/${training.id}/ratings`)
-					const rating =
-						response.data.length !== 0 ? Math.round(response.data[0].rate / 20) : 0
+			const myTraining = response.data.data.map((training) => {
+				const startDate = moment(training.startDate).format('ll-HH-mm')
+				const endDate = moment(training.endDate).format('HH-mm')
+				const period = `${startDate} - ${endDate}`
 
-					return {
-						...training,
-						rating,
-						period,
-					}
-				})
-			)
+				return {
+					...training,
+					period,
+				}
+			})
 
 			setMyTrainingData(myTraining)
 		}
