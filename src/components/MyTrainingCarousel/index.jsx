@@ -5,7 +5,7 @@ import { Carousel } from 'antd'
 const MyTrainingCarousel = ({ carouselData }) => {
 	const mobile = useCheckMobile()
 	const cards = carouselData.map(
-		({ name, location, startDate, endDate, trainerName, isOnline }, index) => (
+		({ name, location, period, trainerName, isOnline, id }, index) => (
 			<MyTrainingCard
 				key={index}
 				name={name}
@@ -13,7 +13,8 @@ const MyTrainingCarousel = ({ carouselData }) => {
 				location={location}
 				trainerName={trainerName}
 				isOnline={isOnline}
-				period={`${startDate} - ${endDate.slice(12)}`}
+				period={period}
+				id={id}
 			/>
 		)
 	)
@@ -44,6 +45,9 @@ const MyTrainingCarousel = ({ carouselData }) => {
 				}
 				.slick-arrow.slick-prev {
 					left: 0;
+				}
+				.slick-slide {
+					height: 100%;
 				}
 			`}</style>
 		</>

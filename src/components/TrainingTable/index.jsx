@@ -77,17 +77,16 @@ const Wrapper = ({
 	dataLength,
 }) => {
 	const fetchMoreData = () => {
-		if (tableData.length >= dataLength) {
-			return false
-		} else setPageLimit((prev) => prev + 5)
+		if (tableData.length >= dataLength) return false
+		else setPageLimit((prev) => prev + 5)
 	}
 
 	if (infiniteScroll)
 		return (
 			<InfiniteScroll
-				dataLength={tableData.length}
+				dataLength={tableData?.length || 0}
 				next={fetchMoreData}
-				hasMore={tableData.length < dataLength}
+				hasMore={tableData?.length < dataLength}
 				loader={
 					<Spin className='absolute bottom-0 left-1/2 -translate-x-1/2' spinning />
 				}

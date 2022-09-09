@@ -10,20 +10,26 @@ const MyTrainingCard = ({
 	isOnline,
 	startDate,
 	endDate,
+	id,
 }) => (
 	<>
 		<Card
 			actions={[
-				<Button type='link' key='status' className='font-bold'>
+				<h1
+					type='link'
+					key='status'
+					className='font-bold text-sm my-auto text-[#1890ff] cursor-default'
+				>
 					{new Date(startDate) < new Date() && new Date() < new Date(endDate)
 						? 'Event Completed'
 						: 'Upcoming Event'}
-				</Button>,
+				</h1>,
 				<Button
 					type='primary'
 					icon={location && <Icon name='MapPin' />}
 					key='location'
 					className='btnPrimary'
+					href={`/detailTraining/${id}`}
 				>
 					{location ? 'View Location' : 'Give Feedback'}
 				</Button>,

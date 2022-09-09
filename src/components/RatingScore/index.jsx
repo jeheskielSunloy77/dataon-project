@@ -43,6 +43,8 @@ const SubmitRatingModal = ({ modal, setModal, rating, id }) => {
 			trainingId: id,
 			rate: rateValue * 20,
 		})
+
+		window.location.reload()
 	}
 
 	if (modal)

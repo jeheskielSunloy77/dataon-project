@@ -1,9 +1,10 @@
 import { TeamOutlined } from '@ant-design/icons'
 import { Card, Spin } from 'antd'
+import { memo } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import Icon from '../Icon'
 
-const AllTrainingsCards = ({ setPageLimit, cardsData, dataLength }) => {
+const MemoizedTrainingsCards = ({ setPageLimit, cardsData, dataLength }) => {
 	const fetchMoreData = () => {
 		if (cardsData.length >= dataLength) {
 			return false
@@ -18,7 +19,7 @@ const AllTrainingsCards = ({ setPageLimit, cardsData, dataLength }) => {
 			loader={
 				<Spin className='absolute bottom-0 left-1/2 -translate-x-1/2' spinning />
 			}
-			className='relative grid grid-cols-5 gap-1'
+			className='relative grid sm:grid-cols-5 gap-x-2 gap-y-6 pb-6'
 		>
 			{cardsData.map(
 				({ name, location, trainerName, isOnline, period }, index) => (
@@ -45,7 +46,7 @@ const TrainingsCard = ({
 	trainerName,
 	isOnline,
 }) => (
-	<Card className='trainingCard max-w-md text-light'>
+	<Card className='trainingCard max-w-md text-light cursor-pointer hover:shadow-2xl hover:scale-105 hover:z-40 transition-all'>
 		<img src={image} className='h-[200px] w-full rounded-t-lg' alt='card image' />
 		{location && !isOnline ? (
 			<p className='mb-0 mt-2'>
@@ -66,5 +67,6 @@ const TrainingsCard = ({
 		</p>
 	</Card>
 )
+const AllTrainingsCards = memo(MemoizedTrainingsCards)
 
 export default AllTrainingsCards
