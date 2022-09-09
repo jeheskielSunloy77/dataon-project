@@ -8,9 +8,6 @@ import { useContext } from 'react'
 const SearchFilters = () => {
 	const { dataView, setDataView, setSearchParams } = useContext(AppContext)
 
-	const changeView = () =>
-		setDataView((prev) => (prev === 'cards' ? 'table' : 'cards'))
-
 	return (
 		<section className='sectionContainer sm:grid grid-cols-5 gap-6'>
 			<Searchbar
@@ -24,9 +21,9 @@ const SearchFilters = () => {
 					showSearch
 					placeholder='Search Event Type'
 					optionFilterProp='children'
-					onSearch={(value) =>
-						setSearchParams((prev) => ({ ...prev, isOnline: value }))
-					}
+					onChange={(event) => {
+						setSearchParams((prev) => ({ ...prev, isOnline: event }))
+					}}
 					data-testid='eventTypeSelect'
 				>
 					<Select.Option value={true}>Online Class</Select.Option>
@@ -39,10 +36,10 @@ const SearchFilters = () => {
 					showSearch
 					placeholder='Search Event Status'
 					optionFilterProp='children'
-					onSearch={(value) =>
+					onChange={(value) =>
 						setSearchParams((prev) => ({
 							...prev,
-							startDate: value ? moment(new Date()).format() : '',
+							startDate: value ? moment(new Date()).toISOString() : '',
 						}))
 					}
 					data-testid='eventStatusSelect'
@@ -63,7 +60,9 @@ const SearchFilters = () => {
 				icon={
 					dataView === 'cards' ? <UnorderedListOutlined /> : <AppstoreOutlined />
 				}
-				onClick={changeView}
+				onClick={() =>
+					setDataView((prev) => (prev === 'cards' ? 'table' : 'cards'))
+				}
 			>
 				View As {dataView === 'cards' ? 'Table' : 'Cards'}
 			</Button>

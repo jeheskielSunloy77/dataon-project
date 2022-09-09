@@ -6,13 +6,14 @@ import {
 import useDebounce from '@/hooks/useDebounce'
 import { AppContext } from '@/utils/AppContext'
 import customAxios from '@/utils/axios'
+import parsePeriod from '@/utils/parsePeriod'
 import queryPrams from '@/utils/queryParams'
 import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 
 const AllTrainings = () => {
 	const { dataView, searchParams } = useContext(AppContext)
-	const [allTrainingData, setAllTrainingData] = useState([])
+	const [allTrainingData, setAllTrainingData] = useState(null)
 	const [pageLimit, setPageLimit] = useState(5)
 	const [dataLength, setDataLength] = useState(0)
 	const url = queryPrams('trainings', searchParams, pageLimit)
@@ -31,14 +32,13 @@ const AllTrainings = () => {
 			})
 			setDataLength(response.data.total)
 			const allTraining = response.data.data.map((training) => {
-				const period = `${training.startDate} - ${training.endDate.slice(12)}`
+				const period = parsePeriod(training.startDate, training.endDate)
 
 				return {
 					...training,
 					period,
 				}
 			})
-
 			setAllTrainingData(allTraining)
 		}
 		fetchData()
