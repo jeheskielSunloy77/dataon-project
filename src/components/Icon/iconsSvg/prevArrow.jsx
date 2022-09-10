@@ -1,6 +1,6 @@
 const prevArrow = ({ onClick }) => (
 	<svg
-		className='slick-arrow slick-prev absolute top-1/2 -left-5 -translate-y-1/2 z-10'
+		className='slick-arrow slick-prev'
 		onClick={onClick}
 		xmlns='http://www.w3.org/2000/svg'
 		width={40}
