@@ -47,7 +47,12 @@ const TrainingsCard = ({
 	isOnline,
 }) => (
 	<Card className='trainingCard max-w-md text-light cursor-pointer hover:shadow-2xl hover:scale-105 hover:z-40 transition-all'>
-		<img src={image} className='h-[200px] w-full rounded-t-lg' alt='card image' />
+		<img
+			src={image}
+			className='h-[200px] w-full rounded-t-lg'
+			alt='card image'
+			loading='lazy'
+		/>
 		{location && !isOnline ? (
 			<p className='mb-0 mt-2'>
 				<Icon name='MapPin' />
