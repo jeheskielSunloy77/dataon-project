@@ -39,8 +39,9 @@ const MyTrainingCard = ({
 			<div className='flex gap-4'>
 				<img
 					src={image}
-					className='bg-blue-500 w-[30%] rounded-l-lg'
+					className='bg-gray-200 w-[30%] rounded-l-lg'
 					alt='card image'
+					loading='lazy'
 				/>
 				<div>
 					{location && !isOnline ? (
