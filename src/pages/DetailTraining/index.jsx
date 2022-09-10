@@ -7,10 +7,10 @@ import {
 	SolutionOutlined,
 	UserOutlined,
 } from '@ant-design/icons'
-import { Button, Card, Spin } from 'antd'
+import { Button, Card, notification, Spin } from 'antd'
 import jwt_decode from 'jwt-decode'
 import moment from 'moment'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './DetailTraining.css'
 
@@ -21,15 +21,15 @@ const DetailTraining = () => {
 	const { userId } = jwt_decode(token)
 	const navigate = useNavigate()
 
-	const fetchData = useCallback(async () => {
-		try {
-			const response = await customAxios.get(`/trainings/${id}`)
-			setTrainingData(response.data.data)
-		} catch (error) {
-			throw new Error(error)
-		}
-	}, [])
 	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await customAxios.get(`/trainings/${id}`)
+				setTrainingData(response.data.data)
+			} catch (error) {
+				throw new Error(error)
+			}
+		}
 		fetchData()
 	}, [])
 
@@ -46,8 +46,22 @@ const DetailTraining = () => {
 	}
 
 	const deleteTraining = () => {
-		customAxios.delete(`trainings/${id}`)
-		navigate('/')
+		notification.open({
+			message: 'Are you sure you want to delete this training?',
+			btn: (
+				<Button
+					type='primary'
+					className='rounded-lg px-8 btnPrimary'
+					onClick={() => {
+						customAxios.delete(`trainings/${id}`)
+						navigate('/')
+					}}
+				>
+					Confirm
+				</Button>
+			),
+			onClose: close(),
+		})
 	}
 
 	return (
@@ -79,8 +93,8 @@ const DetailTraining = () => {
 									alt='teams image'
 								/>
 							</div>
-							<p className='text-light'>
-								<PlusOutlined />
+							<p className='text-light cursor-pointer'>
+								<PlusOutlined className='mr-2' />
 								Invite others
 							</p>
 						</div>
