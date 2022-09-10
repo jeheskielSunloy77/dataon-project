@@ -46,9 +46,6 @@ const MyTrainingCarousel = ({ carouselData }) => {
 				.slick-arrow.slick-prev {
 					left: 0;
 				}
-				.slick-slide {
-					height: 100%;
-				}
 			`}</style>
 		</>
 	)
