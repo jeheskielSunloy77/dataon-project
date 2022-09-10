@@ -7,6 +7,7 @@ import {
 	DatePicker,
 	Form,
 	Input,
+	notification,
 	Radio,
 	Select,
 	Spin,
@@ -48,6 +49,23 @@ const NewTraining = () => {
 	}, [])
 
 	const onFormFinish = (value) => {
+		notification.open({
+			message: 'Are you sure you want to save this training?',
+			btn: (
+				<Button
+					type='primary'
+					className='rounded-lg px-8 btnPrimary'
+					onClick={() => upsertData(value)}
+				>
+					Confirm
+				</Button>
+			),
+			key: 'confirm',
+			onClose: close(),
+		})
+	}
+
+	const upsertData = (value) => {
 		const token = localStorage.getItem('token')
 		const { userId } = jwt_decode(token)
 
@@ -59,13 +77,14 @@ const NewTraining = () => {
 			endDate: moment(date[1]).format(),
 		}
 
-		if (isEditPage) {
-			customAxios.put(`trainings/${params.id}`, data)
-			navigate('/')
-		} else {
-			customAxios.post('trainings', data)
-			navigate('/')
-		}
+		if (isEditPage) customAxios.put(`trainings/${params.id}`, data)
+		else customAxios.post('trainings', data)
+
+		navigate('/')
+		notification.close('confirm')
+		notification.success({
+			message: 'Training saved successfully',
+		})
 	}
 
 	if (!formData) return <Spin className='centerAbsolute' />
@@ -82,11 +101,12 @@ const NewTraining = () => {
 						wrapperCol={{
 							span: 16,
 						}}
-						initialValues={formData || { isOnline: false }}
+						initialValues={isEditPage ? formData : { isOnline: false }}
 						onFinish={onFormFinish}
 						className='sm:px-[10%] new-training-form'
 					>
 						<Form.Item label='Event No'>{formData.id}</Form.Item>
+
 						<Form.Item
 							label='Event Type'
 							name='isOnline'
