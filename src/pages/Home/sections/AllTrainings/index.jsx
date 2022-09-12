@@ -8,7 +8,6 @@ import { AppContext } from '@/utils/AppContext'
 import customAxios from '@/utils/axios'
 import parsePeriod from '@/utils/parsePeriod'
 import queryPrams from '@/utils/queryParams'
-import axios from 'axios'
 import { useContext, useEffect, useState } from 'react'
 
 const AllTrainings = () => {
@@ -16,22 +15,14 @@ const AllTrainings = () => {
 	const [allTrainingData, setAllTrainingData] = useState(null)
 	const [pageLimit, setPageLimit] = useState(5)
 	const [dataLength, setDataLength] = useState(0)
-
+	const [loading, setLoading] = useState(true)
 	const allTrainingSearchParams = { ...searchParams, page: 1, limit: pageLimit }
 	const url = queryPrams('trainings', allTrainingSearchParams)
 
 	useEffect(() => {
 		const fetchData = async () => {
-			let cancelToken
-
-			if (typeof cancelToken != typeof undefined)
-				cancelToken.cancel('Canceling Previous Request!')
-
-			cancelToken = axios.CancelToken.source()
-
-			const response = await customAxios.get(url, {
-				cancelToken: cancelToken.token,
-			})
+			setLoading(true)
+			const response = await customAxios.get(url)
 			setDataLength(response.data.total)
 			const allTraining = response.data.data.map((training) => {
 				const period = parsePeriod(training.startDate, training.endDate)
@@ -42,9 +33,10 @@ const AllTrainings = () => {
 				}
 			})
 			setAllTrainingData(allTraining)
+			setLoading(false)
 		}
 		fetchData()
-	}, [useDebounce(pageLimit, 1000), searchParams])
+	}, [useDebounce(url, 1000)])
 
 	return (
 		<section className='sectionContainer'>
@@ -58,6 +50,7 @@ const AllTrainings = () => {
 					setPageLimit={setPageLimit}
 					infiniteScroll
 					dataLength={dataLength}
+					loading={loading}
 				/>
 			)}
 			{dataView === 'cards' && (
@@ -65,6 +58,7 @@ const AllTrainings = () => {
 					setPageLimit={setPageLimit}
 					cardsData={allTrainingData}
 					dataLength={dataLength}
+					loading={loading}
 				/>
 			)}
 		</section>
