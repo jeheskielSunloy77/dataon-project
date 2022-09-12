@@ -1,23 +1,12 @@
 import customAxios from '@/utils/axios'
 import { Modal, Rate } from 'antd'
-import { memo, useEffect, useState } from 'react'
+import { memo, useState } from 'react'
 import { createPortal } from 'react-dom'
 
-const ScoreRating = ({ id }) => {
+const ScoreRating = ({ rating, id }) => {
 	const [modal, setModal] = useState(null)
-	const [rating, setRating] = useState(null)
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const response = await customAxios.get(`trainings/${id}/ratings`)
-			const rating =
-				response.data.length !== 0 ? Math.round(response.data[0].rate / 20) : 0
-			setRating(rating)
-		}
-		fetchData()
-	}, [])
-
-	if (rating === null) return null
+	if (!rating) return null
 	else
 		return (
 			<>

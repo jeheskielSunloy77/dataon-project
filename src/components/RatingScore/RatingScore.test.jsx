@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import RatingScore from '.'
 describe('RatingScore component', () => {
 	const renderer = () =>
-		render(<RatingScore score={{ rating: 3, id: 1 }} />, {
+		render(<RatingScore id={1} />, {
 			container: document.body,
 		})
 	it('should render without crashing', () => {
