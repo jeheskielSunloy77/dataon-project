@@ -1,5 +1,6 @@
 import { FormTextInput, HeaderSection } from '@/components/index'
 import { transferMockKeys, trasnferMockData } from '@/mockData'
+import { AppContext } from '@/utils/AppContext'
 import customAxios from '@/utils/axios'
 import { PlusSquareOutlined, UploadOutlined } from '@ant-design/icons'
 import {
@@ -16,7 +17,7 @@ import {
 } from 'antd'
 import jwt_decode from 'jwt-decode'
 import moment from 'moment'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import './NewTraining.css'
 const { RangePicker } = DatePicker
@@ -66,9 +67,7 @@ const NewTraining = () => {
 	}
 
 	const upsertData = (value) => {
-		const token = localStorage.getItem('token')
-		const { userId } = jwt_decode(token)
-
+		const { userId } = useContext(AppContext)
 		const { date, ...rest } = value
 		const data = {
 			...rest,
@@ -90,7 +89,7 @@ const NewTraining = () => {
 	if (!formData) return <Spin className='centerAbsolute' />
 	else
 		return (
-			<div className='pageContainer space-y-2'>
+			<main className='pageContainer space-y-2'>
 				<HeaderSection />
 				<section className='sectionContainer'>
 					<Form
@@ -229,7 +228,7 @@ const NewTraining = () => {
 						</div>
 					</Form>
 				</section>
-			</div>
+			</main>
 		)
 }
 
