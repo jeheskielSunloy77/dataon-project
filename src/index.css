@@ -82,5 +82,5 @@ section {
 	background-color: #0780ee !important;
 }
 .trainingCard .ant-card-body {
-	padding: 0;
+	padding: 0 !important;
 }
