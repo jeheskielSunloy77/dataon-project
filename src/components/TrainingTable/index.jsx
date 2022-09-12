@@ -47,15 +47,15 @@ const TrainingTable = ({
 			/>
 			<Table.Column
 				title='Trainer Name'
-				dataIndex='trainerName'
-				key='trainerName'
-				sorter={(a, b) => a.trainerName.length - b.trainerName.length}
+				dataIndex='trainer'
+				key='trainer'
+				sorter={(a, b) => a.trainer.length - b.trainer.length}
 			/>
 			<Table.Column
 				title='Rating'
 				dataIndex='rating'
 				key='rating'
-				render={(_, { id }) => <RatingScore id={id} />}
+				render={(rating, { id }) => <RatingScore rating={rating} id={id} />}
 			/>
 			<Table.Column
 				title='Aditional Info'
