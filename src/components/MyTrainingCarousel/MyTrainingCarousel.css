@@ -1,0 +1,20 @@
+.slick-prev,
+.slick-next {
+	font-size: inherit;
+	color: rgb(160, 160, 160) !important;
+	background-color: rgb(210, 210, 210) !important;
+	border-radius: 50%;
+	width: 30px !important;
+	height: 30px !important;
+	padding-top: 4px !important;
+	align-items: center !important;
+	font-size: 20px !important;
+	z-index: 20 !important;
+}
+
+.slick-prev {
+	left: 10px !important;
+}
+.slick-next {
+	right: 10px !important;
+}

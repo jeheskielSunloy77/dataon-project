@@ -1,9 +1,9 @@
 import customAxios from '@/utils/axios'
-import { Modal, Rate } from 'antd'
-import { memo, useState } from 'react'
+import { Modal, notification, Rate } from 'antd'
+import { useState } from 'react'
 import { createPortal } from 'react-dom'
 
-const ScoreRating = ({ rating, id }) => {
+const RatingScore = ({ rating, id }) => {
 	const [modal, setModal] = useState(null)
 
 	if (!rating) return null
@@ -11,7 +11,7 @@ const ScoreRating = ({ rating, id }) => {
 		return (
 			<>
 				<div id='ratingContainer' onClick={() => setModal(true)}>
-					<Rate className='cursor-pointer' disabled defaultValue={rating} />
+					<Rate className='cursor-pointer' disabled defaultValue={rating / 20} />
 				</div>
 				<SubmitRatingModal
 					modal={modal}
@@ -26,14 +26,17 @@ const ScoreRating = ({ rating, id }) => {
 const SubmitRatingModal = ({ modal, setModal, rating, id }) => {
 	const [rateValue, setRateValue] = useState(rating)
 
-	const submitRating = () => {
+	const submitRating = async () => {
 		setModal(false)
-		customAxios.post(`trainings/${id}/ratings`, {
-			trainingId: id,
-			rate: rateValue * 20,
+		await customAxios.put(`trainings/${id}`, {
+			id,
+			rating: rateValue * 20,
 		})
-
 		window.location.reload()
+		notification.success({
+			message: 'Thank you for your feedback',
+			description: 'Rating submitted successfully',
+		})
 	}
 
 	if (modal)
@@ -54,7 +57,5 @@ const SubmitRatingModal = ({ modal, setModal, rating, id }) => {
 			document.getElementById('ratingContainer')
 		)
 }
-
-const RatingScore = memo(ScoreRating)
 
 export default RatingScore

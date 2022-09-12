@@ -1,54 +1,46 @@
-import { Icon, MyTrainingCard } from '@/components/index'
+import { CardsSkeleton, MyTrainingCard } from '@/components/index'
 import useCheckMobile from '@/hooks/useCheckMobile'
+import { LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { Carousel } from 'antd'
+import './MyTrainingCarousel.css'
 
-const MyTrainingCarousel = ({ carouselData }) => {
+const MyTrainingCarousel = ({ carouselData, loading }) => {
 	const mobile = useCheckMobile()
 	const cards = carouselData.map(
-		({ name, location, period, trainerName, isOnline, id }, index) => (
+		(
+			{ name, location, period, trainerName, isOnline, isComplete, image, id },
+			index
+		) => (
 			<MyTrainingCard
 				key={index}
 				name={name}
-				image={`https://picsum.photos/seed/${index + 1}/200/300`}
+				image={image}
 				location={location}
 				trainerName={trainerName}
 				isOnline={isOnline}
+				isComplete={isComplete}
 				period={period}
 				id={id}
 			/>
 		)
 	)
-
-	return (
-		<>
+	if (loading) return <CardsSkeleton count={3} height='220px' />
+	else
+		return (
 			<Carousel
+				lazyLoad='ondemand'
 				swipeToSlide
 				dots={false}
 				draggable
 				slidesToShow={mobile ? 1 : 3}
 				arrows
-				nextArrow={<Icon name='nextArrow' />}
-				prevArrow={<Icon name='prevArrow' />}
+				nextArrow={<RightOutlined />}
+				prevArrow={<LeftOutlined />}
 				className='relative'
 			>
 				{cards}
 			</Carousel>
-			<style jsx='true'>{`
-				.slick-arrow {
-					transform: scale(1.4);
-					z-index: 20;
-					background-color: #d1d5db !important;
-					border-radius: 100%;
-				}
-				.slick-arrow.slick-next {
-					right: 0;
-				}
-				.slick-arrow.slick-prev {
-					left: 0;
-				}
-			`}</style>
-		</>
-	)
+		)
 }
 
 export default MyTrainingCarousel
