@@ -1,10 +1,13 @@
 import { Breadcrumbs } from '@/components/index'
+import { AppContext } from '@/utils/AppContext'
 import { MoreOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Dropdown, Menu } from 'antd'
+import { useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import './Header.css'
 
 const HeaderSection = () => {
+	const { userId } = useContext(AppContext)
 	const { pathname } = useLocation()
 	const navigate = useNavigate()
 
@@ -28,7 +31,7 @@ const HeaderSection = () => {
 		<section className='sectionContainer flex flex-col sm:flex-row items-center sm:justify-between '>
 			<Breadcrumbs />
 			<div className='space-x-2'>
-				{pathname === '/' && (
+				{pathname === '/' && userId === 'user123' && (
 					<Button
 						type='primary'
 						icon={<PlusOutlined />}
