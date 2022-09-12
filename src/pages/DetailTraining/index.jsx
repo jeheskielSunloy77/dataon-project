@@ -65,7 +65,7 @@ const DetailTraining = () => {
 	}
 
 	return (
-		<div className='pageContainer space-y-2'>
+		<main className='pageContainer space-y-2'>
 			<HeaderSection />
 			<div className='sectionContainer'>
 				<h1>{name}</h1>
@@ -166,7 +166,7 @@ const DetailTraining = () => {
 					</Button>
 				</div>
 			</div>
-		</div>
+		</main>
 	)
 }
 
