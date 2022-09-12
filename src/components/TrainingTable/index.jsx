@@ -1,4 +1,4 @@
-import { Spin, Table } from 'antd'
+import { Table } from 'antd'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Link } from 'react-router-dom'
 import RatingScore from '../RatingScore'
@@ -8,6 +8,7 @@ const TrainingTable = ({
 	setPageLimit,
 	infiniteScroll,
 	dataLength,
+	loading,
 }) => (
 	<Wrapper
 		tableData={tableData}
@@ -16,7 +17,7 @@ const TrainingTable = ({
 		dataLength={dataLength}
 	>
 		<Table
-			loading={!tableData}
+			loading={!tableData || loading}
 			dataSource={tableData}
 			pagination={!infiniteScroll}
 			className='overflow-x-auto rounded-lg'
@@ -26,7 +27,10 @@ const TrainingTable = ({
 				dataIndex='name'
 				key='name'
 				render={(text, { id }) => (
-					<Link to={`/detailTraining/${id}`} className='text-blue-500 font-medium'>
+					<Link
+						to={`/detailTraining/${id}`}
+						className='text-blue-500 font-medium capitalize'
+					>
 						{text}
 					</Link>
 				)}
@@ -55,7 +59,7 @@ const TrainingTable = ({
 				title='Rating'
 				dataIndex='rating'
 				key='rating'
-				render={(rating, { id }) => <RatingScore rating={rating} id={id} />}
+				render={(_, { id, rating }) => <RatingScore rating={rating} id={id} />}
 			/>
 			<Table.Column
 				title='Aditional Info'
@@ -86,9 +90,6 @@ const Wrapper = ({
 				dataLength={tableData?.length || 0}
 				next={fetchMoreData}
 				hasMore={tableData?.length < dataLength}
-				loader={
-					<Spin className='absolute bottom-0 left-1/2 -translate-x-1/2' spinning />
-				}
 				className='relative'
 			>
 				{children}

@@ -1,5 +1,6 @@
 import AllTrainingsCards from './AllTrainingsCards'
 import Breadcrumbs from './Breadcrumbs'
+import CardsSkeleton from './CardsSkeleton'
 import FormTextInput from './FormTextInput'
 import HeaderSection from './HeaderSection'
 import Icon from './Icon'
@@ -24,4 +25,5 @@ export {
 	HeaderSection,
 	FormTextInput,
 	AllTrainingsCards,
+	CardsSkeleton,
 }
