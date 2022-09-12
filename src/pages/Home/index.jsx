@@ -2,12 +2,12 @@ import { HeaderSection } from '@/components/index'
 import { AllTrainings, MyTraining, SearchFilters } from './sections'
 
 const Home = () => (
-	<div className='pageContainer space-y-2'>
+	<main className='pageContainer space-y-2'>
 		<HeaderSection />
 		<SearchFilters />
 		<MyTraining />
 		<AllTrainings />
-	</div>
+	</main>
 )
 
 export default Home

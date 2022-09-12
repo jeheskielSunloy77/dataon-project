@@ -2,7 +2,6 @@ import { Searchbar } from '@/components/index'
 import { AppContext } from '@/utils/AppContext'
 import { AppstoreOutlined, UnorderedListOutlined } from '@ant-design/icons'
 import { Button, Select, Switch } from 'antd'
-import moment from 'moment'
 import { useContext } from 'react'
 
 const SearchFilters = () => {
@@ -21,8 +20,8 @@ const SearchFilters = () => {
 					showSearch
 					placeholder='Search Event Type'
 					optionFilterProp='children'
-					onChange={(event) => {
-						setSearchParams((prev) => ({ ...prev, isOnline: event }))
+					onChange={(value) => {
+						setSearchParams((prev) => ({ ...prev, isOnline: value }))
 					}}
 					data-testid='eventTypeSelect'
 				>
@@ -39,7 +38,7 @@ const SearchFilters = () => {
 					onChange={(value) =>
 						setSearchParams((prev) => ({
 							...prev,
-							startDate: value ? moment(new Date()).toISOString() : '',
+							isComplete: value,
 						}))
 					}
 					data-testid='eventStatusSelect'
