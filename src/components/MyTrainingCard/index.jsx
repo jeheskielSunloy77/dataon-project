@@ -8,30 +8,29 @@ const MyTrainingCard = ({
 	period,
 	trainerName,
 	isOnline,
-	startDate,
-	endDate,
+	isComplete,
 	id,
 }) => (
 	<>
 		<Card
+			bodyStyle={{ borderRadius: '10px' }}
 			actions={[
-				<h1
+				<Button
 					type='link'
 					key='status'
-					className='font-bold text-sm my-auto text-[#1890ff] cursor-default'
+					className='font-bold text-sm text-[#1890ff] cursor-default'
 				>
-					{new Date(startDate) < new Date() && new Date() < new Date(endDate)
-						? 'Event Completed'
-						: 'Upcoming Event'}
-				</h1>,
+					{isComplete ? 'Event Completed' : 'Upcoming Event'}
+				</Button>,
 				<Button
 					type='primary'
-					icon={location && <Icon name='MapPin' />}
+					icon={location && !isComplete && <Icon name='MapPin' />}
 					key='location'
 					className='btnPrimary'
 					href={`/detailTraining/${id}`}
 				>
-					{location ? 'View Location' : 'Give Feedback'}
+					{(location && !isComplete && 'View Location') ||
+						(isComplete && 'Give Feedback')}
 				</Button>,
 			]}
 			className='trainingCard max-w-md'
@@ -39,11 +38,11 @@ const MyTrainingCard = ({
 			<div className='flex gap-4'>
 				<img
 					src={image}
-					className='bg-gray-200 w-[30%] rounded-l-lg'
+					className='bg-gray-200 w-[30%] rounded-l-lg  object-cover'
 					alt='card image'
 					loading='lazy'
 				/>
-				<div>
+				<div className='p-2'>
 					{location && !isOnline ? (
 						<p>
 							<Icon name='MapPin' />
