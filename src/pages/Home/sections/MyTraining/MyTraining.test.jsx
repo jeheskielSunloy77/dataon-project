@@ -1,5 +1,4 @@
-import { AppProvider } from '@/utils/AppContext'
-import { matchMediaConfig } from '@/utils/testUtils'
+import { AppProvider, matchMediaConfig } from '@/utils/index'
 import { render } from '@testing-library/react'
 import { expect, it } from 'vitest'
 import MyTraining from '.'

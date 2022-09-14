@@ -3,18 +3,24 @@ import {
 	TrainingSectionTitle,
 	TrainingTable,
 } from '@/components/index'
-import { AppContext } from '@/utils/AppContext'
-import customAxios from '@/utils/axios'
-import parsePeriod from '@/utils/parsePeriod'
-import queryPrams from '@/utils/queryParams'
+import {
+	AppContext,
+	customAxios,
+	getUser,
+	parsePeriod,
+	queryPrams,
+} from '@/utils/index'
 import { useCallback, useContext, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const MyTraining = () => {
-	const { dataView, searchParams, userId } = useContext(AppContext)
-	const [myTrainingData, setMyTrainingData] = useState(null)
+	const { dataView, searchParams } = useContext(AppContext)
+	const [myTrainingData, setMyTrainingData] = useState([])
 	const [loading, setLoading] = useState(true)
+	const { userId } = getUser()
+	const { t } = useTranslation()
 
-	const myTrainingSearchParams = { ...searchParams, userId }
+	const myTrainingSearchParams = { userId, ...searchParams }
 	const url = queryPrams('trainings', myTrainingSearchParams)
 
 	const fetchData = useCallback(async () => {
@@ -40,7 +46,7 @@ const MyTraining = () => {
 	return (
 		<section className='sectionContainer myTraining'>
 			<TrainingSectionTitle
-				text='My Trainings Sessions'
+				text={t('My Trainings Sessions')}
 				dataLength={myTrainingData?.length}
 			/>
 			{dataView === 'table' && (
