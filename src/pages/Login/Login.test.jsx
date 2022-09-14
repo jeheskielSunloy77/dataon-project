@@ -1,4 +1,4 @@
-import { matchMediaConfig } from '@/utils/testUtils'
+import { matchMediaConfig } from '@/utils/index'
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { describe, expect, test } from 'vitest'
