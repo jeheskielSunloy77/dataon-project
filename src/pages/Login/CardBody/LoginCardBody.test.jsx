@@ -1,4 +1,4 @@
-import { matchMediaConfig } from '@/utils/testUtils'
+import { matchMediaConfig } from '@/utils/index'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { describe, test } from 'vitest'
 import LoginCardBody from '.'
