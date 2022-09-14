@@ -1,5 +1,4 @@
-import { AppProvider } from '@/utils/AppContext'
-import { matchMediaConfig } from '@/utils/testUtils'
+import { AppProvider, matchMediaConfig } from '@/utils/customAxios'
 import { fireEvent, render, waitFor } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
