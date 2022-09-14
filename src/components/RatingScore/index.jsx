@@ -1,61 +1,30 @@
-import customAxios from '@/utils/axios'
-import { Modal, notification, Rate } from 'antd'
-import { useState } from 'react'
-import { createPortal } from 'react-dom'
+import { customAxios } from '@/utils/index'
+import { notification, Rate } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 const RatingScore = ({ rating, id }) => {
-	const [modal, setModal] = useState(null)
+	const { t } = useTranslation()
 
-	if (!rating) return null
-	else
-		return (
-			<>
-				<div id='ratingContainer' onClick={() => setModal(true)}>
-					<Rate className='cursor-pointer' disabled defaultValue={rating / 20} />
-				</div>
-				<SubmitRatingModal
-					modal={modal}
-					setModal={setModal}
-					rating={rating}
-					id={id}
-				/>
-			</>
-		)
-}
-
-const SubmitRatingModal = ({ modal, setModal, rating, id }) => {
-	const [rateValue, setRateValue] = useState(rating)
-
-	const submitRating = async () => {
-		setModal(false)
+	const submitRating = async (value) => {
 		await customAxios.put(`trainings/${id}`, {
 			id,
-			rating: rateValue * 20,
+			rating: value * 20,
 		})
-		window.location.reload()
 		notification.success({
-			message: 'Thank you for your feedback',
-			description: 'Rating submitted successfully',
+			message: t('Thank you for your feedback'),
+			description: t('Rating submitted successfully'),
 		})
 	}
 
-	if (modal)
-		return createPortal(
-			<Modal
-				title='Submit Rating'
-				visible={modal}
-				onOk={submitRating}
-				onCancel={() => setModal(false)}
-			>
-				<Rate
-					className='centerAbsolute'
-					defaultValue={rateValue}
-					value={rateValue}
-					onChange={(value) => setRateValue(value)}
-				/>
-			</Modal>,
-			document.getElementById('ratingContainer')
-		)
+	return (
+		<div id='ratingContainer'>
+			<Rate
+				className='cursor-pointer'
+				onChange={submitRating}
+				defaultValue={rating / 20}
+			/>
+		</div>
+	)
 }
 
 export default RatingScore
