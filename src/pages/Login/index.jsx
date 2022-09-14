@@ -8,6 +8,8 @@ import CardBody from './CardBody'
 import CardHeader from './CardHeader'
 import Wrapper from './Wrapper'
 
+const secret = 'as12ewqasdassao1121903rqeijoasjdoqwe'
+
 const Login = () => {
 	const [rememberMe, setRememberMe] = useState(false)
 	const navigate = useNavigate()
@@ -16,7 +18,7 @@ const Login = () => {
 		const user = userDB.find((user) => user.username === username)
 
 		if (user && user.password === password) {
-			const token = sign(user, 'as12ewqasdassao1121903rqeijoasjdoqwe')
+			const token = sign(user, secret)
 			rememberMe
 				? localStorage.setItem('token', token)
 				: sessionStorage.setItem('token', token)

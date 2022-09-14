@@ -29,7 +29,7 @@ const NewTraining = () => {
 	const navigate = useNavigate()
 	const params = useParams()
 	const { t } = useTranslation()
-	const { user } = getUser()
+	const { role, userId } = getUser()
 
 	const fetchData = async () => {
 		const response = await customAxios.get(`trainings/${params.id}`)
@@ -43,7 +43,7 @@ const NewTraining = () => {
 	}
 
 	useEffect(() => {
-		user?.role === 'admin'
+		role === 'admin'
 			? isEditPage
 				? fetchData()
 				: setFormData({})
@@ -54,7 +54,7 @@ const NewTraining = () => {
 		const { date, ...rest } = value
 		const data = {
 			...rest,
-			userId: user.userId,
+			userId: userId,
 			startDate: moment(date[0]).format(),
 			endDate: moment(date[1]).format(),
 		}
