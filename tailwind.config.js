@@ -3,7 +3,13 @@ module.exports = {
 	content: ['./src/**/*.{js,jsx,ts,tsx}'],
 	darkMode: 'class',
 	theme: {
-		extend: {},
+		extend: {
+			colors: {
+				transparent: 'transparent',
+				current: 'currentColor',
+				accent: '#1890ff',
+			},
+		},
 	},
 	plugins: [],
 	corePlugins: {

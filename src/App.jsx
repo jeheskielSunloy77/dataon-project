@@ -1,19 +1,19 @@
 import { Route, Routes, useLocation } from 'react-router-dom'
-import { DetailTraining, Home, Login, NewTraining } from './pages'
+import { DetailTraining, Home, Login, NewTraining, Page404 } from './pages'
 
 const App = () => {
 	const { pathname } = useLocation()
-	const token = localStorage.getItem('token')
+	const token = localStorage.getItem('token') || sessionStorage.getItem('token')
 	if (pathname !== '/login' && !token) window.location.replace('/login')
 
 	return (
 		<Routes>
 			<Route path='/' element={<Home />} />
 			<Route path='/login' element={<Login />} />
-			<Route path='/detailTraining/:id' element={<DetailTraining />} />
-			<Route path='/editTraining/:id' element={<NewTraining />} />
+			<Route path='/detail-training/:id' element={<DetailTraining />} />
+			<Route path='/edit-training/:id' element={<NewTraining />} />
 			<Route path='/newTraining' element={<NewTraining />} />
-			<Route path='*' element={<div>404</div>} />
+			<Route path='*' element={<Page404 />} />
 		</Routes>
 	)
 }

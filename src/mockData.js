@@ -1,3 +1,18 @@
+export const userDB = [
+	{
+		username: 'admin',
+		password: 'admin',
+		role: 'admin',
+		userId: 'admin1',
+	},
+	{
+		username: 'user1',
+		password: 'user1',
+		role: 'user',
+		userId: 'user1',
+	},
+]
+
 export const data1 = [
 	{
 		createdAt: '2022-08-23T06:37:34.614Z',
