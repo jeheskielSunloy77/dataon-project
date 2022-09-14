@@ -1,4 +1,4 @@
-import { matchMediaConfig } from '@/utils/testUtils'
+import { matchMediaConfig } from '@/utils/index'
 import { render, waitFor } from '@testing-library/react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { expect, it } from 'vitest'
@@ -72,7 +72,7 @@ describe('NewTraining page', () => {
 
 		expect(window.location.pathname).toBe('/')
 	})
-	it('should render the editTraining page when the url is /editTraining', async () => {
+	it('should render the editTraining page when the url is /edit-training', async () => {
 		const { container } = renderer()
 		setupAdmin()
 		const eventName = container.querySelectorAll('input')

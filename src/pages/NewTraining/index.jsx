@@ -1,7 +1,6 @@
 import { FormTextInput, HeaderSection } from '@/components/index'
 import { transferMockKeys, trasnferMockData } from '@/mockData'
-import { AppContext } from '@/utils/AppContext'
-import customAxios from '@/utils/axios'
+import { customAxios, getUser } from '@/utils/index'
 import { PlusSquareOutlined, UploadOutlined } from '@ant-design/icons'
 import {
 	Button,
@@ -15,9 +14,9 @@ import {
 	Transfer,
 	Upload,
 } from 'antd'
-import jwt_decode from 'jwt-decode'
 import moment from 'moment'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import './NewTraining.css'
 const { RangePicker } = DatePicker
@@ -25,10 +24,12 @@ const { RangePicker } = DatePicker
 const NewTraining = () => {
 	const [transferKeys, setTransferKeys] = useState(transferMockKeys)
 	const [onlineClass, setOnlineClass] = useState(false)
+	const isEditPage = window.location.pathname.includes('/edit-training')
 	const [formData, setFormData] = useState(null)
 	const navigate = useNavigate()
-	const isEditPage = window.location.pathname.includes('/editTraining')
 	const params = useParams()
+	const { t } = useTranslation()
+	const { user } = getUser()
 
 	const fetchData = async () => {
 		const response = await customAxios.get(`trainings/${params.id}`)
@@ -42,36 +43,18 @@ const NewTraining = () => {
 	}
 
 	useEffect(() => {
-		if (isEditPage) {
-			const token = localStorage.getItem('token')
-			const decoded = jwt_decode(token)
-			decoded.userId === 'user123' ? fetchData() : navigate('/')
-		} else setFormData({})
+		user?.role === 'admin'
+			? isEditPage
+				? fetchData()
+				: setFormData({})
+			: navigate('/')
 	}, [])
 
-	const onFormFinish = (value) => {
-		notification.open({
-			message: 'Are you sure you want to save this training?',
-			btn: (
-				<Button
-					type='primary'
-					className='rounded-lg px-8 btnPrimary'
-					onClick={() => upsertData(value)}
-				>
-					Confirm
-				</Button>
-			),
-			key: 'confirm',
-			onClose: close(),
-		})
-	}
-
 	const upsertData = (value) => {
-		const { userId } = useContext(AppContext)
 		const { date, ...rest } = value
 		const data = {
 			...rest,
-			userId,
+			userId: user.userId,
 			startDate: moment(date[0]).format(),
 			endDate: moment(date[1]).format(),
 		}
@@ -82,7 +65,24 @@ const NewTraining = () => {
 		navigate('/')
 		notification.close('confirm')
 		notification.success({
-			message: 'Training saved successfully',
+			message: t('Training saved successfully'),
+		})
+	}
+
+	const onFormFinish = (value) => {
+		notification.open({
+			message: t('Are you sure you want to save this training?'),
+			btn: (
+				<Button
+					type='primary'
+					className='rounded-lg px-8 btnPrimary'
+					onClick={() => upsertData(value)}
+				>
+					{t('Confirm')}
+				</Button>
+			),
+			key: 'confirm',
+			onClose: close(),
 		})
 	}
 
@@ -104,59 +104,59 @@ const NewTraining = () => {
 						onFinish={onFormFinish}
 						className='sm:px-[10%] new-training-form'
 					>
-						<Form.Item label='Event No'>{formData.id}</Form.Item>
+						<Form.Item label={t('Event Number')}>{formData.id}</Form.Item>
 
 						<Form.Item
-							label='Event Type'
+							label={t('Event Type')}
 							name='isOnline'
 							rules={[
 								{
 									required: true,
-									message: 'Please select the Event Type!',
+									message: t('Please select the Event Type!'),
 								},
 							]}
 						>
 							<Radio.Group onChange={(e) => setOnlineClass(e.target.value)}>
 								<Radio.Button value={true} data-testid='onlineClass'>
-									Online Calss
+									{t('Online Class')}
 								</Radio.Button>
 								<Radio.Button value={false} data-testid='offlineClass'>
-									Offline Class
+									{t('Offline Class')}
 								</Radio.Button>
 							</Radio.Group>
 						</Form.Item>
-						<FormTextInput label='Training Course' required />
-						<FormTextInput label='Event Name' name='name' required />
-						<FormTextInput label='Trainer Name' name='trainerName' required />
+						<FormTextInput label={t('Training Course')} required />
+						<FormTextInput label={t('Event Name')} name='name' required />
+						<FormTextInput label={t('Trainer Name')} name='trainerName' required />
 						{!onlineClass && (
 							<>
 								<FormTextInput
-									label='Location'
+									label={t('Location')}
 									name='location'
 									required={!onlineClass}
 								/>
 								<FormTextInput
-									label='Longtitude'
-									name='longtitude'
+									label={t('Longitude')}
+									name='longitude'
 									required={!onlineClass}
 								/>
 								<FormTextInput
-									label='Latitude'
+									label={t('Latitude')}
 									name='latitude'
 									required={!onlineClass}
 								/>
 							</>
 						)}
-						<Form.Item label='Provider Type'>
+						<Form.Item label={t('Provider Type')}>
 							<Radio.Group>
 								<Radio.Button value='internal'>Internal</Radio.Button>
 								<Radio.Button value='external'>External</Radio.Button>
 							</Radio.Group>
 						</Form.Item>
-						<Form.Item label='Provider'>
-							<Select placeholder='Select a Provider'>
-								<Select.Option value='jack'>Provider1</Select.Option>
-								<Select.Option value='lucy'>Provider2</Select.Option>
+						<Form.Item label={t('Provider')}>
+							<Select placeholder={t('Select A Provider')}>
+								<Select.Option value='provider1'>{t('Provider 1')}</Select.Option>
+								<Select.Option value='provider2'>{t('Provider 2')}</Select.Option>
 								<PlusSquareOutlined
 									style={{
 										color: '#1890ff',
@@ -165,48 +165,58 @@ const NewTraining = () => {
 								/>
 							</Select>
 						</Form.Item>
-						<Form.Item label='Event Thumbnail'>
+						<Form.Item label={t('Event Thumbnail')}>
 							<Upload>
-								<Button icon={<UploadOutlined />}>Click to Upload</Button>
+								<Button icon={<UploadOutlined />}>{t('Click To Upload')}</Button>
 							</Upload>
 							<p className='p-0 text-light'>
-								Recomended image resolution is 500x300 (5:3 aspect ratio) with max 2MB
-								.jpeg/jpg
+								{t(
+									'Recomended image resolution is 500x300 (5:3 aspect ratio) with max 2MB .jpeg/jpg'
+								)}
 							</p>
 						</Form.Item>
 						<Form.Item
-							label='Date'
+							label={t('Date')}
 							name='date'
 							rules={[
 								{
 									required: true,
-									message: 'Please input the date!',
+									message: t('Please input the date!'),
 								},
 							]}
 						>
 							<RangePicker showTime />
 						</Form.Item>
-						<Form.Item label='Status'>
+						<Form.Item
+							label='Status'
+							name='isComplete'
+							rules={[
+								{
+									required: true,
+									message: t('Please select the event status!'),
+								},
+							]}
+						>
 							<Radio.Group>
 								<Radio.Button value='draft'>Draft</Radio.Button>
-								<Radio.Button value='open'>Open For Registration</Radio.Button>
-								<Radio.Button value='closed'>Closed For Registration</Radio.Button>
+								<Radio.Button value={false}>{t('Open For Registration')}</Radio.Button>
+								<Radio.Button value={true}>{t('Event Completed')}</Radio.Button>
 							</Radio.Group>
 						</Form.Item>
 						<Form.Item
-							label='Aditional Information'
+							label={t('Aditional Info')}
 							name='information'
 							rules={[
 								{
 									required: true,
-									message: 'Please fill in the aditional information!',
+									message: t('Please fill in the aditional information!'),
 								},
 							]}
 						>
 							<Input.TextArea rows={4} />
 						</Form.Item>
 						{isEditPage && (
-							<Form.Item label='Participants'>
+							<Form.Item label={t('Participants')}>
 								<Transfer
 									dataSource={trasnferMockData}
 									showSearch
