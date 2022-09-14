@@ -1,3 +1,4 @@
+import bgImage from '@/assets/background.svg'
 import { userDB } from '@/mockData'
 import { Card, notification } from 'antd'
 import 'antd/dist/antd.css'
@@ -7,7 +8,6 @@ import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import CardBody from './CardBody'
 import CardHeader from './CardHeader'
-import Wrapper from './Wrapper'
 
 const secret = 'as12ewqasdassao1121903rqeijoasjdoqwe'
 
@@ -38,12 +38,16 @@ const Login = () => {
 	}, [])
 
 	return (
-		<Wrapper>
-			<Card className='max-w-[90%] sm:max-w-[60%] rounded-xl shadow-2xl'>
+		<main
+			className='centerAll h-screen bg-no-repeat bg-center bg-cover'
+			style={{ backgroundImage: `url(${bgImage})` }}
+			data-testid='loginWrapper'
+		>
+			<Card className='max-w-[90%] max-h-[90%] sm:max-w-[60%] rounded-xl shadow-2xl'>
 				<CardHeader />
 				<CardBody signIn={signIn} setRememberMe={setRememberMe} />
 			</Card>
-		</Wrapper>
+		</main>
 	)
 }
 

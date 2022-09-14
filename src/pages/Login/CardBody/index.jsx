@@ -33,7 +33,7 @@ const CardBody = ({ signIn, setRememberMe }) => {
 
 	return (
 		<>
-			<div className='sm:flex my-14'>
+			<div className='sm:flex sm:my-14'>
 				<div className='container mx-auto w-full sm:w-1/2 p-2 '>
 					{loading && (
 						<Skeleton.Image
@@ -128,7 +128,7 @@ const CardBody = ({ signIn, setRememberMe }) => {
 					</Form>
 				</div>
 			</div>
-			<p className='text-center w-2/3 mx-auto'>
+			<p className='text-center sm:w-2/3 mx-auto'>
 				{t('This product is licensed for Dataon Corporation')} <br />©
 				{t('1999 - 2022 Dataon Technologies, All Rights Reserved')}
 			</p>

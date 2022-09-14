@@ -20,7 +20,7 @@ const CardHeader = () => {
 					alt='main logo'
 					data-testid='mainLogo'
 				/>
-				<span>
+				<span className='hidden sm:block'>
 					{t('Human Resource Information System')}
 					<h1 className='font-bold text-xl'>SunFish7</h1>
 				</span>
