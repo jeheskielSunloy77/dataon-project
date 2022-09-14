@@ -1,7 +1,7 @@
 import { Skeleton } from 'antd'
 
-const CardsSkeleton = ({ count, height }) => (
-	<div style={{ height }} className={`grid grid-cols-${count} gap-3`}>
+const CardsSkeleton = ({ count, height, className }) => (
+	<div style={{ height }} className={className}>
 		{Array.from({ length: count }).map((_, index) => (
 			<Skeleton.Image
 				key={index}

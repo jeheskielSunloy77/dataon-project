@@ -1,5 +1,5 @@
 import { data1 } from '@/mockData'
-import { AppProvider } from '@/utils/AppContext'
+import { AppProvider } from '@/utils/index'
 import { render } from '@testing-library/react'
 import { it } from 'vitest'
 import MyTrainingCarousel from '.'

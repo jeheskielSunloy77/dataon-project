@@ -8,7 +8,19 @@ const MyTrainingCarousel = ({ carouselData, loading }) => {
 	const mobile = useCheckMobile()
 	const cards = carouselData.map(
 		(
-			{ name, location, period, trainerName, isOnline, isComplete, image, id },
+			{
+				name,
+				location,
+				period,
+				trainerName,
+				isOnline,
+				isComplete,
+				image,
+				id,
+				latitude,
+				longitude,
+				rating,
+			},
 			index
 		) => (
 			<MyTrainingCard
@@ -21,10 +33,16 @@ const MyTrainingCarousel = ({ carouselData, loading }) => {
 				isComplete={isComplete}
 				period={period}
 				id={id}
+				latitude={latitude}
+				longitude={longitude}
+				rating={rating}
 			/>
 		)
 	)
-	if (loading) return <CardsSkeleton count={3} height='220px' />
+	if (loading)
+		return (
+			<CardsSkeleton className='grid grid-cols-3 gap-3' count={3} height='220px' />
+		)
 	else
 		return (
 			<Carousel
