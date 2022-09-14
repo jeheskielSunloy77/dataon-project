@@ -30,7 +30,7 @@ const HeaderSection = () => {
 	)
 
 	return (
-		<section className='sectionContainer flex flex-col sm:flex-row items-center sm:justify-between '>
+		<section className='sectionContainer flex flex-row items-center justify-between'>
 			<Breadcrumbs />
 			<div className='space-x-2'>
 				{pathname === '/' && role === 'admin' && (

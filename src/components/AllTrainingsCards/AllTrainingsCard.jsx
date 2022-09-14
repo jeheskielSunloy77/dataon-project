@@ -20,7 +20,7 @@ const AllTrainigsCard = ({
 	return (
 		<Card
 			bodyStyle={{ borderRadius: '10px' }}
-			className='trainingCard max-w-md text-light cursor-pointer hover:shadow-xl hover:z-40 transition-all m-2 cardPrimary'
+			className='trainingCard max-w-md text-light cursor-pointer hover:shadow-xl hover:z-40 transition-all sm:mx-2 my-2 cardPrimary'
 			onClick={() => navigate(`/detail-training/${id}`)}
 		>
 			{loading && (
@@ -36,7 +36,7 @@ const AllTrainigsCard = ({
 			)}
 			<img
 				src={image}
-				className='h-[200px] w-full rounded-t-lg object-contain'
+				className='h-[200px] w-full rounded-t-lg object-cover'
 				alt='card image'
 				loading='lazy'
 				onLoad={() => setLoading(false)}
