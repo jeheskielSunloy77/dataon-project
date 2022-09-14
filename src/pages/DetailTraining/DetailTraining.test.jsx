@@ -1,4 +1,4 @@
-import { matchMediaConfig } from '@/utils/testUtils'
+import { matchMediaConfig } from '@/utils/index'
 import { render, waitFor } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
@@ -9,9 +9,9 @@ matchMediaConfig()
 describe('DetailTraining page', () => {
 	const renderer = (id) =>
 		render(
-			<MemoryRouter initialEntries={['detail page', `/detailTraining/${id}`]}>
+			<MemoryRouter initialEntries={['detail page', `/detail-training/${id}`]}>
 				<Routes>
-					<Route path='detailTraining/:id' element={<DetailTraining />} />
+					<Route path='detail-training/:id' element={<DetailTraining />} />
 				</Routes>
 			</MemoryRouter>
 		)
