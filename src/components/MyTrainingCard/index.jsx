@@ -63,9 +63,8 @@ const MyTrainingCard = ({
 				>
 					<img
 						src={image}
-						className='bg-gray-200 w-[30%] rounded-l-lg  object-cover'
+						className='w-[30%] rounded-l-lg  object-cover'
 						alt='card image'
-						loading='lazy'
 					/>
 					<div className='p-2'>
 						{location && !isOnline ? (

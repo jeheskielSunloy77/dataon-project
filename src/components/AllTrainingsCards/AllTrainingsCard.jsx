@@ -1,5 +1,6 @@
 import { LinkOutlined, PushpinOutlined, TeamOutlined } from '@ant-design/icons'
-import { Card } from 'antd'
+import { Card, Skeleton } from 'antd'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
@@ -14,6 +15,7 @@ const AllTrainigsCard = ({
 }) => {
 	const navigate = useNavigate()
 	const { t } = useTranslation()
+	const [loading, setLoading] = useState(true)
 
 	return (
 		<Card
@@ -21,11 +23,23 @@ const AllTrainigsCard = ({
 			className='trainingCard max-w-md text-light cursor-pointer hover:shadow-xl hover:z-40 transition-all m-2 cardPrimary'
 			onClick={() => navigate(`/detail-training/${id}`)}
 		>
+			{loading && (
+				<Skeleton.Image
+					active
+					style={{
+						height: '200px',
+						width: '100%',
+						borderRadius: '6px',
+					}}
+					className='w-full h-[200px]'
+				/>
+			)}
 			<img
 				src={image}
 				className='h-[200px] w-full rounded-t-lg object-contain'
 				alt='card image'
 				loading='lazy'
+				onLoad={() => setLoading(false)}
 			/>
 			<div className='p-2'>
 				{location && !isOnline ? (
