@@ -1,10 +1,12 @@
 import loginIlustration1 from '@/assets/loginIlustration1.svg'
 import loginIlustration2 from '@/assets/loginIlustration2.svg'
 import loginIlustration3 from '@/assets/loginIlustration3.svg'
-import { Button, Carousel, Checkbox, Form, Input } from 'antd'
+import { Button, Carousel, Checkbox, Form, Input, Skeleton } from 'antd'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const CardBody = ({ signIn, setRememberMe }) => {
+	const [loading, setLoading] = useState(true)
 	const [form] = Form.useForm()
 	const { t } = useTranslation()
 
@@ -32,12 +34,29 @@ const CardBody = ({ signIn, setRememberMe }) => {
 	return (
 		<>
 			<div className='sm:flex my-14'>
-				<div className='container mx-auto w-full sm:w-1/2 p-2'>
-					<Carousel autoplay swipeToSlide draggable>
+				<div className='container mx-auto w-full sm:w-1/2 p-2 '>
+					{loading && (
+						<Skeleton.Image
+							active
+							style={{
+								height: '100%',
+								width: '100%',
+								borderRadius: '6px',
+							}}
+							className='w-full h-full'
+						/>
+					)}
+					<Carousel
+						autoplay
+						swipeToSlide
+						draggable
+						style={{ display: loading ? 'none' : 'block' }}
+					>
 						<img
 							src={loginIlustration1}
 							alt='login page ilustration 1'
 							className='w-full'
+							onLoad={() => setLoading(false)}
 						/>
 						<img
 							src={loginIlustration2}

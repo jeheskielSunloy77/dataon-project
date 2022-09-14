@@ -7,7 +7,7 @@ import {
 	SolutionOutlined,
 	UserOutlined,
 } from '@ant-design/icons'
-import { Button, Card, notification, Spin } from 'antd'
+import { Button, Card, notification, Skeleton, Spin } from 'antd'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -15,6 +15,7 @@ import './DetailTraining.css'
 
 const DetailTraining = () => {
 	const [trainingData, setTrainingData] = useState(null)
+	const [loading, setLoading] = useState(true)
 	const [isTaken, setIsTaken] = useState(null)
 	const { id } = useParams()
 	const navigate = useNavigate()
@@ -45,6 +46,7 @@ const DetailTraining = () => {
 		location,
 		trainerName,
 		name,
+		image,
 	} = trainingData
 
 	const deleteTraining = () => {
@@ -106,10 +108,22 @@ const DetailTraining = () => {
 					<p className='text-xl text-light'>{t('Training Class')}</p>
 					<div className='sm:flex gap-4'>
 						<Card className='sm:w-1/2 cardPrimary'>
+							{loading && (
+								<Skeleton.Image
+									active
+									style={{
+										height: '400px',
+										width: '100%',
+										borderRadius: '6px',
+									}}
+									className='w-full h-[400px]'
+								/>
+							)}
 							<img
-								src={`https://picsum.photos/seed/${id}/700/500`}
+								src={image}
 								alt='class image'
 								className='w-full h-[400px] rounded-xl object-cover'
+								onLoad={() => setLoading(false)}
 							/>
 							<Button
 								type='primary'
