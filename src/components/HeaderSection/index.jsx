@@ -1,27 +1,29 @@
 import { Breadcrumbs } from '@/components/index'
-import { AppContext } from '@/utils/AppContext'
+import { getUser } from '@/utils/index'
 import { MoreOutlined, PlusOutlined } from '@ant-design/icons'
 import { Button, Dropdown, Menu } from 'antd'
-import { useContext } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
+import { useLocation } from 'react-router-dom'
 import './Header.css'
 
 const HeaderSection = () => {
-	const { userId } = useContext(AppContext)
 	const { pathname } = useLocation()
-	const navigate = useNavigate()
+	const { t } = useTranslation()
+	const { role } = getUser()
 
 	const logout = () => {
 		localStorage.removeItem('token')
-		navigate('/login')
+		sessionStorage.removeItem('token')
+		window.location.replace('/login')
 	}
 	const menu = (
 		<Menu
 			items={[
 				{
 					key: '1',
-					label: 'Logout',
+					label: t('Logout'),
 					onClick: logout,
+					danger: true,
 				},
 			]}
 		/>
@@ -31,7 +33,7 @@ const HeaderSection = () => {
 		<section className='sectionContainer flex flex-col sm:flex-row items-center sm:justify-between '>
 			<Breadcrumbs />
 			<div className='space-x-2'>
-				{pathname === '/' && userId === 'user123' && (
+				{pathname === '/' && role === 'admin' && (
 					<Button
 						type='primary'
 						icon={<PlusOutlined />}
@@ -39,12 +41,12 @@ const HeaderSection = () => {
 						href='/newTraining'
 						data-testid='newTrainingBtn'
 					>
-						Create New Training
+						{t('Create New Training')}
 					</Button>
 				)}
 				<Dropdown overlay={menu}>
 					<Button className='btnDefault' data-testid='moreBtn'>
-						More
+						{t('More')}
 						<MoreOutlined />
 					</Button>
 				</Dropdown>
