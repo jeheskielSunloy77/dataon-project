@@ -38,7 +38,7 @@ const HeaderSection = () => {
 						type='primary'
 						icon={<PlusOutlined />}
 						className='btnPrimary'
-						href='/newTraining'
+						href='/new-training'
 						data-testid='newTrainingBtn'
 					>
 						{t('Create New Training')}

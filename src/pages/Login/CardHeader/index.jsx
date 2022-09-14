@@ -1,4 +1,4 @@
-import mainLogo from '@/assets/mainLogo.png'
+import mainLogo from '@/assets/mainLogo.svg'
 import { Select } from 'antd'
 import { useTranslation } from 'react-i18next'
 
