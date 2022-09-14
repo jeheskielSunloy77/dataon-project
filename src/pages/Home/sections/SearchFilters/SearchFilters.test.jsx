@@ -1,4 +1,4 @@
-import { AppContext, AppProvider } from '@/utils/AppContext'
+import { AppContext, AppProvider } from '@/utils/index'
 import { fireEvent, render } from '@testing-library/react'
 import SearchFilters from '.'
 

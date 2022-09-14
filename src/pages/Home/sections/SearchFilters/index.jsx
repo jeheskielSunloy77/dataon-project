@@ -1,39 +1,41 @@
 import { Searchbar } from '@/components/index'
-import { AppContext } from '@/utils/AppContext'
+import { AppContext } from '@/utils/index'
 import { AppstoreOutlined, UnorderedListOutlined } from '@ant-design/icons'
 import { Button, Select, Switch } from 'antd'
 import { useContext } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const SearchFilters = () => {
 	const { dataView, setDataView, setSearchParams } = useContext(AppContext)
+	const { t } = useTranslation()
 
 	return (
 		<section className='sectionContainer sm:grid grid-cols-5 gap-6'>
 			<Searchbar
-				label='Search Training'
-				placeholder='Search Training'
+				label={t('Search Training')}
+				placeholder={t('Search Training Name')}
 				onSearch={(value) => setSearchParams((prev) => ({ ...prev, name: value }))}
 			/>
 			<label className='rounded-xl flex flex-col'>
-				Event Type
+				{t('Event Type')}
 				<Select
 					showSearch
-					placeholder='Search Event Type'
+					placeholder={t('Search Event Type')}
 					optionFilterProp='children'
 					onChange={(value) => {
 						setSearchParams((prev) => ({ ...prev, isOnline: value }))
 					}}
 					data-testid='eventTypeSelect'
 				>
-					<Select.Option value={true}>Online Class</Select.Option>
-					<Select.Option value={false}>Offline Class</Select.Option>
+					<Select.Option value={true}>{t('Online Class')}</Select.Option>
+					<Select.Option value={false}>{t('Offline Class')}</Select.Option>
 				</Select>
 			</label>
 			<label className='rounded-xl flex flex-col'>
-				Event Status
+				{t('Event Status')}
 				<Select
 					showSearch
-					placeholder='Search Event Status'
+					placeholder={t('Search Event Status')}
 					optionFilterProp='children'
 					onChange={(value) =>
 						setSearchParams((prev) => ({
@@ -43,13 +45,13 @@ const SearchFilters = () => {
 					}
 					data-testid='eventStatusSelect'
 				>
-					<Select.Option value={true}>Event Completed</Select.Option>
-					<Select.Option value={false}>Event Started</Select.Option>
+					<Select.Option value={true}>{t('Event Completed')}</Select.Option>
+					<Select.Option value={false}>{t('Upcoming Event')}</Select.Option>
 				</Select>
 			</label>
 
 			<label className='flex flex-col'>
-				Related Jobs Only
+				{t('Related Jobs Only')}
 				<div>
 					<Switch defaultChecked />
 				</div>
@@ -63,7 +65,7 @@ const SearchFilters = () => {
 					setDataView((prev) => (prev === 'cards' ? 'table' : 'cards'))
 				}
 			>
-				View As {dataView === 'cards' ? 'Table' : 'Cards'}
+				{dataView === 'cards' ? t('View As Table') : t('View As Cards')}
 			</Button>
 		</section>
 	)
