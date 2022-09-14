@@ -132,6 +132,11 @@ i18next.use(initReactI18next).init({
 				'Sorry, We couldnt find what you are looking for!':
 					'Sorry, We couldnt find what you are looking for!',
 				'Go Back': 'Go Back',
+
+				'Username: admin, Password: admin and Username: user1, Password: user1':
+					'Username: admin, Password: admin and Username: user1, Password: user1',
+				'Testing Accounts': 'Testing Accounts',
+				'Wrong password or username!': 'Wrong password or username!',
 			},
 		},
 		id: {
@@ -262,6 +267,11 @@ i18next.use(initReactI18next).init({
 				'Sorry, We couldnt find what you are looking for!':
 					'Maaf, kami tidak dapat menemukan apa yang anda cari!',
 				'Go Back': 'Kembali',
+
+				'Username: admin, Password: admin and Username: user1, Password: user1':
+					'Username: admin, Kata Sandi: admin dan Username: user1, Kata Sandi: user1',
+				'Testing Accounts': 'Akun Pengujian',
+				'Wrong password or username!': 'Kata sandi atau username salah!',
 			},
 		},
 	},
