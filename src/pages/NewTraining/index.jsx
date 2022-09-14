@@ -12,7 +12,7 @@ import {
 	Select,
 	Spin,
 	Transfer,
-	Upload,
+	Upload
 } from 'antd'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
@@ -86,6 +86,7 @@ const NewTraining = () => {
 		})
 	}
 
+	console.log(formData)
 	if (!formData) return <Spin className='centerAbsolute' />
 	else
 		return (
@@ -104,7 +105,9 @@ const NewTraining = () => {
 						onFinish={onFormFinish}
 						className='sm:px-[10%] new-training-form'
 					>
-						<Form.Item label={t('Event Number')}>{formData.id}</Form.Item>
+						{formData.id && (
+							<Form.Item label={t('Event Number')}>{formData.id}</Form.Item>
+						)}
 
 						<Form.Item
 							label={t('Event Type')}
@@ -116,11 +119,22 @@ const NewTraining = () => {
 								},
 							]}
 						>
-							<Radio.Group onChange={(e) => setOnlineClass(e.target.value)}>
-								<Radio.Button value={true} data-testid='onlineClass'>
+							<Radio.Group
+								onChange={(e) => setOnlineClass(e.target.value)}
+								className='space-x-2'
+							>
+								<Radio.Button
+									value={true}
+									data-testid='onlineClass'
+									style={{ borderRadius: '4px' }}
+								>
 									{t('Online Class')}
 								</Radio.Button>
-								<Radio.Button value={false} data-testid='offlineClass'>
+								<Radio.Button
+									value={false}
+									data-testid='offlineClass'
+									style={{ borderRadius: '4px' }}
+								>
 									{t('Offline Class')}
 								</Radio.Button>
 							</Radio.Group>
@@ -148,9 +162,13 @@ const NewTraining = () => {
 							</>
 						)}
 						<Form.Item label={t('Provider Type')}>
-							<Radio.Group>
-								<Radio.Button value='internal'>Internal</Radio.Button>
-								<Radio.Button value='external'>External</Radio.Button>
+							<Radio.Group className='space-x-2'>
+								<Radio.Button value='internal' style={{ borderRadius: '4px' }}>
+									Internal
+								</Radio.Button>
+								<Radio.Button value='external' style={{ borderRadius: '4px' }}>
+									External
+								</Radio.Button>
 							</Radio.Group>
 						</Form.Item>
 						<Form.Item label={t('Provider')}>
@@ -167,7 +185,9 @@ const NewTraining = () => {
 						</Form.Item>
 						<Form.Item label={t('Event Thumbnail')}>
 							<Upload>
-								<Button icon={<UploadOutlined />}>{t('Click To Upload')}</Button>
+								<Button icon={<UploadOutlined />} style={{ borderRadius: '4px' }}>
+									{t('Click To Upload')}
+								</Button>
 							</Upload>
 							<p className='p-0 text-light'>
 								{t(
@@ -197,10 +217,13 @@ const NewTraining = () => {
 								},
 							]}
 						>
-							<Radio.Group>
-								<Radio.Button value='draft'>Draft</Radio.Button>
-								<Radio.Button value={false}>{t('Open For Registration')}</Radio.Button>
-								<Radio.Button value={true}>{t('Event Completed')}</Radio.Button>
+							<Radio.Group className='flex'>
+								<Radio.Button value={false} style={{ borderRadius: '4px' }}>
+									{t('Open For Registration')}
+								</Radio.Button>
+								<Radio.Button value={true} style={{ borderRadius: '4px' }}>
+									{t('Event Completed')}
+								</Radio.Button>
 							</Radio.Group>
 						</Form.Item>
 						<Form.Item

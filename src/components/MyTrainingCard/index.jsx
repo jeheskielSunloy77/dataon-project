@@ -55,7 +55,7 @@ const MyTrainingCard = ({
 							t('Online Class')}
 					</Button>,
 				]}
-				className='trainingCard max-w-md hover:shadow-lg hover:z-40 transition-all m-3 cardPrimary'
+				className='trainingCard max-w-md hover:shadow-lg hover:z-40 transition-all sm:m-3 cardPrimary'
 			>
 				<div
 					className='flex gap-4 cursor-pointer'

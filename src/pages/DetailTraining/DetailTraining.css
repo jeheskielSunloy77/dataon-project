@@ -6,3 +6,6 @@
 	color: white;
 	font-weight: bold;
 }
+.ant-card-head {
+	padding: 0 !important;
+}

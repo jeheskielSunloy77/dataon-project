@@ -17,10 +17,10 @@
 		@apply rounded-lg shadow-md;
 	}
 	.pageContainer {
-		@apply container mx-auto px-6 py-14;
+		@apply container mx-auto p-2 sm:p-6;
 	}
 	.sectionContainer {
-		@apply bg-white rounded-lg container mx-auto py-3 px-6 shadow-md;
+		@apply bg-white rounded-lg container mx-auto p-3 sm:py-3 sm:px-6 shadow-md;
 	}
 	.sectionPrimary {
 		@apply bg-gray-100 dark:bg-gray-900;
@@ -86,4 +86,7 @@ section {
 }
 .trainingCard .ant-card-body {
 	padding: 0 !important;
+}
+.ant-input {
+	border-radius: 4px !important;
 }

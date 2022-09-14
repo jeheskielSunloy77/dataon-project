@@ -1,3 +1,12 @@
 .new-training-form .ant-col-8 {
 	flex: 0 0 20% !important;
 }
+.new-training-form .ant-row {
+	display: initial;
+}
+.new-training-form .ant-select-selector {
+	border-radius: 4px;
+}
+.new-training-form .ant-picker.ant-picker-range {
+	border-radius: 4px;
+}

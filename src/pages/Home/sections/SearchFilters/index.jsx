@@ -10,7 +10,7 @@ const SearchFilters = () => {
 	const { t } = useTranslation()
 
 	return (
-		<section className='sectionContainer sm:grid grid-cols-5 gap-6'>
+		<section className='sectionContainer flex flex-col sm:grid grid-cols-5 gap-2 sm:gap-6'>
 			<Searchbar
 				label={t('Search Training')}
 				placeholder={t('Search Training Name')}
@@ -57,7 +57,7 @@ const SearchFilters = () => {
 				</div>
 			</label>
 			<Button
-				className='mt-5 btnDefault'
+				className='sm:mt-5 btnDefault w-full sm:w-auto'
 				icon={
 					dataView === 'cards' ? <UnorderedListOutlined /> : <AppstoreOutlined />
 				}

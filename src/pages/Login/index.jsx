@@ -43,7 +43,7 @@ const Login = () => {
 			style={{ backgroundImage: `url(${bgImage})` }}
 			data-testid='loginWrapper'
 		>
-			<Card className='max-w-[90%] max-h-[90%] sm:max-w-[60%] rounded-xl shadow-2xl'>
+			<Card className='max-w-[90%] max-h-[90%] sm:w-[60%] rounded-xl shadow-2xl'>
 				<CardHeader />
 				<CardBody signIn={signIn} setRememberMe={setRememberMe} />
 			</Card>
