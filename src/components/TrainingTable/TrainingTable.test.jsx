@@ -1,9 +1,9 @@
-import { matchMediaConfig } from '@/utils/testUtils'
+import { data1 } from '@/mockData'
+import { matchMediaConfig } from '@/utils/index'
 import { fireEvent, render } from '@testing-library/react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { it } from 'vitest'
 import TrainingTable from '.'
-import { data1 } from '../../mockData'
 
 matchMediaConfig()
 
