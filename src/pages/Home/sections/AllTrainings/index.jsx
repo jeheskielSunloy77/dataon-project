@@ -4,20 +4,20 @@ import {
 	TrainingTable,
 } from '@/components/index'
 import useDebounce from '@/hooks/useDebounce'
-import { AppContext } from '@/utils/AppContext'
-import customAxios from '@/utils/axios'
-import parsePeriod from '@/utils/parsePeriod'
-import queryPrams from '@/utils/queryParams'
+import { AppContext, customAxios, parsePeriod, queryPrams } from '@/utils/index'
 import { useContext, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const AllTrainings = () => {
 	const { dataView, searchParams } = useContext(AppContext)
-	const [allTrainingData, setAllTrainingData] = useState(null)
-	const [pageLimit, setPageLimit] = useState(5)
+	const [allTrainingData, setAllTrainingData] = useState([])
+	const [pageLimit, setPageLimit] = useState(10)
 	const [dataLength, setDataLength] = useState(0)
 	const [loading, setLoading] = useState(true)
 	const allTrainingSearchParams = { ...searchParams, page: 1, limit: pageLimit }
 	const url = queryPrams('trainings', allTrainingSearchParams)
+
+	const { t } = useTranslation()
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -41,7 +41,7 @@ const AllTrainings = () => {
 	return (
 		<section className='sectionContainer'>
 			<TrainingSectionTitle
-				text='All Trainings Sessions'
+				text={t('All Trainings Sessions')}
 				dataLength={dataLength}
 			/>
 			{dataView === 'table' && (
