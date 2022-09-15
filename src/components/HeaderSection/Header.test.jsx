@@ -1,10 +1,12 @@
+import { setupAdmin } from '@/utils/index'
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
-import { describe, expect, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import BreadcrumbSection from '.'
 
 describe('Bradcrumb component test', () => {
-	test('should render correctly', () => {
+	it('should render correctly', () => {
+		setupAdmin()
 		render(
 			<BrowserRouter>
 				<BreadcrumbSection />
@@ -17,7 +19,9 @@ describe('Bradcrumb component test', () => {
 	})
 })
 describe('Create new training button test', () => {
-	test('should render button as a link', () => {
+	it('should render button as a link', () => {
+		setupAdmin()
+
 		render(
 			<BrowserRouter>
 				<BreadcrumbSection />
@@ -26,7 +30,7 @@ describe('Create new training button test', () => {
 		const newTrainingBtn = screen.getByTestId('newTrainingBtn')
 		expect(newTrainingBtn).toHaveProperty(
 			'href',
-			expect.stringContaining('/newTraining')
+			expect.stringContaining('/new-training')
 		)
 	})
 })
