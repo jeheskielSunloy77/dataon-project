@@ -1,5 +1,4 @@
-import { data1 } from '@/mockData'
-import { matchMediaConfig } from '@/utils/index'
+import { AppProvider, matchMediaConfig, mockData1 } from '@/utils/index'
 import { fireEvent, render } from '@testing-library/react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { it } from 'vitest'
@@ -7,15 +6,18 @@ import TrainingTable from '.'
 
 matchMediaConfig()
 
-describe('TrainingTable component', () => {
-	const renderer = () =>
-		render(
-			<BrowserRouter>
+const renderer = () =>
+	render(
+		<BrowserRouter>
+			<AppProvider>
 				<Routes>
-					<Route path='/' element={<TrainingTable tableData={data1} />} />
+					<Route path='/' element={<TrainingTable tableData={mockData1} />} />
 				</Routes>
-			</BrowserRouter>
-		)
+			</AppProvider>
+		</BrowserRouter>
+	)
+
+describe('TrainingTable component', () => {
 	it('should render', () => {
 		const { container } = renderer()
 		expect(container).toBeDefined()
