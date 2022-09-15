@@ -18,7 +18,7 @@ const BreadcrumbItems = () => {
 			)
 			setEventName(response.data.data.name)
 		}
-		fetchData()
+		pathnames[pathnames.length - 1] && fetchData()
 	}, [])
 
 	return pathnames.map((name, index) => {
