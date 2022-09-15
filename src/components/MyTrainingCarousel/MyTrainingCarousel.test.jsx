@@ -1,15 +1,17 @@
-import { data1 } from '@/mockData'
-import { AppProvider } from '@/utils/index'
+import { AppProvider, mockData1 } from '@/utils/index'
 import { render } from '@testing-library/react'
+import { BrowserRouter } from 'react-router-dom'
 import { it } from 'vitest'
 import MyTrainingCarousel from '.'
 
 describe('MyTrainingCarousel component', () => {
 	const renderer = () =>
 		render(
-			<AppProvider>
-				<MyTrainingCarousel carouselData={data1} />
-			</AppProvider>
+			<BrowserRouter>
+				<AppProvider>
+					<MyTrainingCarousel carouselData={mockData1} />
+				</AppProvider>
+			</BrowserRouter>
 		)
 
 	it('should render with props without crashing', () => {
