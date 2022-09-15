@@ -98,7 +98,7 @@ const Wrapper = ({
 
 	const fetchMoreData = () => {
 		if (tableData.length >= dataLength) return false
-		else setPageLimit((prev) => prev + 5)
+		else setPageLimit((prev) => prev + 10)
 	}
 
 	if (infiniteScroll)

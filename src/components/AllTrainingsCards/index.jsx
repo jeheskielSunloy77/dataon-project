@@ -8,7 +8,7 @@ const AllTrainingsCards = ({ setPageLimit, cardsData, dataLength }) => {
 
 	const fetchMoreData = () => {
 		if (cardsData.length >= dataLength) return false
-		else setPageLimit((prev) => prev + 5)
+		else setPageLimit((prev) => prev + 10)
 	}
 
 	return (
