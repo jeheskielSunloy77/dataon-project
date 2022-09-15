@@ -3,40 +3,18 @@ import {
 	TrainingSectionTitle,
 	TrainingTable,
 } from '@/components/index'
+import { useFilteredData } from '@/hooks/index'
 import { AppContext } from '@/utils/index'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const AllTrainings = () => {
-	const {
-		dataView,
-		dataLength,
-		setPageLimit,
-		allTrainingData,
-		searchParams,
-		isSearched,
-	} = useContext(AppContext)
+	const { dataView, dataLength, setPageLimit, allTrainingData, isSearched } =
+		useContext(AppContext)
 
-	const [filteredData, setFilteredData] = useState(null)
 	const { t } = useTranslation()
 
-	useEffect(() => {
-		const filtered = allTrainingData.filter((training) => {
-			const { name, isOnline, isComplete } = searchParams
-
-			if (
-				(name !== ''
-					? training.name.toLowerCase().includes(name.toLowerCase())
-					: true) &&
-				(isOnline !== '' ? training.isOnline === isOnline : true) &&
-				isComplete !== '' &&
-				training.isComplete === isComplete
-			) {
-				return training
-			}
-		})
-		setFilteredData(filtered)
-	}, [searchParams, allTrainingData])
+	const filteredData = useFilteredData(allTrainingData, true)
 
 	return (
 		<section className='sectionContainer'>

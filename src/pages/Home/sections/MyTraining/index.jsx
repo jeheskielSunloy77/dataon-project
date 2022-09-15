@@ -3,52 +3,29 @@ import {
 	TrainingSectionTitle,
 	TrainingTable,
 } from '@/components/index'
+import { useFilteredData } from '@/hooks/index'
 import { AppContext } from '@/utils/index'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const MyTraining = () => {
-	const { dataView, myTrainingData, loading, searchParams } =
+	const { dataView, myTrainingData, loading, isSearched } =
 		useContext(AppContext)
-	const [filteredData, setFilteredData] = useState(null)
-	const isSearched = Object.values(searchParams).some((param) => param !== '')
 	const { t } = useTranslation()
-
-	useEffect(() => {
-		const filtered = myTrainingData.filter((training) => {
-			const { name, isOnline, isComplete } = searchParams
-
-			if (
-				(name !== ''
-					? training.name.toLowerCase().includes(name.toLowerCase())
-					: true) &&
-				(isOnline !== '' ? training.isOnline === isOnline : true) &&
-				isComplete !== '' &&
-				training.isComplete === isComplete
-			) {
-				return training
-			}
-		})
-		setFilteredData(filtered)
-	}, [searchParams])
+	const filteredData = useFilteredData(myTrainingData)
+	const data = isSearched ? filteredData : myTrainingData
 
 	return (
 		<section className='sectionContainer myTraining'>
 			<TrainingSectionTitle
 				text={t('My Trainings Sessions')}
-				dataLength={myTrainingData?.length}
+				dataLength={data.length}
 			/>
 			{dataView === 'table' && (
-				<TrainingTable
-					tableData={isSearched ? filteredData : myTrainingData}
-					loading={loading}
-				/>
+				<TrainingTable tableData={data} loading={loading} />
 			)}
 			{dataView === 'cards' && (
-				<MyTrainingCarousel
-					carouselData={isSearched ? filteredData : myTrainingData}
-					loading={loading}
-				/>
+				<MyTrainingCarousel carouselData={data} loading={loading} />
 			)}
 		</section>
 	)

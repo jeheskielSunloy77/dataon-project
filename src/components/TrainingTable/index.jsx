@@ -24,11 +24,10 @@ const TrainingTable = ({
 			filteredDataLength={filteredDataLength}
 		>
 			<Table
-				loading={!tableData}
+				loading={!tableData || tableData.length < 1}
 				dataSource={tableData}
 				pagination={!infiniteScroll}
 				className='overflow-x-auto rounded-lg'
-				pa
 			>
 				<Table.Column
 					title='No'
