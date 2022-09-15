@@ -14,7 +14,6 @@ export const AppProvider = ({ children }) => {
 		isComplete: '',
 	})
 	const isSearched = Object.values(searchParams).some((param) => param !== '')
-
 	const [myTrainingData, setMyTrainingData] = useState([])
 	const user = getUser()
 	const myTrainingsUrl = queryPrams('trainings', { userId: user?.userId })
