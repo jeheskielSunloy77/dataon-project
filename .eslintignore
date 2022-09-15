@@ -4,3 +4,8 @@ package.json
 package-lock.json
 postcss.config.js
 tailwind.config.js
+vercel.json
+jsconfig.json
+.babelrc
+.gitignore
+.eslintrc.json
