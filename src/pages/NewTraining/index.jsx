@@ -12,7 +12,7 @@ import {
 	Select,
 	Spin,
 	Transfer,
-	Upload
+	Upload,
 } from 'antd'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
@@ -86,7 +86,6 @@ const NewTraining = () => {
 		})
 	}
 
-	console.log(formData)
 	if (!formData) return <Spin className='centerAbsolute' />
 	else
 		return (
