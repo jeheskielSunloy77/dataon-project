@@ -1,4 +1,4 @@
-import { matchMediaConfig } from '@/utils/index'
+import { matchMediaConfig, setupAdmin } from '@/utils/index'
 import { render, waitFor } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
@@ -6,23 +6,16 @@ import DetailTraining from '.'
 
 matchMediaConfig()
 
+const renderer = (id) =>
+	render(
+		<MemoryRouter initialEntries={['detail page', `/detail-training/${id || 1}`]}>
+			<Routes>
+				<Route path='detail-training/:id' element={<DetailTraining />} />
+			</Routes>
+		</MemoryRouter>
+	)
+
 describe('DetailTraining page', () => {
-	const renderer = (id) =>
-		render(
-			<MemoryRouter initialEntries={['detail page', `/detail-training/${id}`]}>
-				<Routes>
-					<Route path='detail-training/:id' element={<DetailTraining />} />
-				</Routes>
-			</MemoryRouter>
-		)
-
-	const setupAdmin = () => {
-		const adminToken =
-			'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1dWlkIjoiYjkyZjcwMWMtMjc5My00ZmE2LTk3M2ItY2NiMDEwYzE4NjgwIiwidXNlcm5hbWUiOiJicm93bnBhbmRhODE1IiwicGFzc3dvcmQiOiJob2NrZXkiLCJzYWx0Ijoia0JNbjhRQU0iLCJtZDUiOiI2ZjU5MDUwODVlMTUzMmQyYzljOTg5YThiMjdlMmM4ZiIsInNoYTEiOiIxNTUzZGJhMDk3MzMxMGQ1ODdiYmU2NGZjMmVlZDY2MmI3NTkxMWVkIiwic2hhMjU2IjoiNjBlZjZhYmI1OGM0ZDQyZDE5OTVkZjQ1ZTQxYWJmODhlODMzZTQ0MjExZmUyZDJhNDY0ZWM1MWI0MzFhYjI4ZSIsInVzZXJJZCI6InVzZXIxMjMifQ.gLqTTss_Iqjbdu0PtKDGk0UhbE8JuQdg-LyyoYknO90'
-
-		localStorage.setItem('token', adminToken)
-	}
-
 	it('should render DetailTraining page', async () => {
 		setupAdmin()
 		const { container } = renderer()
@@ -30,21 +23,22 @@ describe('DetailTraining page', () => {
 	})
 	it('should render 2 cards', async () => {
 		setupAdmin()
-		const { container } = renderer(8)
-		await waitFor(() =>
-			expect(container.querySelectorAll('.ant-card').length).toBe(2)
-		)
+		const { container } = renderer()
+		await waitFor(expect(container.querySelectorAll('.ant-card').length).toBe(3))
 	})
 	it('should render 2 buttons', async () => {
 		setupAdmin()
-		const { container } = renderer(8)
+		const { container } = renderer()
 		await waitFor(() =>
 			expect(container.querySelectorAll('.ant-btn').length).toBe(5)
 		)
 	})
 	it('should render disabled join button', async () => {
 		setupAdmin()
-		const { getByText } = renderer(8)
-		await waitFor(() => expect(getByText('Online Class')).toBeTruthy())
+		const { getByText } = renderer()
+		await new Promise((resolve) => setTimeout(resolve, 5000))
+		const joinButton = getByText('Join Class')
+		expect(joinButton).toBeTruthy()
+		// expect(joinButton.disabled).toBeTruthy()
 	})
 })
