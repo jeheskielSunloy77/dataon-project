@@ -1,6 +1,10 @@
 import { FormTextInput, HeaderSection } from '@/components/index'
-import { transferMockKeys, trasnferMockData } from '@/mockData'
-import { customAxios, getUser } from '@/utils/index'
+import {
+	customAxios,
+	getUser,
+	transferMockData,
+	transferMockKeys,
+} from '@/utils/index'
 import { PlusSquareOutlined, UploadOutlined } from '@ant-design/icons'
 import {
 	Button,
@@ -240,7 +244,7 @@ const NewTraining = () => {
 						{isEditPage && (
 							<Form.Item label={t('Participants')}>
 								<Transfer
-									dataSource={trasnferMockData}
+									dataSource={transferMockData}
 									showSearch
 									targetKeys={transferKeys}
 									onChange={(newTargetKeys) => setTransferKeys(newTargetKeys)}
