@@ -1,5 +1,5 @@
 import bgImage from '@/assets/background.svg'
-import { userDB } from '@/mockData'
+import { userDB } from '@/utils/index'
 import { Card, notification } from 'antd'
 import 'antd/dist/antd.css'
 import sign from 'jwt-encode'
