@@ -94,11 +94,7 @@ const Wrapper = ({
 	filteredDataLength,
 }) => {
 	const { isSearched } = useContext(AppContext)
-	console.log(
-		isSearched
-			? tableData.length + (filteredDataLength - tableData.length) !== dataLength
-			: tableData?.length < dataLength
-	)
+	const { t } = useTranslation()
 
 	const fetchMoreData = () => {
 		if (tableData.length >= dataLength) return false
@@ -125,6 +121,11 @@ const Wrapper = ({
 						<Skeleton title paragraph={false} active />
 						<Skeleton title paragraph={false} active />
 					</div>
+				}
+				endMessage={
+					<h1 className='col-span-full mx-auto text-accent'>
+						{t('Your All Cought Up!')}
+					</h1>
 				}
 				className='relative'
 			>
