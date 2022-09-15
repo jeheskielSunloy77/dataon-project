@@ -1,5 +1,5 @@
 import { HeaderSection } from '@/components/index'
-import { customAxios, getUser } from '@/utils/index'
+import { customAxios, getUser, trainingDataShape } from '@/utils/index'
 import {
 	CalendarOutlined,
 	InfoCircleOutlined,
@@ -7,14 +7,14 @@ import {
 	SolutionOutlined,
 	UserOutlined,
 } from '@ant-design/icons'
-import { Button, Card, notification, Skeleton, Spin } from 'antd'
+import { Button, Card, notification, Skeleton } from 'antd'
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useParams } from 'react-router-dom'
 import './DetailTraining.css'
 
 const DetailTraining = () => {
-	const [trainingData, setTrainingData] = useState(null)
+	const [trainingData, setTrainingData] = useState(trainingDataShape)
 	const [loading, setLoading] = useState(true)
 	const [isTaken, setIsTaken] = useState(null)
 	const { id } = useParams()
@@ -35,8 +35,6 @@ const DetailTraining = () => {
 		}
 		fetchData()
 	}, [])
-
-	if (!trainingData) return <Spin className='centerAbsolute' />
 
 	const {
 		isOnline,
