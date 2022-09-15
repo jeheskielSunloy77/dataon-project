@@ -1,4 +1,6 @@
+import { AppContext } from '@/utils/AppContext'
 import { Skeleton, Table } from 'antd'
+import { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { Link } from 'react-router-dom'
@@ -9,7 +11,7 @@ const TrainingTable = ({
 	setPageLimit,
 	infiniteScroll,
 	dataLength,
-	loading,
+	filteredDataLength,
 }) => {
 	const { t } = useTranslation()
 
@@ -19,9 +21,10 @@ const TrainingTable = ({
 			setPageLimit={setPageLimit}
 			infiniteScroll={infiniteScroll}
 			dataLength={dataLength}
+			filteredDataLength={filteredDataLength}
 		>
 			<Table
-				loading={tableData.length === 0 || (!infiniteScroll && loading)}
+				loading={!tableData}
 				dataSource={tableData}
 				pagination={!infiniteScroll}
 				className='overflow-x-auto rounded-lg'
@@ -89,7 +92,15 @@ const Wrapper = ({
 	tableData,
 	setPageLimit,
 	dataLength,
+	filteredDataLength,
 }) => {
+	const { isSearched } = useContext(AppContext)
+	console.log(
+		isSearched
+			? tableData.length + (filteredDataLength - tableData.length) !== dataLength
+			: tableData?.length < dataLength
+	)
+
 	const fetchMoreData = () => {
 		if (tableData.length >= dataLength) return false
 		else setPageLimit((prev) => prev + 5)
@@ -100,7 +111,12 @@ const Wrapper = ({
 			<InfiniteScroll
 				dataLength={tableData?.length || 0}
 				next={fetchMoreData}
-				hasMore={tableData?.length < dataLength}
+				hasMore={
+					isSearched
+						? tableData.length + (filteredDataLength - tableData.length) !==
+						  dataLength
+						: tableData?.length < dataLength
+				}
 				loader={
 					<div className='grid grid-cols-6 gap-6'>
 						<Skeleton title paragraph={false} active />

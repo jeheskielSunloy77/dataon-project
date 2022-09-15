@@ -3,45 +3,34 @@ import {
 	TrainingSectionTitle,
 	TrainingTable,
 } from '@/components/index'
-import {
-	AppContext,
-	customAxios,
-	getUser,
-	parsePeriod,
-	queryPrams,
-} from '@/utils/index'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { AppContext } from '@/utils/index'
+import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const MyTraining = () => {
-	const { dataView, searchParams } = useContext(AppContext)
-	const [myTrainingData, setMyTrainingData] = useState([])
-	const [loading, setLoading] = useState(true)
-	const { userId } = getUser()
+	const { dataView, myTrainingData, loading, searchParams } =
+		useContext(AppContext)
+	const [filteredData, setFilteredData] = useState(null)
+	const isSearched = Object.values(searchParams).some((param) => param !== '')
 	const { t } = useTranslation()
 
-	const myTrainingSearchParams = { userId, ...searchParams }
-	const url = queryPrams('trainings', myTrainingSearchParams)
+	useEffect(() => {
+		const filtered = myTrainingData.filter((training) => {
+			const { name, isOnline, isComplete } = searchParams
 
-	const fetchData = useCallback(async () => {
-		setLoading(true)
-		const response = await customAxios.get(url)
-		const myTraining = response.data.data.map((training) => {
-			const period = parsePeriod(training.startDate, training.endDate)
-
-			return {
-				...training,
-				period,
+			if (
+				(name !== ''
+					? training.name.toLowerCase().includes(name.toLowerCase())
+					: true) &&
+				(isOnline !== '' ? training.isOnline === isOnline : true) &&
+				isComplete !== '' &&
+				training.isComplete === isComplete
+			) {
+				return training
 			}
 		})
-
-		setMyTrainingData(myTraining)
-		setLoading(false)
-	}, [url])
-
-	useEffect(() => {
-		fetchData()
-	}, [url])
+		setFilteredData(filtered)
+	}, [searchParams])
 
 	return (
 		<section className='sectionContainer myTraining'>
@@ -50,10 +39,16 @@ const MyTraining = () => {
 				dataLength={myTrainingData?.length}
 			/>
 			{dataView === 'table' && (
-				<TrainingTable tableData={myTrainingData} loading={loading} />
+				<TrainingTable
+					tableData={isSearched ? filteredData : myTrainingData}
+					loading={loading}
+				/>
 			)}
 			{dataView === 'cards' && (
-				<MyTrainingCarousel carouselData={myTrainingData} loading={loading} />
+				<MyTrainingCarousel
+					carouselData={isSearched ? filteredData : myTrainingData}
+					loading={loading}
+				/>
 			)}
 		</section>
 	)

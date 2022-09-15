@@ -3,62 +3,61 @@ import {
 	TrainingSectionTitle,
 	TrainingTable,
 } from '@/components/index'
-import useDebounce from '@/hooks/useDebounce'
-import { AppContext, customAxios, parsePeriod, queryPrams } from '@/utils/index'
+import { AppContext } from '@/utils/index'
 import { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 const AllTrainings = () => {
-	const { dataView, searchParams } = useContext(AppContext)
-	const [allTrainingData, setAllTrainingData] = useState([])
-	const [pageLimit, setPageLimit] = useState(10)
-	const [dataLength, setDataLength] = useState(0)
-	const [loading, setLoading] = useState(true)
-	const allTrainingSearchParams = { ...searchParams, page: 1, limit: pageLimit }
-	const url = queryPrams('trainings', allTrainingSearchParams)
+	const {
+		dataView,
+		dataLength,
+		setPageLimit,
+		allTrainingData,
+		searchParams,
+		isSearched,
+	} = useContext(AppContext)
 
+	const [filteredData, setFilteredData] = useState(null)
 	const { t } = useTranslation()
 
 	useEffect(() => {
-		const fetchData = async () => {
-			setLoading(true)
-			const response = await customAxios.get(url)
-			setDataLength(response.data.total)
-			const allTraining = response.data.data.map((training) => {
-				const period = parsePeriod(training.startDate, training.endDate)
+		const filtered = allTrainingData.filter((training) => {
+			const { name, isOnline, isComplete } = searchParams
 
-				return {
-					...training,
-					period,
-				}
-			})
-			setAllTrainingData(allTraining)
-			setLoading(false)
-		}
-		fetchData()
-	}, [useDebounce(url, 1000)])
+			if (
+				(name !== ''
+					? training.name.toLowerCase().includes(name.toLowerCase())
+					: true) &&
+				(isOnline !== '' ? training.isOnline === isOnline : true) &&
+				isComplete !== '' &&
+				training.isComplete === isComplete
+			) {
+				return training
+			}
+		})
+		setFilteredData(filtered)
+	}, [searchParams, allTrainingData])
 
 	return (
 		<section className='sectionContainer'>
 			<TrainingSectionTitle
 				text={t('All Trainings Sessions')}
-				dataLength={dataLength}
+				dataLength={isSearched ? filteredData.length : allTrainingData.length}
 			/>
 			{dataView === 'table' && (
 				<TrainingTable
-					tableData={allTrainingData}
+					tableData={isSearched ? filteredData : allTrainingData}
 					setPageLimit={setPageLimit}
 					infiniteScroll
 					dataLength={dataLength}
-					loading={loading}
+					filteredDataLength={allTrainingData.length}
 				/>
 			)}
 			{dataView === 'cards' && (
 				<AllTrainingsCards
 					setPageLimit={setPageLimit}
-					cardsData={allTrainingData}
+					cardsData={isSearched ? filteredData : allTrainingData}
 					dataLength={dataLength}
-					loading={loading}
 				/>
 			)}
 		</section>
