@@ -17,7 +17,7 @@ describe('Bradcrumb component test', () => {
 				<Breadcrumbs />
 			</BrowserRouter>
 		)
-		window.history.pushState({}, 'Test page', '/newTraining')
+		window.history.pushState({}, 'Test page', '/edit-training/1')
 		const homeLink = screen.getByTestId('homeLink')
 		fireEvent.click(homeLink)
 		expect(window.location.pathname).toBe('/')

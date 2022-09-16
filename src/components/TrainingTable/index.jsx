@@ -123,7 +123,7 @@ const Wrapper = ({
 					</div>
 				}
 				endMessage={
-					<h1 className='col-span-full mx-auto text-accent'>
+					<h1 className='col-span-full mx-auto text-accent text-center my-3'>
 						{t('Your All Cought Up!')}
 					</h1>
 				}

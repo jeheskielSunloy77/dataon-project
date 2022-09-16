@@ -24,13 +24,12 @@ const BreadcrumbItems = () => {
 	return pathnames.map((name, index) => {
 		const routeTo = `/${pathnames.slice(0, index + 1).join('/')}`
 		const routeName = capatilize(name.split('-').join(' '))
+		const isIdParams = !isNaN(Number(name)) && index === pathnames.length - 1
 
 		return (
 			<Breadcrumb.Item key={index}>
 				<Link data-testid='itemsLink' to={`${routeTo}`}>
-					{index === pathnames.length - 1
-						? capatilize(eventName)
-						: capatilize(t(routeName))}
+					{isIdParams ? capatilize(eventName) : capatilize(t(routeName))}
 				</Link>
 			</Breadcrumb.Item>
 		)

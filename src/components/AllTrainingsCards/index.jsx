@@ -17,7 +17,7 @@ const AllTrainingsCards = ({ setPageLimit, cardsData, dataLength }) => {
 			next={fetchMoreData}
 			hasMore={cardsData?.length < dataLength}
 			endMessage={
-				<h1 className='col-span-full mx-auto text-accent'>
+				<h1 className='col-span-full mx-auto text-accent my-3'>
 					{t('Your All Cought Up!')}
 				</h1>
 			}

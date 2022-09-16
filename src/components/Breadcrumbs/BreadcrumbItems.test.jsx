@@ -18,7 +18,7 @@ describe('Bradcrumb items test', () => {
 			</BrowserRouter>
 		)
 
-		window.history.pushState({}, 'Test page', '/newTraining')
-		expect(screen.findByText(/Home > NewTraining/i)).toBeDefined()
+		window.history.pushState({}, 'Test page', '/edit-training/1')
+		expect(screen.findByText(/Home > Edit Training/i)).toBeDefined()
 	})
 })
