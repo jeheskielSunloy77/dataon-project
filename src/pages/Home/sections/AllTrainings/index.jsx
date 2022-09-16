@@ -20,7 +20,7 @@ const AllTrainings = () => {
 		<section className='sectionContainer'>
 			<TrainingSectionTitle
 				text={t('All Trainings Sessions')}
-				dataLength={isSearched ? filteredData.length : allTrainingData.length}
+				dataLength={isSearched ? filteredData.length : dataLength}
 			/>
 			{dataView === 'table' && (
 				<TrainingTable
