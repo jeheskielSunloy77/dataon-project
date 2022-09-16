@@ -1,6 +1,6 @@
 import { AppContext, AppProvider } from './AppContext'
 import customAxios from './axios'
-import { trainingDataShape } from './constants'
+import { jwtSecret, trainingDataShape } from './constants'
 import getUser from './getUser'
 import i18n from './i18n'
 import {
@@ -31,4 +31,5 @@ export {
 	transferMockData,
 	transferMockKeys,
 	userDB,
+	jwtSecret,
 }

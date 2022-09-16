@@ -14,3 +14,5 @@ export const trainingDataShape = {
 	trainer: '',
 	userId: '',
 }
+
+export const jwtSecret = 'as12ewqasdassao1121903rqeijoasjdoqwe'
