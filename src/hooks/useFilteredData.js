@@ -4,16 +4,17 @@ import { AppContext } from '../utils'
 const useFilteredData = (data, infiniteScroll) => {
 	const [filteredData, setFilteredData] = useState(null)
 	const { searchParams } = useContext(AppContext)
+
 	useEffect(() => {
 		const filtered = data.filter((training) => {
 			const { name, isOnline, isComplete } = searchParams
 
 			if (
-				(name !== ''
+				(name !== null
 					? training.name.toLowerCase().includes(name.toLowerCase())
 					: true) &&
-				(isOnline !== '' ? training.isOnline === isOnline : true) &&
-				(isComplete !== '' ? training.isComplete === isComplete : true)
+				(isOnline !== null ? training.isOnline === isOnline : true) &&
+				(isComplete !== null ? training.isComplete === isComplete : true)
 			) {
 				return training
 			}

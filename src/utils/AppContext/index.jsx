@@ -7,13 +7,17 @@ export const AppContext = createContext()
 export const AppProvider = ({ children }) => {
 	const [dataView, setDataView] = useState('table')
 	const [searchParams, setSearchParams] = useState({
-		name: '',
-		isOnline: '',
-		isComplete: '',
+		name: null,
+		isOnline: null,
+		isComplete: null,
 	})
-	const isSearched = Object.values(searchParams).some((param) => param !== '')
+	const isSearched = Object.values(searchParams).some(
+		(param) => param !== null && param !== undefined
+	)
+
 	const { myTrainingData, setMyTrainingData } = getMyTrainings()
-	const { allTrainingData, setPageLimit, dataLength } = getAllTrainings()
+	const { allTrainingData, setPageLimit, dataLength } =
+		getAllTrainings(isSearched)
 
 	return (
 		<AppContext.Provider

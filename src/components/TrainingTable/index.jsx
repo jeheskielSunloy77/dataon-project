@@ -108,7 +108,7 @@ const Wrapper = ({
 				hasMore={
 					isSearched
 						? tableData.length + (filteredDataLength - tableData.length) !==
-						  dataLength
+						dataLength
 						: tableData?.length < dataLength
 				}
 				loader={
