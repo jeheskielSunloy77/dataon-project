@@ -1,14 +1,19 @@
 import mainLogo from '@/assets/mainLogo.svg'
-import { Select } from 'antd'
-import { useTranslation } from 'react-i18next'
+import { notification, Select } from 'antd'
+import { useEffect } from 'react'
+import loginHadlers from '../loginHandlers'
 
 const CardHeader = () => {
-	const { t, i18n } = useTranslation()
+	const { t, setLanguage } = loginHadlers()
 
-	const setLanguage = (value) => {
-		i18n.changeLanguage(value)
-		localStorage.setItem('lng', value)
-	}
+	useEffect(() => {
+		notification.info({
+			message: t('Testing Accounts'),
+			description: t(
+				'Username: admin, Password: admin and Username: user1, Password: user1'
+			),
+		})
+	}, [])
 
 	return (
 		<>
