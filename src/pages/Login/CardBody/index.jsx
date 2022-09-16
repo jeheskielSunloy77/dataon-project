@@ -3,33 +3,13 @@ import loginIlustration2 from '@/assets/loginIlustration2.svg'
 import loginIlustration3 from '@/assets/loginIlustration3.svg'
 import { Button, Carousel, Checkbox, Form, Input, Skeleton } from 'antd'
 import { useState } from 'react'
-import { useTranslation } from 'react-i18next'
+import loginHadlers from '../loginHandlers'
 
-const CardBody = ({ signIn, setRememberMe }) => {
+const CardBody = () => {
 	const [loading, setLoading] = useState(true)
 	const [form] = Form.useForm()
-	const { t } = useTranslation()
-
-	const usernameRules = [
-		{ required: true, message: t('Please Enter Your Username') },
-		{
-			max: 20,
-			min: 5,
-			message: t('Username must be between 5 and 20 characters'),
-		},
-		{
-			pattern: new RegExp(/^[a-zA-Z0-9]+$/g),
-			message: t('Username can only be an alphanumeric value'),
-		},
-	]
-	const passwordRules = [
-		{ required: true, message: t('Please Enter Your Password') },
-		{
-			max: 20,
-			min: 5,
-			message: t('Password must be between 5 and 20 characters'),
-		},
-	]
+	const { signIn, setRememberMe, t, usernameRules, passwordRules } =
+		loginHadlers()
 
 	return (
 		<>
