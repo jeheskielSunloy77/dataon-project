@@ -13,8 +13,7 @@ const useFilteredData = (data, infiniteScroll) => {
 					? training.name.toLowerCase().includes(name.toLowerCase())
 					: true) &&
 				(isOnline !== '' ? training.isOnline === isOnline : true) &&
-				isComplete !== '' &&
-				training.isComplete === isComplete
+				(isComplete !== '' ? training.isComplete === isComplete : true)
 			) {
 				return training
 			}

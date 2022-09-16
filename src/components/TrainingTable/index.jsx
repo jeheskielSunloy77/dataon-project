@@ -24,7 +24,6 @@ const TrainingTable = ({
 			filteredDataLength={filteredDataLength}
 		>
 			<Table
-				loading={!tableData || tableData.length < 1}
 				dataSource={tableData}
 				pagination={!infiniteScroll}
 				className='overflow-x-auto rounded-lg'

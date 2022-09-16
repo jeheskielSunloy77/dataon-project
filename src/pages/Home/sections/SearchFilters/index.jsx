@@ -26,6 +26,7 @@ const SearchFilters = () => {
 						setSearchParams((prev) => ({ ...prev, isOnline: value }))
 					}}
 					data-testid='eventTypeSelect'
+					allowClear
 				>
 					<Select.Option value={true}>{t('Online Class')}</Select.Option>
 					<Select.Option value={false}>{t('Offline Class')}</Select.Option>
@@ -44,6 +45,7 @@ const SearchFilters = () => {
 						}))
 					}
 					data-testid='eventStatusSelect'
+					allowClear
 				>
 					<Select.Option value={true}>{t('Event Completed')}</Select.Option>
 					<Select.Option value={false}>{t('Upcoming Event')}</Select.Option>
