@@ -23,12 +23,14 @@ const renderer = () =>
 describe('Home Page', () => {
 	it('should render all 4 sections without crashing', () => {
 		setupUser()
+
 		const { container } = renderer()
 		expect(container.querySelectorAll('.sectionContainer').length).toBe(4)
 	})
 })
 it('should render only 3 when admin sections without crashing', () => {
 	setupAdmin()
+
 	const { container } = renderer()
 	expect(container.querySelectorAll('.sectionContainer').length).toBe(3)
 })
@@ -44,6 +46,7 @@ describe('Search Filters', () => {
 		const searchName = getByTestId('searchbarInput')
 		const searchEvent = getByTestId('eventTypeSelect').querySelector('input')
 		const searchStatus = getByTestId('eventStatusSelect').querySelector('input')
+
 		await new Promise((resolve) => setTimeout(resolve, 2500))
 		const tableRows = container.querySelectorAll('.myTraining tbody tr')
 		fireEvent.change(searchName, { target: { value: 'non et iste' } })
