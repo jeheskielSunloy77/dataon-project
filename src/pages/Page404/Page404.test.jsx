@@ -10,6 +10,7 @@ describe('Page404', () => {
 				<Page404 />
 			</BrowserRouter>
 		)
+
 		expect(container).toBeDefined()
 	})
 	it('should change page when clicked the button', () => {
@@ -19,6 +20,7 @@ describe('Page404', () => {
 			</BrowserRouter>
 		)
 		const button = container.querySelector('a')
+
 		expect(button).toBeDefined()
 		fireEvent.click(button)
 	})
