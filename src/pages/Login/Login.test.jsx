@@ -23,6 +23,7 @@ describe('Login Page test', () => {
 
 		const usernameInput = getByTestId('usernameInput')
 		const passwordInput = getByTestId('passwordInput')
+
 		usernameInput.value = 'test'
 		passwordInput.value = 'test'
 		const form = container.querySelector('form')
@@ -34,6 +35,7 @@ describe('Login Page test', () => {
 
 		const usernameInput = getByTestId('usernameInput')
 		const passwordInput = getByTestId('passwordInput')
+
 		usernameInput.value = 'wrongUsername'
 		passwordInput.value = 'wrongPassword'
 		const form = container.querySelector('form')
