@@ -8,6 +8,7 @@ matchMediaConfig()
 
 test('renders without crashing', () => {
 	setupAdmin()
+
 	render(
 		<BrowserRouter>
 			<AppProvider>
